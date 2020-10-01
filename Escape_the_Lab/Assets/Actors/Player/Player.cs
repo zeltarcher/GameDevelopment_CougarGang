@@ -109,4 +109,12 @@ public class Player : MonoBehaviour
         Vector3 newVelocity = calculateVelocity(ref velocity, direction);
         controller.move(newVelocity);
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Key"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }
