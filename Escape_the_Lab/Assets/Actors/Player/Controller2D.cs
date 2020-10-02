@@ -129,4 +129,6 @@ public class Controller2D : MonoBehaviour
         collider2D = GetComponent<BoxCollider2D>();
         calculateRaySpacing();
     }
+
+    
 }

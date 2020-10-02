@@ -91,6 +91,7 @@ public class Player : MonoBehaviour
   
     void Update()
     {
+
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (controller.collisions.above || controller.collisions.below)
@@ -109,4 +110,7 @@ public class Player : MonoBehaviour
         Vector3 newVelocity = calculateVelocity(ref velocity, direction);
         controller.move(newVelocity);
     }
+
+    
+
 }
