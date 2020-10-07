@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Keys
+  - Drugs
   layers:
   - Default
   - TransparentFX
