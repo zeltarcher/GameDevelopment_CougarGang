@@ -7,7 +7,7 @@ public class Controller2D : MonoBehaviour
 {
     //                          Class variables
     //====================================================================
-    BoxCollider2D collider2D;
+    BoxCollider2D boxCollider;
     RayCastOrigins raycast;
     const float skinWidth = 0.15f;
     public int horizontalRayCount = 4;
@@ -39,7 +39,7 @@ public class Controller2D : MonoBehaviour
 
     void updateRaycastOrigins()
     {
-        Bounds bounds = collider2D.bounds; //sets the size of the collider of each axis
+        Bounds bounds = boxCollider.bounds; //sets the size of the collider of each axis
         bounds.Expand(skinWidth * -2); //changes bounds of each axis inward
         raycast.bottomLeft = new Vector2(bounds.min.x, bounds.min.y); //sets the position of the raycasts
         raycast.bottomRight = new Vector2(bounds.max.x, bounds.min.y);
@@ -49,7 +49,7 @@ public class Controller2D : MonoBehaviour
 
     void calculateRaySpacing()
     {
-        Bounds bounds = collider2D.bounds;
+        Bounds bounds = boxCollider.bounds;
         bounds.Expand(skinWidth * -2);
         horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue); //sets min count to 2
         verticalRayCount = Mathf.Clamp(verticalRayCount, 2, int.MaxValue);
@@ -85,7 +85,6 @@ public class Controller2D : MonoBehaviour
 
             rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
-            //Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red, Time.deltaTime);
 
             if(hit)
             {
@@ -111,7 +110,6 @@ public class Controller2D : MonoBehaviour
 
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
-            //Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red, Time.deltaTime);
 
             if (hit)
             {
@@ -126,7 +124,7 @@ public class Controller2D : MonoBehaviour
     //=====================================================================
     void Start()
     {
-        collider2D = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
         calculateRaySpacing();
     }
 

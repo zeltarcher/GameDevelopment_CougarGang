@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Keys
   - Drugs
+  - Water
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -18,9 +20,9 @@ TagManager:
   - object/enemy
   - Player
   - Platform
-  - 
-  - 
-  - 
+  - water
+  - Wall
+  - Ceiling
   - 
   - 
   - 
