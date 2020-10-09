@@ -35,7 +35,7 @@ public class DoorUnlock : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player")
-            && other.GetType().ToString() == "UnityEngine.CapsuleCollider2D" && keyObtained == true)
+            && other.GetType().ToString() == "UnityEngine.BoxCollider2D" && keyObtained == true)
         {
             canOpen = true;
         }
@@ -43,7 +43,7 @@ public class DoorUnlock : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.CapsuleCollider2D")
+        if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.BoxCollider2D")
         {
             canOpen = false;
         }
