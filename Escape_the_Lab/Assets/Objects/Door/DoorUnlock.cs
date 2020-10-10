@@ -15,12 +15,12 @@ public class DoorUnlock : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         isOpened = false;
-        keyObtained = GameObject.Find("Player").GetComponent<Player>().keyobtained;
         LoadNext = GetComponent<LoadScene>();
     }
 
     void Update()
     {
+        keyObtained = GameObject.Find("Player").GetComponent<Player>().keyobtained;
         if (Input.GetKeyDown(KeyCode.I) )
         {
             if (canOpen && !isOpened)
