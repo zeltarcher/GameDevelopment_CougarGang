@@ -30,7 +30,8 @@ public class MixerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        mixer.SetFloat("SFXVolume", 0f);
+        mixer.SetFloat("SoundVolume", 0f);
     }
 
     // Update is called once per frame
