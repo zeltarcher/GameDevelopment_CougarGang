@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     Animator animate;
     SpriteRenderer sprite;
     int currentHealth;
+
+    AudioSource SFX_playerSrc;
+    AudioClip main_jumpSound, main_dieSound, main_walkSound, main_hitSound;
     //                          Helper methods
     //====================================================================
     private void updateAnimation()
@@ -77,6 +80,12 @@ public class Player : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+
+        //SFX
+        if(currentHealth>0)
+            SFX_playerSrc.PlayOneShot(main_hitSound);
+        else if(currentHealth==0)
+            SFX_playerSrc.PlayOneShot(main_dieSound);
     }
     private void poisonWater() { 
         TakeDamage(10); }
@@ -107,7 +116,7 @@ public class Player : MonoBehaviour
     private void stopAnimation() {
         animate.enabled = false;
     }
-
+   
     //                      Run time methods
     //=====================================================================
     void Start()
@@ -121,6 +130,13 @@ public class Player : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         gravity = -(2 * jumpHeight) / Mathf.Pow(jumpAcceleration, 2);
         jumpSpeed = Mathf.Abs(gravity) * jumpAcceleration;
+
+        main_jumpSound = Resources.Load<AudioClip>("Main_jump");
+        main_dieSound = Resources.Load<AudioClip>("Main_Die");
+        main_walkSound = Resources.Load<AudioClip>("Main_Walk");
+        main_hitSound = Resources.Load<AudioClip>("Main_Hurt");
+
+        SFX_playerSrc = GetComponent<AudioSource>();
     }
  
     void Update()
@@ -128,7 +144,7 @@ public class Player : MonoBehaviour
         if(currentHealth <= 0)
         {
             currentHealth = 0;
-            StartCoroutine("playerDeath");
+            StartCoroutine("playerDeath");            
         }
 
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -141,6 +157,9 @@ public class Player : MonoBehaviour
             resetAnimations();
             animate.SetTrigger("Player jump start");
             velocity.y = jumpSpeed;
+
+            //SFX
+            SFX_playerSrc.PlayOneShot(main_jumpSound);
         }
         if (Input.GetKeyUp(KeyCode.Space) && velocity.y > 0)
             velocity.y = 1f;
@@ -150,6 +169,9 @@ public class Player : MonoBehaviour
             updateAnimation();
             Vector3 newVelocity = calculateVelocity(ref velocity, direction);
             controller.move(newVelocity);
+
+            //SFX
+            //SFX_playerSrc.PlayOneShot(main_walkSound);
         }
     }
 }

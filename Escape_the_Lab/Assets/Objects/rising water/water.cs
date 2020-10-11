@@ -18,6 +18,9 @@ public class water : MonoBehaviour
     bool hitWall = false;
     Transform cameraTransform;
 
+    AudioSource water_AudioSrc;
+    AudioClip water_raisingSound;
+
     private Bounds OrthographicBounds(Camera camera)
     {
         float screenAspect = (float)Screen.width / (float)Screen.height;
@@ -69,7 +72,10 @@ public class water : MonoBehaviour
         Physics2D.IgnoreLayerCollision(11, 8);
         Physics2D.IgnoreLayerCollision(11, 12);
         InvokeRepeating("flipSpriteX", 1f, .5f); 
-        InvokeRepeating("flipSpriteY", .8f, .5f); 
+        InvokeRepeating("flipSpriteY", .8f, .5f);
+
+        water_raisingSound = Resources.Load<AudioClip>("Water_Rasing_Normal");
+        water_AudioSrc = GetComponent<AudioSource>();
     }
 
 
@@ -90,6 +96,13 @@ public class water : MonoBehaviour
         //transform.position = new Vector3(resultingPosition.x, transform.position.y, resultingPosition.z);
 
         transform.Translate(velocity);
+
+        //SFX
+        if (water_AudioSrc.time >= water_raisingSound.length || water_AudioSrc.time <= 0)
+        {
+            //Debug.Log("Get in play water sound==========================");
+            water_AudioSrc.Play();
+        }
 
     }
 }
