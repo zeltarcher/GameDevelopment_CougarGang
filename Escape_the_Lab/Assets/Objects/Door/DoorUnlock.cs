@@ -20,7 +20,7 @@ public class DoorUnlock : MonoBehaviour
 
     void Update()
     {
-        keyObtained = GameObject.Find("Player").GetComponent<Player>().keyobtained;
+        //keyObtained = GameObject.Find("Player").GetComponent<Player>().keyobtained;
         if (Input.GetKeyDown(KeyCode.I) )
         {
             if (canOpen && !isOpened)
