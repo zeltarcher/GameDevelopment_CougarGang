@@ -79,10 +79,9 @@ public class Player : MonoBehaviour
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
-
+        //healthBar.SetHealth(currentHealth);
         //SFX
-        if(currentHealth>0)
+        if (currentHealth>0)
             SFX_playerSrc.PlayOneShot(main_hitSound);
         else if(currentHealth==0)
             SFX_playerSrc.PlayOneShot(main_dieSound);
@@ -144,7 +143,14 @@ public class Player : MonoBehaviour
         if(currentHealth <= 0)
         {
             currentHealth = 0;
-            StartCoroutine("playerDeath");            
+            StartCoroutine("playerDeath");
+
+            healthBar.SetHealth(currentHealth);
+        }
+        else
+        {
+
+            healthBar.SetHealth(currentHealth);
         }
 
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));

@@ -32,21 +32,25 @@ public class HealthBar : MonoBehaviour
 
     public void SetHealth(int health)
     {
-        sliderHP.value = health;
-        txt.text = health.ToString();
+        sliderHP.value = float.Parse(health.ToString());
+        txt.text = health.ToString(); 
+        txt.color = Color.white;
 
         fill.color = gradient.Evaluate(sliderHP.normalizedValue);
         if (health == 0)
         {
             face.sprite = rip;
+            txt.color = Color.red;
         }
         else if(health>0 && health <= (sliderHP.maxValue / 3))
         {
             face.sprite = ohNo;
+            txt.color = Color.white;
         }
         else if (health > (sliderHP.maxValue / 3) && health <= ((sliderHP.maxValue / 3)*2))
         {
             face.sprite = okay;
+            txt.color = Color.green;
         }
     }
 
