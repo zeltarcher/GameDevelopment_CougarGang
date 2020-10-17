@@ -12,9 +12,9 @@ public class MixerControl : MonoBehaviour
         mixer.GetFloat("SoundVolume", out value);
         Debug.Log("Sound volume");
         if (value <= -40f)
-            mixer.SetFloat("SoundVolume", 0f);
+            mixer.SetFloat("SoundVolume", -15f);
         else
-            mixer.SetFloat("SoundVolume", -40f);
+            mixer.SetFloat("SoundVolume", -80);
     }
 
     public void SwitchSFXLv()
@@ -22,16 +22,16 @@ public class MixerControl : MonoBehaviour
         Debug.Log("SFX Volume");
         mixer.GetFloat("SFXVolume", out value);
         if (value <= -40f)
-            mixer.SetFloat("SFXVolume", 0f);
+            mixer.SetFloat("SFXVolume", -10f);
         else
-            mixer.SetFloat("SFXVolume", -40f);
+            mixer.SetFloat("SFXVolume", -80f);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        mixer.SetFloat("SFXVolume", 0f);
-        mixer.SetFloat("SoundVolume", 0f);
+        mixer.SetFloat("SFXVolume", -10f);
+        mixer.SetFloat("SoundVolume", -15f);
     }
 
     // Update is called once per frame

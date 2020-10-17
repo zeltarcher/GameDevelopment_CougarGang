@@ -41,7 +41,7 @@ public class InGameMenu : MonoBehaviour
         inGameMenu.SetActive(true);
         Time.timeScale = 0;
     }
-
+    /*
     public void SoundButton()
     {
         Debug.Log("Sound btn clicked");
@@ -51,5 +51,5 @@ public class InGameMenu : MonoBehaviour
     {
         Debug.Log("SFX button clicked");
         MusicManager.Switch_Mute_SFX();
-    }
+    }*/
 }

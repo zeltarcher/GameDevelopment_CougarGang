@@ -11,7 +11,7 @@ public class MusicManager : MonoBehaviour
     static AudioSource SFX_audioSrc, Water_audioSrc, IngameBG_audioSrc;
     public static AudioClip Ingame_Music_Level_1, main_jumpSound, main_dieSound, main_walkSound, main_hitSound, water_raisingSound;
 
-    public AudioMixer audioMixer;
+    AudioMixer audioMixer;
 
     // Start is called before the first frame update
     void Start()
@@ -67,7 +67,7 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public static void Switch_Mute_SFX()
+    /*public static void Switch_Mute_SFX()
     {
 
         Debug.Log("===========================================SFX SWITCH");
@@ -98,5 +98,5 @@ public class MusicManager : MonoBehaviour
             Debug.Log("TRUE Sound");
             IngameBG_audioSrc.mute = true;
         }
-    }
+    }*/
 }
