@@ -55,7 +55,7 @@ public class MusicManager : MonoBehaviour
             
         }
     }
-
+    /*
     public static void PlayWaterSound()
     {
         //Debug.Log("play water sound");
@@ -65,7 +65,7 @@ public class MusicManager : MonoBehaviour
             //Debug.Log("Get in play water sound==========================");
             Water_audioSrc.Play();
         }
-    }
+    }*/
 
     /*public static void Switch_Mute_SFX()
     {

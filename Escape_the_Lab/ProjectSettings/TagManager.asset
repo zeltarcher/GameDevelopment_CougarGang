@@ -8,6 +8,10 @@ TagManager:
   - Drugs
   - Water
   - Wall
+  - Immutes
+  - Bombs
+  - HPs
+  - Coins
   layers:
   - Default
   - TransparentFX
