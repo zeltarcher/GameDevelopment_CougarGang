@@ -68,9 +68,9 @@ public class water : MonoBehaviour
         cameraBounds = OrthographicBounds(mainCamera);
         waterBounds = boxCollider.bounds;
         waterSpeed = waterSpeed / 100000;
-        Physics2D.IgnoreCollision(boxCollider, ignoreCollider);
-        Physics2D.IgnoreLayerCollision(11, 8);
-        Physics2D.IgnoreLayerCollision(11, 12);
+        //Physics2D.IgnoreCollision(boxCollider, ignoreCollider);
+        //Physics2D.IgnoreLayerCollision(11, 8);
+        //Physics2D.IgnoreLayerCollision(11, 12);
         InvokeRepeating("flipSpriteX", 1f, .5f); 
         InvokeRepeating("flipSpriteY", .8f, .5f);
 

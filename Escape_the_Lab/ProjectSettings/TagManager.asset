@@ -12,6 +12,7 @@ TagManager:
   - Bombs
   - HPs
   - Coins
+  - Enemy
   layers:
   - Default
   - TransparentFX
