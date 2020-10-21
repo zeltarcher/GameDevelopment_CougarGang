@@ -12,13 +12,15 @@ public class KeyPicker : MonoBehaviour
     private float hp = 0;
     private float key = 0;
     private float drug = 0;
+    private float superPotion = 0;
 
-    public Text txtCoin;
-    public Text txtBomb;
-    public Text txtImmute;
-    public Text txtHP;
-    public Text txtDrug;
-    public Text txtKey;
+    public TextMeshProUGUI txtCoin;
+    public TextMeshProUGUI txtBomb;
+    public TextMeshProUGUI txtImmute;
+    public TextMeshProUGUI txtHP;
+    public TextMeshProUGUI txtDrug;
+    public TextMeshProUGUI txtKey;
+    public TextMeshProUGUI txtSuper;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -28,6 +30,15 @@ public class KeyPicker : MonoBehaviour
             coin++;
             Debug.Log(coin);
             txtCoin.text = coin.ToString();
+        }
+
+        else if(other.transform.tag == "superPotion")
+        {
+            Destroy(other.gameObject);
+            superPotion++;
+            Debug.Log("superpotion counts: " + superPotion);
+            txtSuper.text = superPotion.ToString();
+
         }
 
         else if(other.transform.tag == "Bombs")
@@ -52,14 +63,14 @@ public class KeyPicker : MonoBehaviour
         {
             Destroy(other.gameObject);
             drug++;
-            Debug.Log(drug);
+            Debug.Log("Drug counts: " + drug);
             txtDrug.text = drug.ToString();
         }
         else if (other.transform.tag == "Keys")
         {
             Destroy(other.gameObject);
             key++;
-            Debug.Log(drug.ToString());
+            Debug.Log("Key counts: " + key);
             txtKey.text = key.ToString();
         }
     }
