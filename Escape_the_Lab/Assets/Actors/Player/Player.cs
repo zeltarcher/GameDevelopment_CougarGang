@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
+
 [RequireComponent (typeof (Controller2D))]
 [RequireComponent(typeof(HealthBar))]
 public class Player : MonoBehaviour
@@ -12,24 +13,7 @@ public class Player : MonoBehaviour
     //                          Class variables
     //====================================================================
 
-    // from key picker
-    //=============================
-    private float coin = 0;
-    private float bomb = 0;
-    private float immute = 0;
-    private float hp = 0;
-    private float key = 0;
-    private float drug = 0;
-    private float superPotion = 0;
-
-    public TextMeshProUGUI txtCoin;
-    public TextMeshProUGUI txtBomb;
-    public TextMeshProUGUI txtImmute;
-    public TextMeshProUGUI txtHP;
-    public TextMeshProUGUI txtDrug;
-    public TextMeshProUGUI txtKey;
-    public TextMeshProUGUI txtSuper;
-    //==============================
+    
 
 
 
@@ -52,7 +36,6 @@ public class Player : MonoBehaviour
     AudioSource SFX_playerSrc;
     AudioClip main_jumpSound, main_dieSound, main_walkSound, main_hitSound;
 
-    KeyPicker keypick;
 
     
     //                          Helper methods
@@ -123,64 +106,12 @@ public class Player : MonoBehaviour
             InvokeRepeating("poisonWater", 0f, .5f); 
     }
 
-    private void OnTriggerExit2D(Collider2D other) 
+    private void OnTriggerExit2D(Collider2D collision) 
     {
-        if (other.tag == "Water")
+        if (collision.tag == "Water")
             CancelInvoke();
 
-        // from key picker
-        //======================================================
-        else if (other.transform.tag == "Coins")
-        {
-            Destroy(other.gameObject);
-            coin++;
-            Debug.Log(coin);
-            txtCoin.text = coin.ToString();
-        }
-
-        else if (other.transform.tag == "superPotion")
-        {
-            Destroy(other.gameObject);
-            superPotion++;
-            Debug.Log("superpotion counts: " + superPotion);
-            txtSuper.text = superPotion.ToString();
-
-        }
-
-        else if (other.transform.tag == "Bombs")
-        {
-            Destroy(other.gameObject);
-            bomb++;
-            txtBomb.text = bomb.ToString();
-        }
-        else if (other.transform.tag == "Immutes")
-        {
-            Destroy(other.gameObject);
-            immute++;
-            txtImmute.text = immute.ToString();
-        }
-        else if (other.transform.tag == "HPs")
-        {
-            Destroy(other.gameObject);
-            hp++;
-            txtHP.text = hp.ToString();
-        }
-        else if (other.transform.tag == "Drugs")
-        {
-            Destroy(other.gameObject);
-            drug++;
-            Debug.Log("Drug counts: " + drug);
-            txtDrug.text = drug.ToString();
-        }
-        else if (other.transform.tag == "Keys")
-        {
-            Destroy(other.gameObject);
-            key++;
-            Debug.Log("Key counts: " + key);
-            txtKey.text = key.ToString();
-        }
-        //======================================================
-
+        
     }
 
     private IEnumerator playerDeath()
@@ -202,8 +133,7 @@ public class Player : MonoBehaviour
     //=====================================================================
     void Start()
     {
-        //keypick = gameObject.AddComponent<KeyPicker>();
-
+        
         healthBar = FindObjectOfType<HealthBar>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
@@ -225,7 +155,11 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        khaBomb();
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            gameObject.GetComponent<water>().testNumber = gameObject.GetComponent<water>().testNumber + 1;
+            Debug.Log(gameObject.GetComponent<water>().testNumber);
+        }
 
         if (currentHealth <= 0)
         {
@@ -272,22 +206,7 @@ public class Player : MonoBehaviour
 
     
 
-    public float countBomb()
-    {
-        return bomb;
-    }
-
-    public void khaBomb()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            if (bomb > 0)
-            {
-                bomb--;
-                txtBomb.text = bomb.ToString();
-            }
-        }
-    }
+    
 
 
 }
