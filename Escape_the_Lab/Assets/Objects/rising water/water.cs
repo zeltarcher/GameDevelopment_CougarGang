@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class water : MonoBehaviour
 {
+
+    public int testNumber = 0;
     public float waterSpeed;
     TilemapCollider2D ignoreCollider;
     private Vector3 velocity;
@@ -68,11 +70,11 @@ public class water : MonoBehaviour
         cameraBounds = OrthographicBounds(mainCamera);
         waterBounds = boxCollider.bounds;
         waterSpeed = waterSpeed / 100000;
-        Physics2D.IgnoreCollision(boxCollider, ignoreCollider);
-        Physics2D.IgnoreLayerCollision(11, 8);
-        Physics2D.IgnoreLayerCollision(11, 12);
-        InvokeRepeating("flipSpriteX", 1f, .5f); 
-        InvokeRepeating("flipSpriteY", .8f, .5f);
+        //Physics2D.IgnoreCollision(boxCollider, ignoreCollider);
+        //Physics2D.IgnoreLayerCollision(11, 8);
+        //Physics2D.IgnoreLayerCollision(11, 12);
+        //InvokeRepeating("flipSpriteX", 1f, .5f); 
+        //InvokeRepeating("flipSpriteY", .8f, .5f);
 
         water_raisingSound = Resources.Load<AudioClip>("Water_Rasing_Normal");
         water_AudioSrc = GetComponent<AudioSource>();

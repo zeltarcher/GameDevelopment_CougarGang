@@ -6,23 +6,41 @@ using TMPro;
 
 public class KeyPicker : MonoBehaviour
 {
+
+    // from key picker
+    //=============================
     private float coin = 0;
     private float bomb = 0;
     private float immute = 0;
     private float hp = 0;
     private float key = 0;
     private float drug = 0;
+    private float superPotion = 0;
 
-    public Text txtCoin;
-    public Text txtBomb;
-    public Text txtImmute;
-    public Text txtHP;
-    public Text txtDrug;
-    public Text txtKey;
+    public TextMeshProUGUI txtCoin;
+    public TextMeshProUGUI txtBomb;
+    public TextMeshProUGUI txtImmute;
+    public TextMeshProUGUI txtHP;
+    public TextMeshProUGUI txtDrug;
+    public TextMeshProUGUI txtKey;
+    public TextMeshProUGUI txtSuper;
+    //==============================
 
-    private void OnTriggerEnter2D(Collider2D other)
+
+
+    void Update()
     {
-        if(other.transform.tag == "Coins")
+
+        khaBomb();
+        
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+
+        // from key picker
+        //======================================================
+        if (other.transform.tag == "Coins")
         {
             Destroy(other.gameObject);
             coin++;
@@ -30,7 +48,16 @@ public class KeyPicker : MonoBehaviour
             txtCoin.text = coin.ToString();
         }
 
-        else if(other.transform.tag == "Bombs")
+        else if (other.transform.tag == "superPotion")
+        {
+            Destroy(other.gameObject);
+            superPotion++;
+            Debug.Log("superpotion counts: " + superPotion);
+            txtSuper.text = superPotion.ToString();
+
+        }
+
+        else if (other.transform.tag == "Bombs")
         {
             Destroy(other.gameObject);
             bomb++;
@@ -52,15 +79,36 @@ public class KeyPicker : MonoBehaviour
         {
             Destroy(other.gameObject);
             drug++;
-            Debug.Log(drug);
+            Debug.Log("Drug counts: " + drug);
             txtDrug.text = drug.ToString();
         }
         else if (other.transform.tag == "Keys")
         {
             Destroy(other.gameObject);
             key++;
-            Debug.Log(drug.ToString());
+            Debug.Log("Key counts: " + key);
             txtKey.text = key.ToString();
         }
+        //======================================================
+
     }
+
+
+    
+    public void khaBomb()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (bomb > 0)
+            {
+                bomb--;
+                txtBomb.text = bomb.ToString();
+                gameObject.GetComponent<water>().testNumber = gameObject.GetComponent<water>().testNumber * 100;
+                Debug.Log(gameObject.GetComponent<water>().testNumber);
+            }
+        }
+    }
+
+
+
 }

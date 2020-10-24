@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
+
 
 [RequireComponent (typeof (Controller2D))]
 [RequireComponent(typeof(HealthBar))]
@@ -9,6 +12,11 @@ public class Player : MonoBehaviour
 {
     //                          Class variables
     //====================================================================
+
+    
+
+
+
     public float jumpHeight = 4f;
     public float jumpAcceleration = .4f;
     public float movementSpeed = 6f;
@@ -27,6 +35,9 @@ public class Player : MonoBehaviour
 
     AudioSource SFX_playerSrc;
     AudioClip main_jumpSound, main_dieSound, main_walkSound, main_hitSound;
+
+
+    
     //                          Helper methods
     //====================================================================
     private void updateAnimation()
@@ -99,6 +110,8 @@ public class Player : MonoBehaviour
     {
         if (collision.tag == "Water")
             CancelInvoke();
+
+        
     }
 
     private IEnumerator playerDeath()
@@ -142,6 +155,7 @@ public class Player : MonoBehaviour
     //=====================================================================
     void Start()
     {
+        
         healthBar = FindObjectOfType<HealthBar>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
@@ -162,7 +176,14 @@ public class Player : MonoBehaviour
  
     void Update()
     {
-        if(currentHealth <= 0)
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            gameObject.GetComponent<water>().testNumber = gameObject.GetComponent<water>().testNumber + 1;
+            Debug.Log(gameObject.GetComponent<water>().testNumber);
+        }
+
+        if (currentHealth <= 0)
         {
             currentHealth = 0;
             StartCoroutine("playerDeath");
@@ -204,5 +225,13 @@ public class Player : MonoBehaviour
             //SFX
             //SFX_playerSrc.PlayOneShot(main_walkSound);
         }
+
+        
     }
+
+    
+
+    
+
+
 }
