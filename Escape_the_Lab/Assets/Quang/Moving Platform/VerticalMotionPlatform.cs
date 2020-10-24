@@ -7,24 +7,21 @@ public class VerticalMotionPlatform : MonoBehaviour
 {
     public float moveSpeed = 3f;
     bool moveUp = true;
-    public float Vertical_Start_Point;
-    public float Vertical_End_Point;
-    float distance;
-    public bool isEndPointNegative = true;
+    public float Vertical_High_Point;
+    public float Vertical_Low_Point;
     // Start is called before the first frame update
     void Start()
     {
-        distance = Math.Abs(Vertical_End_Point - Vertical_Start_Point);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y > Vertical_Start_Point)
+        if (transform.position.y > Vertical_High_Point)
         {
             moveUp = false;
         }
-        if (transform.position.y < Vertical_End_Point)
+        if (transform.position.y < Vertical_Low_Point)
         {
             moveUp = true;
         }
