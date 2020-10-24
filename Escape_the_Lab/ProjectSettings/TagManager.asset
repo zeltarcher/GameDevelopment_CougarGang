@@ -12,6 +12,8 @@ TagManager:
   - Bombs
   - HPs
   - Coins
+  - Platform
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
@@ -27,7 +29,7 @@ TagManager:
   - water
   - Wall
   - Ceiling
-  - 
+  - Tutorials
   - 
   - 
   - 
@@ -48,4 +50,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer
+    uniqueID: 1588617771
+    locked: 0
+  - name: Tutorial
+    uniqueID: 2221351251
     locked: 0

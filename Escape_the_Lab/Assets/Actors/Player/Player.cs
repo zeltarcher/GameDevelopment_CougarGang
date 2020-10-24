@@ -115,7 +115,29 @@ public class Player : MonoBehaviour
     private void stopAnimation() {
         animate.enabled = false;
     }
-   
+
+    //For Player to sttay on moving platform
+    /*
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collied something******************");
+        if (collision.gameObject.tag == "MovingPlatform")
+        {
+            Debug.Log("On the Moving platform===============================");
+            //collision.collider.transform.SetParent(transform);
+            transform.SetParent(collision.gameObject.transform);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "MovingPlatform")
+        {
+
+        }
+    }
+    */
+
     //                      Run time methods
     //=====================================================================
     void Start()
@@ -166,6 +188,9 @@ public class Player : MonoBehaviour
 
             //SFX
             SFX_playerSrc.PlayOneShot(main_jumpSound);
+
+            //handle jump out of moving platform
+            //transform.parent = null;
         }
         if (Input.GetKeyUp(KeyCode.Space) && velocity.y > 0)
             velocity.y = 1f;
