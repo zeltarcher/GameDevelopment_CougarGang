@@ -26,7 +26,10 @@ public class KeyPicker : MonoBehaviour
     public TextMeshProUGUI txtSuper;
     //==============================
 
-
+    public float getKeys()
+    {
+        return key;
+    }
 
     void Update()
     {
@@ -35,7 +38,7 @@ public class KeyPicker : MonoBehaviour
         
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
 
         // from key picker

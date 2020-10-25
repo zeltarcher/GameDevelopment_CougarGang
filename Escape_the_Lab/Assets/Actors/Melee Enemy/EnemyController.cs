@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class EnemyController : MonoBehaviour
     public LayerMask detectCollisionWith;
     public float followRange = 5f;
     public float attackRange = 1f;
+    public float gravitySpeed = 400f;
+    public float health = 100;
     Transform player;
     Rigidbody2D myRigidBody;
     BoxCollider2D box;
@@ -17,41 +20,90 @@ public class EnemyController : MonoBehaviour
     SpriteRenderer sprite;
     Vector2 leftRayCast, rightRayCast;
     RaycastHit2D leftHit, rightHit;
+    Animator animate;
     State state;
+    bool ground;
+    float distanceToPlayer;
+    float gravity;
+    private enum State 
+    { 
+        Walking, 
+        Chase, 
+        Attack,
+        Hit,
+        Death
+    }
 
-    private enum State { Walking, Chase, attack}
+    private void playAnimation(String name)
+    {
+        foreach (AnimatorControllerParameter parameter in animate.parameters)
+        {
+            if (parameter.type == AnimatorControllerParameterType.Bool)
+                animate.SetBool(parameter.name, false);
+        }
+        animate.SetBool(name, true);
+    }
 
     void updateState()
     {
         switch(state)
         {
             case State.Walking:
-                if (!leftHit || !rightHit)
+                playAnimation("enemy walking");
+                if (leftHit != rightHit && ground == true)
+                {
                     moveSpeed *= -1;
+                    ground = false;
+                }
 
                 if (Mathf.Sign(moveSpeed) > 0)
                     sprite.flipX = false;
                 else
                     sprite.flipX = true;
+           
+                myRigidBody.velocity = new Vector2(moveSpeed, gravity);
+                if (leftHit == rightHit)
+                    ground = true;
 
-                myRigidBody.velocity = new Vector2(moveSpeed, 0f);
                 break;
 
             case State.Chase:
-                transform.position = Vector2.MoveTowards(transform.position, player.position, Mathf.Abs(moveSpeed) * Time.deltaTime);
-                if(transform.position.x > player.position.x)
+                playAnimation("enemy walking");
+                if (transform.position.x > player.position.x)
+                {
                     sprite.flipX = true;
+                    moveSpeed = -Mathf.Abs(moveSpeed);
+                }
                 else
+                {
+                    moveSpeed = Mathf.Abs(moveSpeed);
                     sprite.flipX = false;
-
-                if (Vector3.Distance(transform.position, player.position) <= attackRange)
-                    state = State.attack;
+                }
+                myRigidBody.velocity = new Vector2(moveSpeed * 1.5f, gravity);
                 break;
 
-            case State.attack:
-
+            case State.Attack:
+                playAnimation("enemy attack");
+                myRigidBody.velocity = new Vector2(0, gravity);
+                break;
+            case State.Hit:
+                playAnimation("enemy hit");
+                myRigidBody.velocity = new Vector2(0, gravity);
+                break;
+            case State.Death:
+                playAnimation("enemy death");
+                health = 0;
+                foreach (Collider c in GetComponents<Collider>())
+                    c.enabled = false;
+                myRigidBody.velocity = new Vector2(0, gravity);
+                enabled = false;
                 break;
         }
+    }
+
+    void terminate()
+    {
+        Destroy(gameObject);
     }
 
     void updateRaycast()
@@ -59,8 +111,47 @@ public class EnemyController : MonoBehaviour
         colliderBounds = box.bounds;
         leftRayCast = new Vector2(colliderBounds.min.x - .1f, colliderBounds.min.y);
         rightRayCast = new Vector2(colliderBounds.max.x + .1f, colliderBounds.min.y);
-        leftHit = Physics2D.Raycast(leftRayCast, Vector2.down, .5f, detectCollisionWith);
-        rightHit = Physics2D.Raycast(rightRayCast, Vector2.down, .5f, detectCollisionWith);
+        leftHit = Physics2D.Raycast(leftRayCast, Vector2.down, .1f, detectCollisionWith);
+        rightHit = Physics2D.Raycast(rightRayCast, Vector2.down, .1f, detectCollisionWith);
+    }
+
+    void takeDamage(int damage){
+        health -= damage;
+    }
+
+    void poisonWater(){
+        takeDamage(10);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.collider.tag);
+        if (collision.collider.tag == "Platform" && leftHit && rightHit)
+            gravity = 0;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Platform")
+            gravity += -gravitySpeed * Time.deltaTime;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Water")
+        {
+            state = State.Hit;
+            InvokeRepeating("poisonWater", 0f, .5f);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Water")
+        {
+            state = State.Walking;
+            CancelInvoke();
+        }
     }
 
     void Start()
@@ -69,6 +160,7 @@ public class EnemyController : MonoBehaviour
         myRigidBody = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         player = FindObjectOfType<Player>().transform;
+        animate = GetComponent<Animator>();
         state = State.Walking;
     }
 
@@ -76,14 +168,16 @@ public class EnemyController : MonoBehaviour
     void FixedUpdate()
     {
         updateRaycast();
+        distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (Vector3.Distance(transform.position, player.position) <= followRange)
-            state = State.Chase;
-        else if (Vector3.Distance(transform.position, player.position) <= attackRange)
-            state = State.attack;
-        else
-            state = State.Walking;
-
+            if (distanceToPlayer <= followRange && distanceToPlayer >= attackRange && state != State.Hit)
+                state = State.Chase;
+            else if (distanceToPlayer <= attackRange && state != State.Hit)
+                state = State.Attack;
+            else if(health <= 0)
+                state = State.Death;
+            else if(state != State.Hit)
+                state = State.Walking;
 
         updateState();
     }

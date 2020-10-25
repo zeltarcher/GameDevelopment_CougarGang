@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-
+using System;
 
 [RequireComponent (typeof (Controller2D))]
 [RequireComponent(typeof(HealthBar))]
@@ -12,10 +12,6 @@ public class Player : MonoBehaviour
 {
     //                          Class variables
     //====================================================================
-
-    
-
-
 
     public float jumpHeight = 4f;
     public float jumpAcceleration = .4f;
@@ -36,10 +32,18 @@ public class Player : MonoBehaviour
     AudioSource SFX_playerSrc;
     AudioClip main_jumpSound, main_dieSound, main_walkSound, main_hitSound;
 
-
-    
     //                          Helper methods
     //====================================================================
+
+    private void playAnimation(String name)
+    {
+        foreach (AnimatorControllerParameter parameter in animate.parameters)
+        {
+            if (parameter.type == AnimatorControllerParameterType.Bool)
+                animate.SetBool(parameter.name, false);
+        }
+        animate.SetBool(name, true);
+    }
     private void updateAnimation()
     {
         if (direction.x < 0)
@@ -48,34 +52,13 @@ public class Player : MonoBehaviour
             sprite.flipX = false;
 
         if (direction.x == 0 && controller.collisions.below)
-        {
-            resetAnimations();
-            animate.SetBool("Player Idle", true);
-        }
+            playAnimation("Player Idle");
         else if (controller.collisions.below)
-        {
-            resetAnimations();
-            animate.SetBool("Player Moving", true);
-        }
+            playAnimation("Player Moving");
         else if (velocity.y > 1 && controller.collisions.below == false)
-        {
-            resetAnimations();
-            animate.SetBool("Player jump loop", true);
-        }
+            playAnimation("Player jump loop");
         else if (velocity.y < 1 && controller.collisions.below == false)
-        {
-            resetAnimations();
-            animate.SetBool("Player falling", true);
-        }
-    }
-
-    private void resetAnimations()
-    {
-        foreach (AnimatorControllerParameter parameter in animate.parameters)
-        {
-            if (parameter.type == AnimatorControllerParameterType.Bool)
-                animate.SetBool(parameter.name, false);
-        }
+            playAnimation("Player falling");
     }
 
     private Vector3 calculateVelocity(ref Vector3 velocity, Vector2 direction)
@@ -109,16 +92,13 @@ public class Player : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision) 
     {
         if (collision.tag == "Water")
-            CancelInvoke();
-
-        
+            CancelInvoke();   
     }
 
     private IEnumerator playerDeath()
     {
         Time.timeScale = 0;
-        resetAnimations();
-        animate.SetTrigger("Player Death");
+        playAnimation("Player Death");
         yield return new WaitForSecondsRealtime(3f);
         Time.timeScale = 1;
         Scene scene = SceneManager.GetActiveScene();
@@ -203,8 +183,7 @@ public class Player : MonoBehaviour
    
         if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below)
         {
-            resetAnimations();
-            animate.SetTrigger("Player jump start");
+            playAnimation("Player jump start");
             velocity.y = jumpSpeed;
 
             //SFX

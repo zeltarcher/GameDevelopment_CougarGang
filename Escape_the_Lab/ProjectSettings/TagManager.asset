@@ -14,6 +14,7 @@ TagManager:
   - Coins
   - Enemy
   - superPotion
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -23,13 +24,13 @@ TagManager:
   - UI
   - 
   - 
-  - object/enemy
+  - object
   - Player
   - Platform
   - water
   - Wall
   - Ceiling
-  - 
+  - enemy
   - 
   - 
   - 
