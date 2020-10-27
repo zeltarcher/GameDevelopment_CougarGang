@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     Animator animate;
     SpriteRenderer sprite;
     int currentHealth;
+    bool hit;
 
     AudioSource SFX_playerSrc;
     AudioClip main_jumpSound, main_dieSound, main_walkSound, main_hitSound;
@@ -50,15 +51,17 @@ public class Player : MonoBehaviour
             sprite.flipX = true;
         else if (direction.x != 0)
             sprite.flipX = false;
-
-        if (direction.x == 0 && controller.collisions.below)
-            playAnimation("Player Idle");
-        else if (controller.collisions.below)
-            playAnimation("Player Moving");
-        else if (velocity.y > 1 && controller.collisions.below == false)
-            playAnimation("Player jump loop");
-        else if (velocity.y < 1 && controller.collisions.below == false)
-            playAnimation("Player falling");
+        if(!hit)
+        {
+            if (direction.x == 0 && controller.collisions.below)
+                playAnimation("Player Idle");
+            else if (controller.collisions.below)
+                playAnimation("Player Moving");
+            else if (velocity.y > 1 && controller.collisions.below == false)
+                playAnimation("Player jump loop");
+            else if (velocity.y < 1 && controller.collisions.below == false)
+                playAnimation("Player falling");
+        }
     }
 
     private Vector3 calculateVelocity(ref Vector3 velocity, Vector2 direction)
@@ -72,21 +75,29 @@ public class Player : MonoBehaviour
     }
     void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        //healthBar.SetHealth(currentHealth);
-        //SFX
-        if (currentHealth>0)
-            SFX_playerSrc.PlayOneShot(main_hitSound);
-        else if(currentHealth==0)
-            SFX_playerSrc.PlayOneShot(main_dieSound);
+        if (!hit)
+        {
+            hit = true;
+            playAnimation("Player Hit");
+            currentHealth -= damage;
+            //healthBar.SetHealth(currentHealth);
+            //SFX
+            if (currentHealth > 0)
+                SFX_playerSrc.PlayOneShot(main_hitSound);
+            else if (currentHealth == 0)
+                SFX_playerSrc.PlayOneShot(main_dieSound);
+        }
     }
     private void poisonWater() { 
         TakeDamage(10); }
+    private void endHit() { hit = false; }
 
     private void OnTriggerEnter2D(Collider2D collision) 
-    { 
-        if(collision.tag == "Water" && immuneToWater == false)
-            InvokeRepeating("poisonWater", 0f, .5f); 
+    {
+        if (collision.tag == "Water" && immuneToWater == false)
+            InvokeRepeating("poisonWater", 0f, .5f);
+        else if (collision.tag == "attack")
+            poisonWater();
     }
 
     private void OnTriggerExit2D(Collider2D collision) 
@@ -167,12 +178,10 @@ public class Player : MonoBehaviour
         {
             currentHealth = 0;
             StartCoroutine("playerDeath");
-
             healthBar.SetHealth(currentHealth);
         }
         else
         {
-
             healthBar.SetHealth(currentHealth);
         }
 

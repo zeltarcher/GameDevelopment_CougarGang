@@ -15,6 +15,7 @@ TagManager:
   - Enemy
   - superPotion
   - Platform
+  - attack
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - Wall
   - Ceiling
   - enemy
-  - 
+  - attack
   - 
   - 
   - 

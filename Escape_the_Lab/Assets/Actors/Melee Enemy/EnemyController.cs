@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     Transform player;
     Rigidbody2D myRigidBody;
     BoxCollider2D box;
+    PolygonCollider2D polygon;
     Bounds colliderBounds;
     SpriteRenderer sprite;
     Vector2 leftRayCast, rightRayCast;
@@ -101,11 +102,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void terminate()
-    {
-        Destroy(gameObject);
-    }
-
     void updateRaycast()
     {
         colliderBounds = box.bounds;
@@ -115,17 +111,14 @@ public class EnemyController : MonoBehaviour
         rightHit = Physics2D.Raycast(rightRayCast, Vector2.down, .1f, detectCollisionWith);
     }
 
-    void takeDamage(int damage){
-        health -= damage;
-    }
-
-    void poisonWater(){
-        takeDamage(10);
-    }
+    void terminate() { Destroy(gameObject); }
+    void enableAttack() { polygon.enabled = true; }
+    void disableAttack() { polygon.enabled = false; }
+    void takeDamage(int damage) { health -= damage; }
+    void poisonWater(){ takeDamage(10); }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.collider.tag);
         if (collision.collider.tag == "Platform" && leftHit && rightHit)
             gravity = 0;
     }
@@ -161,6 +154,8 @@ public class EnemyController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         player = FindObjectOfType<Player>().transform;
         animate = GetComponent<Animator>();
+        polygon = GetComponentInChildren<PolygonCollider2D>();
+        polygon.enabled = false;
         state = State.Walking;
     }
 
