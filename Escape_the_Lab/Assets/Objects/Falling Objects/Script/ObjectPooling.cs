@@ -33,7 +33,7 @@ public class ObjectPooling : MonoBehaviour
         //look for inactive objects to use
         for(int i = 0; i < pulledObjects.Count; i++)
         {
-            if (pulledObjects[i].transform.position.y < (Camera.main.transform.position.y - Camera.main.orthographicSize))//camera to be changed
+            if (pulledObjects[i].transform.position.y < (Camera.main.transform.position.y - Camera.main.orthographicSize))
                 pulledObjects[i].SetActive(false);
 
             if (pulledObjects[i].activeInHierarchy == false && pulledObjects[i].name == name)

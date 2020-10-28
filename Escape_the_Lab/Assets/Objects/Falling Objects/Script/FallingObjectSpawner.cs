@@ -52,7 +52,7 @@ public class FallingObjectSpawner : MonoBehaviour
         string FallObjType = fallObjName[r];
 
         GameObject FallObj = ObjectPooling.instance.GetPooledObject(FallObjType);
-        FallObj.transform.position = new Vector3(xPos, Camera.main.transform.position.y + 2*Camera.main.orthographicSize, 0); //camera to be changed
+        FallObj.transform.position = new Vector3(xPos, Camera.main.transform.position.y + 2*Camera.main.orthographicSize, 0); 
         FallObj.SetActive(true);
     }
 

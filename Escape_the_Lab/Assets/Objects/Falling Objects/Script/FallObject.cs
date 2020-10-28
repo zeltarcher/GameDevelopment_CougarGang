@@ -8,7 +8,7 @@ public class FallObject : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindObjectOfType<Player>();
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
