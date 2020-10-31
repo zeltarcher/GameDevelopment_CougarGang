@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     SpriteRenderer sprite;
     int currentHealth;
     bool hit;
+    float timer;//use to do plaer's animated Healthbar
 
     AudioSource SFX_playerSrc;
     AudioClip main_jumpSound, main_dieSound, main_walkSound, main_hitSound;
@@ -80,6 +81,10 @@ public class Player : MonoBehaviour
     {
         if (!hit)
         {
+            //For health bar animation
+            timer = 0.0f;
+            healthBar.HBar_GetHitAnimated();
+
             hit = true;
             playAnimation("Player Hit");
             currentHealth -= damage;
@@ -159,6 +164,7 @@ public class Player : MonoBehaviour
         healthBar = FindObjectOfType<HealthBar>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        timer = 0.0f;
 
         controller = GetComponent<Controller2D>();
         animate = GetComponent<Animator>();
@@ -223,7 +229,13 @@ public class Player : MonoBehaviour
             //SFX_playerSrc.PlayOneShot(main_walkSound);
         }
 
-        
+        timer += Time.deltaTime;
+        float seconds = timer % 60;
+        if (seconds > .2f)
+        {
+            healthBar.HBar_Normalized();
+        }
+        Debug.Log(seconds);
     }
 
     

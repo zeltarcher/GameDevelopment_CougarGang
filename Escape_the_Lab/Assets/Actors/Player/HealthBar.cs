@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     public GameObject Hbar;
+    private Vector2 localscale;
+
     public Slider sliderHP;
 
     public Text txt;
@@ -19,6 +21,17 @@ public class HealthBar : MonoBehaviour
     public Sprite okay;
     public Sprite ohNo;
     public Sprite rip;
+
+    public void HBar_GetHitAnimated()
+    {
+        Hbar.transform.localScale = new Vector2(.9f, .9f);
+    }
+
+    public void HBar_Normalized()
+    {
+        Hbar.transform.localScale = new Vector2(1f, 1f);
+        // Hbar.transform.localScale = localscale;
+    }
 
     public void SetMaxHealth(int health)
     {
@@ -56,4 +69,8 @@ public class HealthBar : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        //Hbar.transform.localScale = localscale;
+    }
 }
