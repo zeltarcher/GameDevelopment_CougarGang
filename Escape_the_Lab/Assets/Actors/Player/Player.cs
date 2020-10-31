@@ -73,7 +73,10 @@ public class Player : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         return deltaMove;
     }
-    void TakeDamage(int damage)
+
+
+    //I changed to public to make FallObject to call it.
+    public void TakeDamage(int damage)
     {
         if (!hit)
         {
@@ -118,6 +121,12 @@ public class Player : MonoBehaviour
 
     private void stopAnimation() {
         animate.enabled = false;
+    }
+
+    //Get player velocity for FallingObjectSpawners
+    public Vector3 GetPlayerVelocity()
+    {
+        return velocity;
     }
 
     //For Player to sttay on moving platform

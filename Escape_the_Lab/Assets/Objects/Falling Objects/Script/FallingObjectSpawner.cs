@@ -31,7 +31,7 @@ public class FallingObjectSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        velocity = player.velocity;
+        velocity = player.GetPlayerVelocity();
         ////======================
         if (velocity.x > 0)     //if player starts moving, then the falling objects start to spawn
         {

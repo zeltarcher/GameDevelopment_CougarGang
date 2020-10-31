@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    public GameObject Hbar;
     public Slider sliderHP;
 
     public Text txt;
@@ -32,6 +33,7 @@ public class HealthBar : MonoBehaviour
 
     public void SetHealth(int health)
     {
+       
         sliderHP.value = float.Parse(health.ToString());
         txt.text = health.ToString(); 
         txt.color = Color.white;
