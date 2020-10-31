@@ -6,21 +6,23 @@ using UnityEngine.UI;
 public class Enemy_H_Bar : MonoBehaviour
 {
     Vector2 localScale;
-    EnemyController Enemy;
+
+    public GameObject enemy;
+
+    //EnemyController enemyControl;
 
     // Start is called before the first frame update
     void Start()
     {
         localScale = transform.localScale;
-
-        Enemy = GetComponent<EnemyController>();
+        EnemyController enemyControl = enemy.GetComponents("EnemyController");
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        localScale.x = Enemy.health;
+        localScale.x = enemy.heal;
         transform.localScale = localScale;
     }
 }
