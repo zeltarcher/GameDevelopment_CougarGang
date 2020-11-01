@@ -38,12 +38,12 @@ public class MixerControl : MonoBehaviour
         mixer.GetFloat("SFXVolume", out value);
         if (value <= -80f)
         {
-            mixer.SetFloat("SoundVolume", -15f);
+            mixer.SetFloat("SFXVolume", -15f);
             btnSFX.image.sprite = SFX_on;
         }
         else
         {
-            mixer.SetFloat("SoundVolume", -80f);
+            mixer.SetFloat("SFXVolume", -80f);
             btnSFX.image.sprite = SFX_off;
         }
     }
