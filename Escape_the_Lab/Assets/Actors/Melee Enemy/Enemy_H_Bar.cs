@@ -15,14 +15,13 @@ public class Enemy_H_Bar : MonoBehaviour
     void Start()
     {
         localScale = transform.localScale;
-        EnemyController enemyControl = enemy.GetComponents("EnemyController");
+        //EnemyController enemyControl = enemy.GetComponents<EnemyController>();
     }
-
     // Update is called once per frame
     void Update()
     {
 
-        localScale.x = enemy.heal;
+        //localScale.x = enemy.heal;
         transform.localScale = localScale;
     }
 }
