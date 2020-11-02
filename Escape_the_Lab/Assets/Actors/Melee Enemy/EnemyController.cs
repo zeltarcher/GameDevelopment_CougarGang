@@ -114,8 +114,8 @@ public class EnemyController : MonoBehaviour
     void terminate() { Destroy(gameObject); }
     void enableAttack() { polygon.enabled = true; }
     void disableAttack() { polygon.enabled = false; }
-    void takeDamage(int damage) { health -= damage; }
-    void poisonWater(){ takeDamage(10); }
+    public void TakeDamage(int damage) { health -= damage; }
+    void poisonWater(){ TakeDamage(10); }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -145,7 +145,7 @@ public class EnemyController : MonoBehaviour
             state = State.Walking;
             CancelInvoke();
         }
-    }
+    } 
 
     void Start()
     {

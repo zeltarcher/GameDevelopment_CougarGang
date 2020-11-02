@@ -13,6 +13,9 @@ public class water : MonoBehaviour
     bool checkY = false;
     AudioSource water_AudioSrc;
     AudioClip water_raisingSound;
+    HealthController Health;
+    //public int damageAmount = 10;
+    //public float damageInterval = .5f;
 
     private void flipSpriteX()
     {
@@ -38,6 +41,27 @@ public class water : MonoBehaviour
         else
             checkY = false;
     }
+
+   /* private void poisonWater()
+    {
+        Health.TakeDamage(damageAmount);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
+        if (collision.tag == "Enemy")
+        {
+            Debug.Log(collision.gameObject.name);
+            Health = collision.gameObject.GetComponent<HealthController>();
+            InvokeRepeating("poisonWater", 0f, damageInterval);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        CancelInvoke();
+    } */
 
     void Start()
     {

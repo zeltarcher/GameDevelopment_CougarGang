@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Net;
+using Unity.Mathematics;
 
 [RequireComponent (typeof (Controller2D))]
 [RequireComponent(typeof(HealthBar))]
@@ -18,6 +20,9 @@ public class Player : MonoBehaviour
     public float movementSpeed = 6f;
     public int maxHealth = 100;
     public bool immuneToWater = false;
+    public GameObject gunProjectile;
+    public float projectileSpeed = 20;
+    public int projectileDamage = 20;
     HealthBar healthBar;
     float jumpSpeed;
     float gravity;
@@ -30,6 +35,9 @@ public class Player : MonoBehaviour
     int currentHealth;
     bool hit;
     float timer;//use to do plaer's animated Healthbar
+    bool shoot;
+    Vector2 bulletPosition;
+    Projectile projectile;
 
     AudioSource SFX_playerSrc;
     AudioClip main_jumpSound, main_dieSound, main_walkSound, main_hitSound;
@@ -96,23 +104,27 @@ public class Player : MonoBehaviour
                 SFX_playerSrc.PlayOneShot(main_dieSound);
         }
     }
-    private void poisonWater() { 
-        TakeDamage(10); }
+    private void poisonWater() {
+        hit = false;
+        TakeDamage(10); 
+    }
     private void endHit() { hit = false; }
+    private void enableShooting() { shoot = true; }
+    private void disableShooting() { shoot = false; }
 
     private void OnTriggerEnter2D(Collider2D collision) 
     {
         if (collision.tag == "Water" && immuneToWater == false)
             InvokeRepeating("poisonWater", 0f, .5f);
         else if (collision.tag == "attack")
-            poisonWater();
+            TakeDamage(10);
     }
 
     private void OnTriggerExit2D(Collider2D collision) 
     {
         if (collision.tag == "Water")
             CancelInvoke();   
-    }
+    } 
 
     private IEnumerator playerDeath()
     {
@@ -134,27 +146,27 @@ public class Player : MonoBehaviour
         return velocity;
     }
 
-    //For Player to sttay on moving platform
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void fireGun()
     {
-        Debug.Log("Collied something******************");
-        if (collision.gameObject.tag == "MovingPlatform")
+        SpriteRenderer projectileSprite = gunProjectile.GetComponent<SpriteRenderer>();
+        Bounds bounds = GetComponent<BoxCollider2D>().bounds;
+        if (sprite.flipX)
         {
-            Debug.Log("On the Moving platform===============================");
-            //collision.collider.transform.SetParent(transform);
-            transform.SetParent(collision.gameObject.transform);
+            projectileSprite.flipX = true;
+            bulletPosition = new Vector2(bounds.min.x, bounds.center.y);
+            projectile.speed = -projectileSpeed;
         }
+        else
+        {
+            bulletPosition = new Vector2(bounds.max.x, bounds.center.y);
+            projectile.speed = projectileSpeed;
+            projectileSprite.flipX = false;
+        }
+
+            Instantiate(gunProjectile, bulletPosition, quaternion.identity);
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "MovingPlatform")
-        {
 
-        }
-    }
-    */
 
     //                      Run time methods
     //=====================================================================
@@ -178,16 +190,20 @@ public class Player : MonoBehaviour
         main_hitSound = Resources.Load<AudioClip>("Main_Hurt");
 
         SFX_playerSrc = GetComponent<AudioSource>();
+        shoot = true;
+        projectile = gunProjectile.GetComponent<Projectile>();
+        projectile.speed = projectileSpeed;
+        projectile.damage = projectileDamage;
     }
  
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.A))
+       /* if (Input.GetKeyDown(KeyCode.A))
         {
             gameObject.GetComponent<water>().testNumber = gameObject.GetComponent<water>().testNumber + 1;
             Debug.Log(gameObject.GetComponent<water>().testNumber);
-        }
+        } */
 
         if (currentHealth <= 0)
         {
@@ -219,6 +235,9 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) && velocity.y > 0)
             velocity.y = 1f;
 
+        if (Input.GetKeyDown(KeyCode.Mouse0) && shoot)
+            fireGun();
+
         if (Time.timeScale != 0)
         {
             updateAnimation();
@@ -235,7 +254,7 @@ public class Player : MonoBehaviour
         {
             healthBar.HBar_Normalized();
         }
-        Debug.Log(seconds);
+        //Debug.Log(seconds);
     }
 
     

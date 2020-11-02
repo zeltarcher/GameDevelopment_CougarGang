@@ -26,9 +26,9 @@ TagManager:
   - 
   - 
   - object
-  - Player
-  - Platform
   - water
+  - Platform
+  - Player
   - Wall
   - Ceiling
   - enemy
