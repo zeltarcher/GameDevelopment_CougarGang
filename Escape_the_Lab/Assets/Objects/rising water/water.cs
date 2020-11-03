@@ -13,7 +13,7 @@ public class water : MonoBehaviour
     bool checkY = false;
     AudioSource water_AudioSrc;
     AudioClip water_raisingSound;
-    HealthController Health;
+    //HealthController Health;
     //public int damageAmount = 10;
     //public float damageInterval = .5f;
 
