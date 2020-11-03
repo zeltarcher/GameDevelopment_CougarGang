@@ -153,12 +153,12 @@ public class Player : MonoBehaviour
         if (sprite.flipX)
         {
             projectileSprite.flipX = true;
-            bulletPosition = new Vector2(bounds.min.x, bounds.center.y);
+            bulletPosition = new Vector2(bounds.min.x - .6f, bounds.center.y);
             projectile.speed = -projectileSpeed;
         }
         else
         {
-            bulletPosition = new Vector2(bounds.max.x, bounds.center.y);
+            bulletPosition = new Vector2(bounds.max.x + .5f, bounds.center.y);
             projectile.speed = projectileSpeed;
             projectileSprite.flipX = false;
         }

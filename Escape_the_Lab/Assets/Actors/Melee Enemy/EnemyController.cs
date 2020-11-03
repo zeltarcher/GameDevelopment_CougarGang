@@ -40,7 +40,9 @@ public class EnemyController : MonoBehaviour
         foreach (AnimatorControllerParameter parameter in animate.parameters)
         {
             if (parameter.type == AnimatorControllerParameterType.Bool)
+            {
                 animate.SetBool(parameter.name, false);
+            }
         }
         animate.SetBool(name, true);
     }
@@ -88,7 +90,6 @@ public class EnemyController : MonoBehaviour
                 myRigidBody.velocity = new Vector2(0, gravity);
                 break;
             case State.Hit:
-                playAnimation("enemy hit");
                 myRigidBody.velocity = new Vector2(0, gravity);
                 break;
             case State.Death:
@@ -114,7 +115,11 @@ public class EnemyController : MonoBehaviour
     void terminate() { Destroy(gameObject); }
     void enableAttack() { polygon.enabled = true; }
     void disableAttack() { polygon.enabled = false; }
-    public void TakeDamage(int damage) { health -= damage; }
+    void endHit() { state = State.Walking;}
+    public void TakeDamage(int damage) {
+        animate.SetTrigger("enemy hit");
+        state = State.Hit;
+        health -= damage; }
     void poisonWater(){ TakeDamage(10); }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -164,15 +169,19 @@ public class EnemyController : MonoBehaviour
     {
         updateRaycast();
         distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-            if (distanceToPlayer <= followRange && distanceToPlayer >= attackRange && state != State.Hit)
+        if (state != State.Hit && health > 0)
+        {
+            if (distanceToPlayer <= followRange && distanceToPlayer >= attackRange)
                 state = State.Chase;
-            else if (distanceToPlayer <= attackRange && state != State.Hit)
+            else if (distanceToPlayer <= attackRange)
                 state = State.Attack;
-            else if(health <= 0)
-                state = State.Death;
-            else if(state != State.Hit)
+            else
                 state = State.Walking;
+        }
+        else if(health <= 0)
+        {
+            state = State.Death;
+        }
 
         updateState();
     }
