@@ -10,6 +10,7 @@ public class DoorUnlock : MonoBehaviour
     private LoadScene LoadNext;
     private KeyPicker inventory;
 
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -28,10 +29,14 @@ public class DoorUnlock : MonoBehaviour
             {
                 Debug.Log("pressed");
                 anim.enabled = true;
-                anim.SetTrigger("Opening");
+                anim.SetTrigger("Opening");                
                 isOpened = true;
-                LoadNext.LoadNextScene();
             }
+        }
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("DoorOpening"))
+        {
+            LoadNext.LoadNextScene();
         }
     }
 
