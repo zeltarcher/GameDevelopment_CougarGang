@@ -26,6 +26,11 @@ public class EnemyController : MonoBehaviour
     bool ground;
     float distanceToPlayer;
     float gravity;
+
+    //healthbar
+    Transform healthBar;
+    float hb_max;
+
     private enum State 
     { 
         Walking, 
@@ -116,10 +121,18 @@ public class EnemyController : MonoBehaviour
     void enableAttack() { polygon.enabled = true; }
     void disableAttack() { polygon.enabled = false; }
     void endHit() { state = State.Walking;}
-    public void TakeDamage(int damage) {
+    public void TakeDamage(int damage) 
+    {
         animate.SetTrigger("enemy hit");
         state = State.Hit;
-        health -= damage; }
+        health -= damage;
+
+        if (health >= 0)
+        {
+            healthBar.localScale = new Vector3(health / hb_max, healthBar.localScale.y, healthBar.localScale.z);
+        }
+        
+    }
     void poisonWater(){ TakeDamage(10); }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -162,6 +175,9 @@ public class EnemyController : MonoBehaviour
         polygon = GetComponentInChildren<PolygonCollider2D>();
         polygon.enabled = false;
         state = State.Walking;
+
+        healthBar = gameObject.transform.Find("HealthBar");
+        hb_max = health;
     }
 
 
