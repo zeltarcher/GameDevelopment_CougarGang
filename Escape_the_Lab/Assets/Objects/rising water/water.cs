@@ -7,7 +7,7 @@ public class water : MonoBehaviour
 {
 
     public int testNumber = 0;
-    public float waterSpeed;
+    public float waterSpeed = 100;
     TilemapCollider2D ignoreCollider;
     private Vector3 velocity;
     Camera mainCamera;
@@ -19,6 +19,7 @@ public class water : MonoBehaviour
     bool checkY = false;
     bool hitWall = false;
     Transform cameraTransform;
+
 
     AudioSource water_AudioSrc;
     AudioClip water_raisingSound;
@@ -80,16 +81,24 @@ public class water : MonoBehaviour
         water_AudioSrc = GetComponent<AudioSource>();
     }
 
+    private void Update()
+    {
+        
+    }
 
     void FixedUpdate()
     {
+
+        
 
         // cameraBounds = OrthographicBounds(mainCamera);
         // waterBounds = boxCollider.bounds;
         //waterBounds.max.y < cameraBounds.max.y
         //if (!hitWall)
-       //  {
-            velocity.y += waterSpeed * Time.deltaTime;
+        //  {
+        
+        velocity.y += waterSpeed * Time.deltaTime;
+       
         // }
         // else
          // velocity.y = 0;

@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class KeyPicker : MonoBehaviour
 {
 
     // from key picker
     //=============================
+
     private float coin = 0;
-    private float bomb = 0;
+    public float bomb = 0;
     private float immute = 0;
     private float hp = 0;
     private float key = 0;
@@ -24,15 +26,40 @@ public class KeyPicker : MonoBehaviour
     public TextMeshProUGUI txtDrug;
     public TextMeshProUGUI txtKey;
     public TextMeshProUGUI txtSuper;
+    public GameObject playerDoc;
+    public GameObject samplePlayerDoc;
+    public GameObject waterManager;
     //==============================
-
+    
 
 
     void Update()
     {
 
         khaBomb();
+        makeChange();
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+
+            print("waterSpeed: " + gameObject.GetComponent<water>().waterSpeed);
+            print("testNumber: " + gameObject.GetComponent<water>().testNumber);
+        }
         
+        
+        
+    }
+
+    private void makeChange()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (superPotion > 0)
+            {
+                superPotion--;
+                txtSuper.text = superPotion.ToString();
+
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -103,8 +130,10 @@ public class KeyPicker : MonoBehaviour
             {
                 bomb--;
                 txtBomb.text = bomb.ToString();
-                gameObject.GetComponent<water>().testNumber = gameObject.GetComponent<water>().testNumber * 100;
-                Debug.Log(gameObject.GetComponent<water>().testNumber);
+                FindObjectOfType<water>().waterSpeed = 0.01f;
+                //gameObject.GetComponent<water>().waterSpeed = gameObject.GetComponent<water>().waterSpeed * 10;
+                //Debug.Log(gameObject.GetComponent<water>().waterSpeed);
+                
             }
         }
     }

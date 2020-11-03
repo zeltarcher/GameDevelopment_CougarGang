@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     Controller2D controller;
     Animator animate;
     SpriteRenderer sprite;
-    int currentHealth;
+    public int currentHealth;
 
     AudioSource SFX_playerSrc;
     AudioClip main_jumpSound, main_dieSound, main_walkSound, main_hitSound;
@@ -46,27 +46,44 @@ public class Player : MonoBehaviour
             sprite.flipX = true;
         else if (direction.x != 0)
             sprite.flipX = false;
+        if (FindObjectOfType<charChange>().p1)
+        {
+            if (direction.x == 0 && controller.collisions.below)
+            {
+                resetAnimations();
+                animate.SetBool("Player Idle", true);
+            }
+            else if (controller.collisions.below)
+            {
+                resetAnimations();
+                animate.SetBool("Player Moving", true);
+            }
+            else if (velocity.y > 1 && controller.collisions.below == false)
+            {
+                resetAnimations();
+                animate.SetBool("Player jump loop", true);
+            }
+            else if (velocity.y < 1 && controller.collisions.below == false)
+            {
+                resetAnimations();
+                animate.SetBool("Player falling", true);
+            }
+        }
+        else if (FindObjectOfType<charChange>().p2)
+        {
+            if(direction.x == 0 && controller.collisions.below)
+            {
+                resetAnimations();
+                animate.SetBool("Running", false);
+            }
 
-        if (direction.x == 0 && controller.collisions.below)
-        {
-            resetAnimations();
-            animate.SetBool("Player Idle", true);
+            else if (direction.x > 0 || direction.x < 0)
+            {
+                resetAnimations();
+                animate.SetBool("Running", true);
+            }
         }
-        else if (controller.collisions.below)
-        {
-            resetAnimations();
-            animate.SetBool("Player Moving", true);
-        }
-        else if (velocity.y > 1 && controller.collisions.below == false)
-        {
-            resetAnimations();
-            animate.SetBool("Player jump loop", true);
-        }
-        else if (velocity.y < 1 && controller.collisions.below == false)
-        {
-            resetAnimations();
-            animate.SetBool("Player falling", true);
-        }
+        
     }
 
     private void resetAnimations()
@@ -155,11 +172,7 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            gameObject.GetComponent<water>().testNumber = gameObject.GetComponent<water>().testNumber + 1;
-            Debug.Log(gameObject.GetComponent<water>().testNumber);
-        }
+        
 
         if (currentHealth <= 0)
         {
