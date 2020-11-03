@@ -17,13 +17,13 @@ public class KeyPicker : MonoBehaviour
     private float drug = 0;
     private float superPotion = 0;
 
-    public TextMeshProUGUI txtCoin;
-    public TextMeshProUGUI txtBomb;
-    public TextMeshProUGUI txtImmute;
-    public TextMeshProUGUI txtHP;
-    public TextMeshProUGUI txtDrug;
-    public TextMeshProUGUI txtKey;
-    public TextMeshProUGUI txtSuper;
+    TextMeshProUGUI txtCoin;
+    TextMeshProUGUI txtBomb;
+    TextMeshProUGUI txtImmute;
+    TextMeshProUGUI txtHP;
+    TextMeshProUGUI txtDrug;
+    TextMeshProUGUI txtKey;
+    TextMeshProUGUI txtSuper;
     //==============================
 
     public float getKeys()
@@ -113,5 +113,14 @@ public class KeyPicker : MonoBehaviour
     }
 
 
-
+    private void Start()
+    {
+        txtCoin = GameObject.Find("Coin Count Text").GetComponent<TextMeshProUGUI>();
+        txtBomb = GameObject.Find("Bomb Count Text").GetComponent<TextMeshProUGUI>();
+        txtImmute = GameObject.Find("Super Count Text").GetComponent<TextMeshProUGUI>();
+        txtHP = GameObject.Find("HP Potion Count Text").GetComponent<TextMeshProUGUI>();
+        txtDrug = GameObject.Find("Drug Count Text").GetComponent<TextMeshProUGUI>();
+        txtKey = GameObject.Find("Key Count Text").GetComponent<TextMeshProUGUI>();
+        //txtSuper = GameObject.Find("Coin Count Text").GetComponent<TextMeshProUGUI>();
+    }
 }
