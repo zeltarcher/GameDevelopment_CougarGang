@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
             sprite.flipX = true;
         else if (direction.x != 0)
             sprite.flipX = false;
-        if(!hit)
+        if(!hit && !shoot)
         {
             if (direction.x == 0 && controller.collisions.below)
                 playAnimation("Player Idle");
@@ -68,6 +68,17 @@ public class Player : MonoBehaviour
                 playAnimation("Player Moving");
             else if (velocity.y > 1 && controller.collisions.below == false)
                 playAnimation("Player jump loop");
+            else if (velocity.y < 1 && controller.collisions.below == false)
+                playAnimation("Player falling");
+        }
+        else if (!hit && shoot)
+        {
+            if (direction.x == 0 && controller.collisions.below)
+                playAnimation("Idle gun");
+            else if (controller.collisions.below)
+                playAnimation("Walking gun");
+            else if (velocity.y > 1 && controller.collisions.below == false)
+                playAnimation("Jump gun");
             else if (velocity.y < 1 && controller.collisions.below == false)
                 playAnimation("Player falling");
         }
