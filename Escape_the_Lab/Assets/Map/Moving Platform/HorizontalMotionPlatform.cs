@@ -4,22 +4,10 @@ using UnityEngine;
 
 public class HorizontalMotionPlatform : MonoBehaviour
 {
-    public GameObject thisPlatform;
     public float moveSpeed = 3f;
     bool moveRight = true;
     public float Horizontal_left_Point;
     public float Horizontal_right_Point;
-
-
-    
-    /*
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Platform")
-        {
-            collision.collider.transform.SetParent(null);
-        }
-    }*/
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +35,16 @@ public class HorizontalMotionPlatform : MonoBehaviour
         else
         {
             transform.position = new Vector2(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("AHHHHHHHHHHHHHHHHHHH");
+        if (collision.collider.tag == "Player")
+        {
+            Debug.Log("PLAYERRRRRRRRRRRRRR");
+            collision.transform.position = new Vector2(collision.transform.position.x + moveSpeed * Time.deltaTime, collision.transform.position.y);
         }
     }
 }
