@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
 public class KeyPicker : MonoBehaviour
 {
 
@@ -17,8 +16,9 @@ public class KeyPicker : MonoBehaviour
     private float hp = 0;
     private float key = 0;
     private float drug = 0;
-    private float superPotion = 0;
+    public float superPotion = 0;
 
+    /*
     public TextMeshProUGUI txtCoin;
     public TextMeshProUGUI txtBomb;
     public TextMeshProUGUI txtImmute;
@@ -28,39 +28,47 @@ public class KeyPicker : MonoBehaviour
     public TextMeshProUGUI txtSuper;
     public GameObject playerDoc;
     public GameObject samplePlayerDoc;
-    public GameObject waterManager;
-    //==============================
-    
+    */
 
+    //==============================
+
+    public float getKeys()
+    {
+        return key;
+    }
 
     void Update()
     {
 
         khaBomb();
-        makeChange();
-        if (Input.GetKeyDown(KeyCode.C))
+        healing();
+        if (Input.GetKeyDown(KeyCode.V))
         {
-
-            print("waterSpeed: " + gameObject.GetComponent<water>().waterSpeed);
-            print("testNumber: " + gameObject.GetComponent<water>().testNumber);
+            print("superPotion: " + superPotion);
         }
-        
-        
-        
-    }
-
-    private void makeChange()
-    {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            if (superPotion > 0)
+            print("ok");
+
+            if (FindObjectOfType<Inventory>().superPotion > 0)
             {
-                superPotion--;
-                txtSuper.text = superPotion.ToString();
+                print("then?");
+                if (FindObjectOfType<charChange>().p1 == true && FindObjectOfType<charChange>().p2 == false)
+                {
+                    FindObjectOfType<Inventory>().superPotion--;
+                    FindObjectOfType<Inventory>().textSuper.text = FindObjectOfType<Inventory>().superPotion.ToString();
+                    FindObjectOfType<charChange>().transformSuper();
+                }
 
             }
         }
+
+
+
+
     }
+
+
 
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -70,70 +78,92 @@ public class KeyPicker : MonoBehaviour
         if (other.transform.tag == "Coins")
         {
             Destroy(other.gameObject);
-            coin++;
-            Debug.Log(coin);
-            txtCoin.text = coin.ToString();
+            FindObjectOfType<Inventory>().coin++;
+
+            FindObjectOfType<Inventory>().textCoin.text = FindObjectOfType<Inventory>().coin.ToString();
+
         }
 
         else if (other.transform.tag == "superPotion")
         {
             Destroy(other.gameObject);
-            superPotion++;
-            Debug.Log("superpotion counts: " + superPotion);
-            txtSuper.text = superPotion.ToString();
+            FindObjectOfType<Inventory>().superPotion++;
+
+            FindObjectOfType<Inventory>().textSuper.text = FindObjectOfType<Inventory>().superPotion.ToString();
+
 
         }
 
         else if (other.transform.tag == "Bombs")
         {
             Destroy(other.gameObject);
-            bomb++;
-            txtBomb.text = bomb.ToString();
+            FindObjectOfType<Inventory>().bomb++;
+
+            FindObjectOfType<Inventory>().textBomb.text = FindObjectOfType<Inventory>().bomb.ToString();
         }
+
         else if (other.transform.tag == "Immutes")
         {
             Destroy(other.gameObject);
-            immute++;
-            txtImmute.text = immute.ToString();
+            FindObjectOfType<Inventory>().immute++;
+            FindObjectOfType<Inventory>().textImmute.text = FindObjectOfType<Inventory>().immute.ToString();
+
         }
         else if (other.transform.tag == "HPs")
         {
             Destroy(other.gameObject);
-            hp++;
-            txtHP.text = hp.ToString();
+            FindObjectOfType<Inventory>().hp++;
+
+            FindObjectOfType<Inventory>().textHP.text = FindObjectOfType<Inventory>().hp.ToString();
+
         }
         else if (other.transform.tag == "Drugs")
         {
             Destroy(other.gameObject);
-            drug++;
-            Debug.Log("Drug counts: " + drug);
-            txtDrug.text = drug.ToString();
+            FindObjectOfType<Inventory>().drug++;
+
+            FindObjectOfType<Inventory>().textDrug.text = FindObjectOfType<Inventory>().drug.ToString();
         }
         else if (other.transform.tag == "Keys")
         {
             Destroy(other.gameObject);
-            key++;
-            Debug.Log("Key counts: " + key);
-            txtKey.text = key.ToString();
+            FindObjectOfType<Inventory>().key++;
+
+            FindObjectOfType<Inventory>().textKey.text = FindObjectOfType<Inventory>().key.ToString();
         }
         //======================================================
 
     }
 
 
-    
+
     public void khaBomb()
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
             if (bomb > 0)
             {
-                bomb--;
-                txtBomb.text = bomb.ToString();
+                FindObjectOfType<Inventory>().bomb--;
+                FindObjectOfType<Inventory>().textBomb.text = FindObjectOfType<Inventory>().bomb.ToString();
+
                 FindObjectOfType<water>().waterSpeed = 0.01f;
                 //gameObject.GetComponent<water>().waterSpeed = gameObject.GetComponent<water>().waterSpeed * 10;
                 //Debug.Log(gameObject.GetComponent<water>().waterSpeed);
-                
+
+            }
+        }
+    }
+
+    public void healing()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (FindObjectOfType<charChange>().p1 == true)
+            {
+                FindObjectOfType<Inventory>().hp--;
+                FindObjectOfType<Inventory>().textHP.text = FindObjectOfType<Inventory>().hp.ToString();
+
+                FindObjectOfType<Player>().currentHealth = 100;
             }
         }
     }
@@ -141,3 +171,17 @@ public class KeyPicker : MonoBehaviour
 
 
 }
+
+/*
+private void Start()
+    {
+        txtCoin = GameObject.Find("Coin Count Text").GetComponent<TextMeshProUGUI>();
+        txtBomb = GameObject.Find("Bomb Count Text").GetComponent<TextMeshProUGUI>();
+        txtImmute = GameObject.Find("Super Count Text").GetComponent<TextMeshProUGUI>();
+        txtHP = GameObject.Find("HP Potion Count Text").GetComponent<TextMeshProUGUI>();
+        txtDrug = GameObject.Find("Drug Count Text").GetComponent<TextMeshProUGUI>();
+        txtKey = GameObject.Find("Key Count Text").GetComponent<TextMeshProUGUI>();
+        //txtSuper = GameObject.Find("Coin Count Text").GetComponent<TextMeshProUGUI>();
+    }
+}
+*/

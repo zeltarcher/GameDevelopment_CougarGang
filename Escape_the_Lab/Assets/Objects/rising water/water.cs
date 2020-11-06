@@ -5,34 +5,17 @@ using UnityEngine.Tilemaps;
 
 public class water : MonoBehaviour
 {
-
     public int testNumber = 0;
-    public float waterSpeed = 100;
-    TilemapCollider2D ignoreCollider;
+    public float waterSpeed;
     private Vector3 velocity;
-    Camera mainCamera;
-    Bounds cameraBounds;
-    Bounds waterBounds;
-    Collider2D boxCollider;
     SpriteRenderer sprite;
     bool checkX = false;
     bool checkY = false;
-    bool hitWall = false;
-    Transform cameraTransform;
-
-
     AudioSource water_AudioSrc;
     AudioClip water_raisingSound;
-
-    private Bounds OrthographicBounds(Camera camera)
-    {
-        float screenAspect = (float)Screen.width / (float)Screen.height;
-        float cameraHeight = camera.orthographicSize * 2;
-        Bounds bounds = new Bounds(
-            camera.transform.position,
-            new Vector3(cameraHeight * screenAspect, cameraHeight, 0));
-        return bounds;
-    }
+    //HealthController Health;
+    //public int damageAmount = 10;
+    //public float damageInterval = .5f;
 
     private void flipSpriteX()
     {
@@ -59,52 +42,41 @@ public class water : MonoBehaviour
             checkY = false;
     }
 
-   
+   /* private void poisonWater()
+    {
+        Health.TakeDamage(damageAmount);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
+        if (collision.tag == "Enemy")
+        {
+            Debug.Log(collision.gameObject.name);
+            Health = collision.gameObject.GetComponent<HealthController>();
+            InvokeRepeating("poisonWater", 0f, damageInterval);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        CancelInvoke();
+    } */
 
     void Start()
     {
-        ignoreCollider = FindObjectOfType <TilemapCollider2D>();
-        mainCamera = FindObjectOfType<Camera>();
-        cameraTransform = mainCamera.transform;
-        boxCollider = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
-        cameraBounds = OrthographicBounds(mainCamera);
-        waterBounds = boxCollider.bounds;
         waterSpeed = waterSpeed / 100000;
-        //Physics2D.IgnoreCollision(boxCollider, ignoreCollider);
-        //Physics2D.IgnoreLayerCollision(11, 8);
-        //Physics2D.IgnoreLayerCollision(11, 12);
-        //InvokeRepeating("flipSpriteX", 1f, .5f); 
-        //InvokeRepeating("flipSpriteY", .8f, .5f);
+        InvokeRepeating("flipSpriteX", 1f, .5f); 
+        InvokeRepeating("flipSpriteY", .8f, .5f);
 
         water_raisingSound = Resources.Load<AudioClip>("Water_Rasing_Normal");
         water_AudioSrc = GetComponent<AudioSource>();
     }
 
-    private void Update()
-    {
-        
-    }
-
     void FixedUpdate()
     {
-
-        
-
-        // cameraBounds = OrthographicBounds(mainCamera);
-        // waterBounds = boxCollider.bounds;
-        //waterBounds.max.y < cameraBounds.max.y
-        //if (!hitWall)
-        //  {
-        
-        velocity.y += waterSpeed * Time.deltaTime;
-       
-        // }
-        // else
-         // velocity.y = 0;
-
-        //Vector3 resultingPosition = cameraTransform.position + cameraTransform.forward;
-        //transform.position = new Vector3(resultingPosition.x, transform.position.y, resultingPosition.z);
+            velocity.y += waterSpeed * Time.deltaTime;
 
         transform.Translate(velocity);
 
