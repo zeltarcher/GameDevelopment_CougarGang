@@ -65,7 +65,7 @@ public class HealthBar : MonoBehaviour
         else if (health > (sliderHP.maxValue / 3) && health <= ((sliderHP.maxValue / 3)*2))
         {
             face.sprite = okay;
-            txt.color = Color.green;
+            txt.color = Color.blue;
         }
     }
 

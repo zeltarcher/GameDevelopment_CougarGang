@@ -50,6 +50,27 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Sky
+    uniqueID: 1870511811
+    locked: 0
+  - name: SeaWater
+    uniqueID: 58615057
+    locked: 0
+  - name: Fish
+    uniqueID: 231648031
+    locked: 0
+  - name: Buildiing-BG
+    uniqueID: 1120431731
+    locked: 0
+  - name: Building
+    uniqueID: 817368065
+    locked: 0
+  - name: Seabed
+    uniqueID: 3860093683
+    locked: 0
+  - name: Platform
+    uniqueID: 1680012601
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

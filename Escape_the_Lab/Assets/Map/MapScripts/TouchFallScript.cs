@@ -23,7 +23,7 @@ public class TouchFallScript : MonoBehaviour
 
     // Update is called once per frame
 
-    void OnTriggerEnter2D(Collider2D other)
+    /**void OnTriggerEnter2D(Collider2D other)
     {
 
         touch++;
@@ -32,6 +32,27 @@ public class TouchFallScript : MonoBehaviour
 
             Invoke("StartDropping", droppingDelay);
         }
+    }*/
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Platform")
+        {
+            Destroy(gameObject,0.0f);
+        }
+            
+
+        if (collision.collider.tag == "Player")
+        {
+            touch++;
+            sr.sprite = Resources.Load("RedUnit", typeof(Sprite)) as Sprite;
+            if (touch > maxTouch)
+            {
+
+                Invoke("StartDropping", droppingDelay);
+            }
+        }
+
     }
 
     void StartDropping()

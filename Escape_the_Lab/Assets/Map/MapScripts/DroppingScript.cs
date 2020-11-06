@@ -15,21 +15,30 @@ public class DroppingScript : MonoBehaviour
     }
 
     // Update is called once per frame
-
+    /*
     void OnTriggerEnter2D(Collider2D other)
     {
         Invoke("StartDropping", droppingDelay);
         //Invoke("StopDropping", stopDelay);
-    }
+    }*/
 
     void StartDropping()
     {
         rb.isKinematic = false;
     }
-
+    /*
     void StopDropping()
     {
         rb.isKinematic = true;
-    }
+    }*/
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Platform")
+        {
+            Destroy(gameObject, 0.0f);
+        }
 
+        if (collision.collider.tag == "Player")
+            Invoke("StartDropping", droppingDelay);
+    }
 }

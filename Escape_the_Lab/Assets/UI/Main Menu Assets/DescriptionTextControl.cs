@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DescriptionTextControl : MonoBehaviour
 {
     public string input;
-    public Text txtNote;
+    public Text txtNote;//txtNoti in HUD or txtInfo iin MainMenu
     // Start is called before the first frame update
     void Start()
     {
