@@ -13,14 +13,17 @@ public class EnemyController : MonoBehaviour
     public float attackRange = 1f;
     public float gravitySpeed = 400f;
     public float health = 100;
+    public Sprite stunnedSprite;
+    public float stunnedDuration = 1f;
     Transform player;
     Rigidbody2D myRigidBody;
     BoxCollider2D box;
     PolygonCollider2D polygon;
-    Bounds colliderBounds;
+    CapsuleCollider2D capsule;
+    Bounds colliderBounds, capsuleBounds;
     SpriteRenderer sprite;
-    Vector2 leftRayCast, rightRayCast;
-    RaycastHit2D leftHit, rightHit;
+    Vector2 leftRayCast, rightRayCast, topRaycast;
+    RaycastHit2D leftHit, rightHit, stunCheck;
     Animator animate;
     State state;
     bool ground;
@@ -37,7 +40,16 @@ public class EnemyController : MonoBehaviour
         Chase, 
         Attack,
         Hit,
-        Death
+        Death,
+        Stunned
+    }
+
+    private IEnumerator stunned()
+    {
+        enabled = false;
+        yield return new WaitForSecondsRealtime(stunnedDuration);
+        enabled = true;
+        state = State.Walking;
     }
 
     private void playAnimation(String name)
@@ -105,16 +117,25 @@ public class EnemyController : MonoBehaviour
                 myRigidBody.velocity = new Vector2(0, gravity);
                 enabled = false;
                 break;
+            case State.Stunned:
+                myRigidBody.velocity = new Vector2(0, gravity);
+                animate.enabled = false;
+                sprite.sprite = stunnedSprite;
+                StartCoroutine("stunned");
+                break;
         }
     }
 
     void updateRaycast()
     {
         colliderBounds = box.bounds;
+        capsuleBounds = capsule.bounds;
         leftRayCast = new Vector2(colliderBounds.min.x - .1f, colliderBounds.min.y);
         rightRayCast = new Vector2(colliderBounds.max.x + .1f, colliderBounds.min.y);
+        topRaycast = new Vector2(capsuleBounds.center.x, capsuleBounds.max.y);
         leftHit = Physics2D.Raycast(leftRayCast, Vector2.down, .1f, detectCollisionWith);
         rightHit = Physics2D.Raycast(rightRayCast, Vector2.down, .1f, detectCollisionWith);
+        stunCheck = Physics2D.Raycast(topRaycast, Vector2.up, .2f, LayerMask.NameToLayer("Player"));
     }
 
     void terminate() { Destroy(gameObject); }
@@ -168,6 +189,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         box = GetComponent<BoxCollider2D>();
+        capsule = GetComponent<CapsuleCollider2D>();
         myRigidBody = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         player = FindObjectOfType<Player>().transform;
@@ -175,6 +197,7 @@ public class EnemyController : MonoBehaviour
         polygon = GetComponentInChildren<PolygonCollider2D>();
         polygon.enabled = false;
         state = State.Walking;
+        Debug.Log(LayerMask.LayerToName(11));
 
         healthBar = gameObject.transform.Find("HealthBar");
         hb_max = health;
@@ -197,6 +220,12 @@ public class EnemyController : MonoBehaviour
         else if(health <= 0)
         {
             state = State.Death;
+        }
+
+        if (stunCheck)
+        {
+            Debug.Log("stunned");
+            state = State.Stunned;
         }
 
         updateState();

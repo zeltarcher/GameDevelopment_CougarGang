@@ -2836,6 +2836,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2800527006683593720, guid: 1d5a4621cd6647c4a8385692a15ce80b, type: 3}
+      propertyPath: stunnedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 81ce0d3a037d30947bdb934a47251836, type: 3}
     - target: {fileID: 2800527006683593721, guid: 1d5a4621cd6647c4a8385692a15ce80b, type: 3}
       propertyPath: m_Offset.x
       value: 0.14338544
@@ -2855,6 +2859,10 @@ PrefabInstance:
     - target: {fileID: 2800527006683593722, guid: 1d5a4621cd6647c4a8385692a15ce80b, type: 3}
       propertyPath: m_Size.x
       value: 2.4482887
+      objectReference: {fileID: 0}
+    - target: {fileID: 2800527006683593722, guid: 1d5a4621cd6647c4a8385692a15ce80b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2800527006683593726, guid: 1d5a4621cd6647c4a8385692a15ce80b, type: 3}
       propertyPath: m_Name
