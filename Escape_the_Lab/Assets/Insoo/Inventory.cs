@@ -24,13 +24,13 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*
-        textCoin.text = coin.ToString();
-        textBomb.text = bomb.ToString();
-        textHP.text = hp.ToString();
-        textDrug.text = drug.ToString();
-        textSuper.text = superPotion.ToString();
-        */
+        textCoin = GameObject.Find("Coin Count Text").GetComponent<TextMeshProUGUI>();
+        textBomb = GameObject.Find("Bomb Count Text").GetComponent<TextMeshProUGUI>();
+        //textImmute = GameObject.Find("Super Count Text").GetComponent<TextMeshProUGUI>();
+        textHP = GameObject.Find("HP Potion Count Text").GetComponent<TextMeshProUGUI>();
+        textDrug = GameObject.Find("Drug Count Text").GetComponent<TextMeshProUGUI>();
+        textKey = GameObject.Find("Key Count Text").GetComponent<TextMeshProUGUI>();
+        textSuper = GameObject.Find("Super Count Text").GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
