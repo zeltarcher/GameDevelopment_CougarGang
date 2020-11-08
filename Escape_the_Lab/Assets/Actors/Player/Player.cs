@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     Projectile projectile;
 
     AudioSource SFX_playerSrc;
-    AudioClip main_jumpSound, main_dieSound, main_walkSound, main_hitSound;
+    AudioClip main_jumpSound, main_dieSound, main_walkSound, main_hitSound, main_shoot_laser;
 
     //                          Helper methods
     //====================================================================
@@ -199,6 +199,7 @@ public class Player : MonoBehaviour
         main_dieSound = Resources.Load<AudioClip>("Main_Die");
         main_walkSound = Resources.Load<AudioClip>("Main_Walk");
         main_hitSound = Resources.Load<AudioClip>("Main_Hurt");
+        main_shoot_laser = Resources.Load<AudioClip>("Main_LaserShoot");
 
         SFX_playerSrc = GetComponent<AudioSource>();
         shoot = true;
@@ -247,7 +248,11 @@ public class Player : MonoBehaviour
             velocity.y = 1f;
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && shoot)
+        {
             fireGun();
+            SFX_playerSrc.PlayOneShot(main_shoot_laser);
+        }
+            
 
         if (Time.timeScale != 0)
         {

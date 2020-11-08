@@ -34,6 +34,10 @@ public class EnemyController : MonoBehaviour
     Transform healthBar;
     float hb_max;
 
+    //sound
+    AudioSource SFX_enemySrc;
+    AudioClip enemy_dieSound, enemy_hitSound, enemy_slashing;
+
     private enum State 
     { 
         Walking, 
@@ -105,16 +109,22 @@ public class EnemyController : MonoBehaviour
             case State.Attack:
                 playAnimation("enemy attack");
                 myRigidBody.velocity = new Vector2(0, gravity);
+
+                if(!SFX_enemySrc.isPlaying)
+                    SFX_enemySrc.PlayOneShot(enemy_slashing);
+
                 break;
             case State.Hit:
                 myRigidBody.velocity = new Vector2(0, gravity);
                 break;
             case State.Death:
+                CoUpdate();
+
                 playAnimation("enemy death");
                 health = 0;
                 foreach (Collider c in GetComponents<Collider>())
                     c.enabled = false;
-                myRigidBody.velocity = new Vector2(0, gravity);
+                myRigidBody.velocity = new Vector2(0, gravity); 
                 enabled = false;
                 break;
             case State.Stunned:
@@ -124,6 +134,16 @@ public class EnemyController : MonoBehaviour
                 StartCoroutine("stunned");
                 break;
         }
+    }
+
+    IEnumerable CoUpdate()
+    {
+        Debug.Log("Waiting");
+        if (!SFX_enemySrc.isPlaying)
+            SFX_enemySrc.PlayOneShot(enemy_dieSound);
+        yield return new WaitForSeconds(2);
+
+        yield return null;
     }
 
     void updateRaycast()
@@ -152,7 +172,11 @@ public class EnemyController : MonoBehaviour
         {
             healthBar.localScale = new Vector3(health / hb_max, healthBar.localScale.y, healthBar.localScale.z);
         }
-        
+
+
+        if (!SFX_enemySrc.isPlaying)
+            SFX_enemySrc.PlayOneShot(enemy_hitSound);
+
     }
     void poisonWater(){ TakeDamage(10); }
 
@@ -201,6 +225,11 @@ public class EnemyController : MonoBehaviour
 
         healthBar = gameObject.transform.Find("HealthBar");
         hb_max = health;
+
+        SFX_enemySrc = GetComponent<AudioSource>();
+        enemy_dieSound = Resources.Load<AudioClip>("Enemy_Death");
+        enemy_slashing = Resources.Load<AudioClip>("Enemy_Sword_Attack");
+        enemy_hitSound = Resources.Load<AudioClip>("Enemy_Hurt");
     }
 
 
@@ -219,6 +248,7 @@ public class EnemyController : MonoBehaviour
         }
         else if(health <= 0)
         {
+            CoUpdate();
             state = State.Death;
         }
 
