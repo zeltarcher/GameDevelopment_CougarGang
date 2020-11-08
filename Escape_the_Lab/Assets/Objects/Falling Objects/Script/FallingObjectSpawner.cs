@@ -20,12 +20,18 @@ public class FallingObjectSpawner : MonoBehaviour
     private Player player;
     private bool StartSpawn = false;
 
+    AudioSource fallingObj_audiosrc;
+    AudioClip fire;
+
     // Start is called before the first frame update
     void Start()
     {
         waveIndex = 0;
         currentTime = wave[waveIndex].delayTime;
         player = GameObject.Find("Player").GetComponent<Player>();
+
+        fallingObj_audiosrc = GetComponent<AudioSource>();
+        fire = Resources.Load<AudioClip>("Fire_Burning");
     }
 
     // Update is called once per frame
@@ -42,18 +48,24 @@ public class FallingObjectSpawner : MonoBehaviour
         {
             currentTime -= Time.deltaTime;
             if (currentTime < 0)
+            {
                 SelectWave();
+
+            }
         }
     }
 
     void SpawnObjects(float xPos)
     {
+        fallingObj_audiosrc.PlayOneShot(fire);
+
         int r = Random.Range(0, fallObjName.Length);    
         string FallObjType = fallObjName[r];
 
         GameObject FallObj = ObjectPooling.instance.GetPooledObject(FallObjType);
         FallObj.transform.position = new Vector3(xPos, Camera.main.transform.position.y + 2*Camera.main.orthographicSize, 0); 
         FallObj.SetActive(true);
+
     }
 
     void SelectWave()

@@ -13,6 +13,9 @@ public class charChange : MonoBehaviour
     public bool p2 = false;
     public float transformTime = 10f;
 
+    AudioSource robo_audiosrc;
+    AudioClip robo_transform, robo_end;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,10 @@ public class charChange : MonoBehaviour
         player2.SetActive(false);
         p1 = true;
         p2 = false;
+
+        robo_audiosrc = GetComponent<AudioSource>();
+        robo_transform = Resources.Load<AudioClip>("Main_Robot_Transform");
+        robo_end = Resources.Load<AudioClip>("Main_Robot_OutOrDie");
     }
 
     // Update is called once per frame
@@ -31,6 +38,7 @@ public class charChange : MonoBehaviour
 
     public void transformSuper()
     {
+        robo_audiosrc.PlayOneShot(robo_transform);
         if (p1 == true && p2 == false)
         {
 
@@ -72,6 +80,7 @@ public class charChange : MonoBehaviour
 
     void backToNomal()
     {
+        robo_audiosrc.PlayOneShot(robo_end);
         if (p1 == false && p2 == true)
         {
             player1.SetActive(true);
