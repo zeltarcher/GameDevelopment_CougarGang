@@ -32,11 +32,25 @@ public class KeyPicker : MonoBehaviour
 
     //==============================
 
+    AudioSource item_audiosrc;
+    AudioClip ac_coin, ac_bomb, ac_immute, ac_hp, ac_key, ac_drug, ac_super,ac_bomb_explore;
+
     public float getKeys()
     {
         return key;
     }
-
+    private void Start()
+    {
+        item_audiosrc = GetComponent<AudioSource>();
+        ac_coin = Resources.Load<AudioClip>("Pickup_Coin");
+        ac_bomb = Resources.Load<AudioClip>("Pickup_Item");
+        ac_immute = Resources.Load<AudioClip>("Pickup_Item1");
+        ac_hp = Resources.Load<AudioClip>("Pickup_Item1");
+        ac_key = Resources.Load<AudioClip>("Pickup_Item2");
+        ac_drug = Resources.Load<AudioClip>("Pickup_Item2");
+        ac_super = Resources.Load<AudioClip>("Pickup_ItemSpecial");
+        ac_bomb_explore = Resources.Load<AudioClip>("bomb_explosion");
+    }
     void Update()
     {
 
@@ -77,6 +91,7 @@ public class KeyPicker : MonoBehaviour
         //======================================================
         if (other.transform.tag == "Coins")
         {
+            item_audiosrc.PlayOneShot(ac_coin);
             Destroy(other.gameObject);
             FindObjectOfType<Inventory>().coin++;
 
@@ -86,6 +101,7 @@ public class KeyPicker : MonoBehaviour
 
         else if (other.transform.tag == "superPotion")
         {
+            item_audiosrc.PlayOneShot(ac_super);
             Destroy(other.gameObject);
             FindObjectOfType<Inventory>().superPotion++;
 
@@ -96,6 +112,7 @@ public class KeyPicker : MonoBehaviour
 
         else if (other.transform.tag == "Bombs")
         {
+            item_audiosrc.PlayOneShot(ac_bomb);
             Destroy(other.gameObject);
             FindObjectOfType<Inventory>().bomb++;
 
@@ -104,6 +121,7 @@ public class KeyPicker : MonoBehaviour
 
         else if (other.transform.tag == "Immutes")
         {
+            item_audiosrc.PlayOneShot(ac_immute);
             Destroy(other.gameObject);
             FindObjectOfType<Inventory>().immute++;
             FindObjectOfType<Inventory>().textImmute.text = FindObjectOfType<Inventory>().immute.ToString();
@@ -111,6 +129,7 @@ public class KeyPicker : MonoBehaviour
         }
         else if (other.transform.tag == "HPs")
         {
+            item_audiosrc.PlayOneShot(ac_hp);
             Destroy(other.gameObject);
             FindObjectOfType<Inventory>().hp++;
 
@@ -119,6 +138,7 @@ public class KeyPicker : MonoBehaviour
         }
         else if (other.transform.tag == "Drugs")
         {
+            item_audiosrc.PlayOneShot(ac_drug);
             Destroy(other.gameObject);
             FindObjectOfType<Inventory>().drug++;
 
@@ -126,6 +146,7 @@ public class KeyPicker : MonoBehaviour
         }
         else if (other.transform.tag == "Keys")
         {
+            item_audiosrc.PlayOneShot(ac_key);
             Destroy(other.gameObject);
             FindObjectOfType<Inventory>().key++;
 
@@ -143,6 +164,7 @@ public class KeyPicker : MonoBehaviour
         {
             if (bomb > 0)
             {
+                item_audiosrc.PlayOneShot(ac_bomb_explore);
                 FindObjectOfType<Inventory>().bomb--;
                 FindObjectOfType<Inventory>().textBomb.text = FindObjectOfType<Inventory>().bomb.ToString();
 
