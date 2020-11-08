@@ -10,7 +10,8 @@ public class DoorUnlock : MonoBehaviour
     private LoadScene LoadNext;
     private KeyPicker inventory;
 
-
+    AudioSource _audiosrc;
+    AudioClip success, failed;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -18,6 +19,10 @@ public class DoorUnlock : MonoBehaviour
         LoadNext = GetComponent<LoadScene>();
         inventory = FindObjectOfType<KeyPicker>();
         anim.enabled = false;
+
+        _audiosrc = GetComponent<AudioSource>();
+        success = Resources.Load<AudioClip>("Win3");
+        failed = Resources.Load<AudioClip>("Answer_Wrong");
     }
 
     void Update()
@@ -28,9 +33,14 @@ public class DoorUnlock : MonoBehaviour
             if (canOpen && !isOpened && inventory.getKeys() > 0)
             {
                 Debug.Log("pressed");
+                _audiosrc.PlayOneShot(success);
                 anim.enabled = true;
                 anim.SetTrigger("Opening");                
                 isOpened = true;
+            }
+            else
+            {
+                _audiosrc.PlayOneShot(failed);
             }
         }
 

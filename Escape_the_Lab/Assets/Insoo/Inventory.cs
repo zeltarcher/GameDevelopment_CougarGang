@@ -5,21 +5,21 @@ using TMPro;
 
 public class Inventory : MonoBehaviour
 {
-    float coin = 0;
-    float bomb = 0;
-    float immute = 0;
-    float hp = 0;
-    float key = 0;
-    float drug = 0;
-    float superPotion = 0;
+    public float coin = 0;
+    public float bomb = 0;
+    public float immute = 0;
+    public float hp = 0;
+    public float key = 0;
+    public float drug = 0;
+    public float superPotion = 0;
 
-    TextMeshProUGUI textCoin;
-    TextMeshProUGUI textBomb;
-    TextMeshProUGUI textImmute;
-    TextMeshProUGUI textHP;
-    TextMeshProUGUI textDrug;
-    TextMeshProUGUI textKey;
-    TextMeshProUGUI textSuper;
+    public TextMeshProUGUI textCoin;
+    public TextMeshProUGUI textBomb;
+    public TextMeshProUGUI textImmute;
+    public TextMeshProUGUI textHP;
+    public TextMeshProUGUI textDrug;
+    public TextMeshProUGUI textKey;
+    public TextMeshProUGUI textSuper;
 
     // Start is called before the first frame update
     void Start()
