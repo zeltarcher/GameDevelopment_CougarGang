@@ -101,20 +101,21 @@ public class Sign : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //if (other.gameObject.CompareTag("Player"))
-        //{
+        if (other.gameObject.CompareTag("Player")
+           && other.GetType().ToString() == "UnityEngine.BoxCollider2D")
+        {
             playerIsEntered = true;
             Debug.Log("Player is entered is " + playerIsEntered);
-        //}
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        //if (other.gameObject.CompareTag("Player"))
-        //{
+        if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.BoxCollider2D")
+        {
             playerIsEntered = false;
             dialogBox.SetActive(false);
             Debug.Log("Player is entered is " + playerIsEntered);
-        //}
+        }
     }
 }

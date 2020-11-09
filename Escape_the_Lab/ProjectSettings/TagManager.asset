@@ -33,7 +33,7 @@ TagManager:
   - Ceiling
   - enemy
   - attack
-  - 
+  - Quiz
   - 
   - 
   - 
@@ -73,4 +73,10 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Quiz
+    uniqueID: 2319653051
+    locked: 0
+  - name: Player
+    uniqueID: 1961442247
     locked: 0
