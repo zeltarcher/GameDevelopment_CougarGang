@@ -53,6 +53,7 @@ public class EnemyController : MonoBehaviour
         enabled = false;
         yield return new WaitForSecondsRealtime(stunnedDuration);
         enabled = true;
+        animate.enabled = true;
         state = State.Walking;
     }
 
@@ -155,7 +156,7 @@ public class EnemyController : MonoBehaviour
         topRaycast = new Vector2(capsuleBounds.center.x, capsuleBounds.max.y);
         leftHit = Physics2D.Raycast(leftRayCast, Vector2.down, .1f, detectCollisionWith);
         rightHit = Physics2D.Raycast(rightRayCast, Vector2.down, .1f, detectCollisionWith);
-        stunCheck = Physics2D.Raycast(topRaycast, Vector2.up, .2f, LayerMask.NameToLayer("Player"));
+        stunCheck = Physics2D.Raycast(topRaycast, Vector2.up, .1f, detectCollisionWith);
     }
 
     void terminate() { Destroy(gameObject); }
@@ -230,6 +231,8 @@ public class EnemyController : MonoBehaviour
         enemy_dieSound = Resources.Load<AudioClip>("Enemy_Death");
         enemy_slashing = Resources.Load<AudioClip>("Enemy_Sword_Attack");
         enemy_hitSound = Resources.Load<AudioClip>("Enemy_Hurt");
+
+        Debug.Log(detectCollisionWith.value);
     }
 
 
@@ -253,10 +256,7 @@ public class EnemyController : MonoBehaviour
         }
 
         if (stunCheck)
-        {
-            Debug.Log("stunned");
             state = State.Stunned;
-        }
 
         updateState();
     }

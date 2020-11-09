@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public GameObject gunProjectile;
     public float projectileSpeed = 20;
     public int projectileDamage = 20;
+    public float rateOfFire = 2f;
     HealthBar healthBar;
     float jumpSpeed;
     float gravity;
@@ -33,9 +34,8 @@ public class Player : MonoBehaviour
     Animator animate;
     SpriteRenderer sprite;
     public int currentHealth;
-    bool hit;
+    bool hit, shoot, hasGun;
     float timer;//use to do plaer's animated Healthbar
-    bool shoot;
     Vector2 bulletPosition;
     Projectile projectile;
 
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
             sprite.flipX = true;
         else if (direction.x != 0)
             sprite.flipX = false;
-        if(!hit && !shoot)
+        if(!hit && !hasGun)
         {
             if (direction.x == 0 && controller.collisions.below)
                 playAnimation("Player Idle");
@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
             else if (velocity.y < 1 && controller.collisions.below == false)
                 playAnimation("Player falling");
         }
-        else if (!hit && shoot)
+        else if (!hit && hasGun)
         {
             if (direction.x == 0 && controller.collisions.below)
                 playAnimation("Idle gun");
@@ -157,8 +157,9 @@ public class Player : MonoBehaviour
         return velocity;
     }
 
-    private void fireGun()
+    private IEnumerator fireGun()
     {
+        shoot = false;
         SpriteRenderer projectileSprite = gunProjectile.GetComponent<SpriteRenderer>();
         Bounds bounds = GetComponent<BoxCollider2D>().bounds;
         if (sprite.flipX)
@@ -173,8 +174,9 @@ public class Player : MonoBehaviour
             projectile.speed = projectileSpeed;
             projectileSprite.flipX = false;
         }
-
-            Instantiate(gunProjectile, bulletPosition, quaternion.identity);
+        Instantiate(gunProjectile, bulletPosition, quaternion.identity);
+        yield return new WaitForSecondsRealtime(1f / rateOfFire);
+        shoot = true;
     }
 
 
@@ -203,6 +205,7 @@ public class Player : MonoBehaviour
 
         SFX_playerSrc = GetComponent<AudioSource>();
         shoot = true;
+        hasGun = true;
         projectile = gunProjectile.GetComponent<Projectile>();
         projectile.speed = projectileSpeed;
         projectile.damage = projectileDamage;
@@ -249,7 +252,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && shoot)
         {
-            fireGun();
+            StartCoroutine("fireGun");
             SFX_playerSrc.PlayOneShot(main_shoot_laser);
         }
             

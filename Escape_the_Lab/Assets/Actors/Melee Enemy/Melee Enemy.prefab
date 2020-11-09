@@ -167,7 +167,7 @@ MonoBehaviour:
   attackRange: 1.5
   gravitySpeed: 350
   health: 100
-  stunnedSprite: {fileID: 0}
+  stunnedSprite: {fileID: 21300000, guid: 8e0a3fc24c7f31140ae75b4c6b73c74a, type: 3}
   stunnedDuration: 1
 --- !u!61 &2800527006683593721
 BoxCollider2D:
