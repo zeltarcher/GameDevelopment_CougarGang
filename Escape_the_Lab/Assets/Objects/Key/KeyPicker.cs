@@ -162,7 +162,8 @@ public class KeyPicker : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (bomb > 0)
+            print(FindObjectOfType<Inventory>().bomb);   
+            if (FindObjectOfType<Inventory>().bomb > 0)
             {
                 item_audiosrc.PlayOneShot(ac_bomb_explore);
                 FindObjectOfType<Inventory>().bomb--;

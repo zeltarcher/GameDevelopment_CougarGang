@@ -19,7 +19,6 @@ public class charChange : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         player1.SetActive(true);
         player2.SetActive(false);
         p1 = true;
@@ -33,16 +32,17 @@ public class charChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            transformSuper();
+        }
     }
 
     public void transformSuper()
     {
-        robo_audiosrc.PlayOneShot(robo_transform);
+        //robo_audiosrc.PlayOneShot(robo_transform);
         if (p1 == true && p2 == false)
         {
-
-
             if (countDown)
             {
                 showCountDown();
@@ -66,14 +66,13 @@ public class charChange : MonoBehaviour
 
     public void showCountDown()
     {
-        Vector3 newPos = new Vector3(player2.transform.position.x - 0.2f, player2.transform.position.y + 2f);
+        Vector3 newPos = new Vector3(player2.transform.position.x - 0.2f, player2.transform.position.y + 3f);
         Instantiate(countDown, newPos, Quaternion.identity, player2.transform);
     }
 
 
     IEnumerator waiter()
     {
-
         yield return new WaitForSeconds(transformTime);
         backToNomal();
     }
