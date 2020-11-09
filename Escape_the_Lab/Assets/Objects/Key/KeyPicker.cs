@@ -152,6 +152,10 @@ public class KeyPicker : MonoBehaviour
 
             FindObjectOfType<Inventory>().textKey.text = FindObjectOfType<Inventory>().key.ToString();
         }
+        //else if (other.transform.tag == "Sign")
+        //{
+            //FindObjectOfType<Sign>().PlayerNotEntered();
+        //}
         //======================================================
 
     }

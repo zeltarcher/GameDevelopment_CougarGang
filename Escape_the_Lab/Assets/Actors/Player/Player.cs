@@ -129,12 +129,16 @@ public class Player : MonoBehaviour
             InvokeRepeating("poisonWater", 0f, .5f);
         else if (collision.tag == "attack")
             TakeDamage(10);
+        //else if (collision.tag == "Sign")
+            //FindObjectOfType<Sign>().PlayerEntered();
     }
 
     private void OnTriggerExit2D(Collider2D collision) 
     {
         if (collision.tag == "Water")
-            CancelInvoke();   
+            CancelInvoke();
+        //else if (collision.tag != "Sign")
+            //FindObjectOfType<Sign>().PlayerNotEntered();
     } 
 
     private IEnumerator playerDeath()

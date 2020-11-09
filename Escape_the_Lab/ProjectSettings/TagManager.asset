@@ -16,6 +16,8 @@ TagManager:
   - superPotion
   - Platform
   - attack
+  - Sign
+  - Quiz
   layers:
   - Default
   - TransparentFX
@@ -33,7 +35,7 @@ TagManager:
   - Ceiling
   - enemy
   - attack
-  - Quiz
+  - Sign
   - 
   - 
   - 
@@ -74,7 +76,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Quiz
+  - name: Sign
     uniqueID: 2319653051
     locked: 0
   - name: Player

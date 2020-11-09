@@ -10,14 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1536403931223920444}
   - component: {fileID: 1536403931223920445}
-  - component: {fileID: 1536403931223920446}
   - component: {fileID: 484902519707519649}
-  - component: {fileID: 1536403931223920447}
   - component: {fileID: 1536403931223920440}
   - component: {fileID: 1536403931223920441}
+  - component: {fileID: 1628573553}
+  - component: {fileID: 1628573554}
   m_Layer: 16
   m_Name: DoorOpen
-  m_TagString: Wall
+  m_TagString: Sign
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,6 +51,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -72,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1834538615
-  m_SortingLayer: 7
+  m_SortingLayerID: -1975314245
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 105f6e6c35121455e8dab6b1f6576180, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -86,19 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1536403931223920446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1536403931223920442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ad3b280d7d7646a8b9a1a839cb9e88f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogBox: {fileID: 0}
 --- !u!114 &484902519707519649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,18 +103,6 @@ MonoBehaviour:
   showPassCode: {fileID: 0}
   Inputs: {fileID: 0}
   Buttons: {fileID: 0}
---- !u!114 &1536403931223920447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1536403931223920442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9fe0baca19fb4dbe9e59ab06baa5a9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &1536403931223920440
 Animator:
   serializedVersion: 3
@@ -172,3 +148,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.13, y: 0.95}
   m_EdgeRadius: 0
+--- !u!114 &1628573553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536403931223920442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995cabd0afe45364e858ce855c7a74ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1628573554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536403931223920442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0686185890925a42aa0aade550a3716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogBox: {fileID: 0}
