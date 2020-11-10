@@ -35,6 +35,7 @@ public class Quiz : MonoBehaviour
     public QuizQuestion FetchQuestion(int num)
     {
         //Fetch question from xml file
+        //
         XmlNode Quiz = document.SelectSingleNode("quizBank");
         XmlNodeList QuestionList = Quiz.ChildNodes;
         XmlNode Question = QuestionList[num];
