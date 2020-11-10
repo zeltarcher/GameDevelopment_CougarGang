@@ -2315,6 +2315,10 @@ PrefabInstance:
       propertyPath: stunnedSprite
       value: 
       objectReference: {fileID: 21300000, guid: 8e0a3fc24c7f31140ae75b4c6b73c74a, type: 3}
+    - target: {fileID: 4695164203881506990, guid: 996908dc4df75674dab3efdd2e1718f5, type: 3}
+      propertyPath: detectCollisionWith.m_Bits
+      value: 3072
+      objectReference: {fileID: 0}
     - target: {fileID: 5121187034879053195, guid: 996908dc4df75674dab3efdd2e1718f5, type: 3}
       propertyPath: m_SortingLayerID
       value: 0
@@ -2536,6 +2540,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1464768406456756192, guid: 5a8be217fe97582478c38daa978ea2ca, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508811800571871627, guid: 5a8be217fe97582478c38daa978ea2ca, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1371.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508811800571871627, guid: 5a8be217fe97582478c38daa978ea2ca, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 3090.5073
+      objectReference: {fileID: 0}
     - target: {fileID: 2773307060734939229, guid: 5a8be217fe97582478c38daa978ea2ca, type: 3}
       propertyPath: m_CullTransparentMesh
       value: 1
@@ -2610,7 +2626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4573285547428066155, guid: 5a8be217fe97582478c38daa978ea2ca, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1298.9
+      value: 1317
       objectReference: {fileID: 0}
     - target: {fileID: 4573285547428066155, guid: 5a8be217fe97582478c38daa978ea2ca, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2663,6 +2679,14 @@ PrefabInstance:
     - target: {fileID: 4573285548358685611, guid: 5a8be217fe97582478c38daa978ea2ca, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420290998961797245, guid: 5a8be217fe97582478c38daa978ea2ca, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420290998961797245, guid: 5a8be217fe97582478c38daa978ea2ca, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5684042428156913700, guid: 5a8be217fe97582478c38daa978ea2ca, type: 3}
       propertyPath: m_AnchorMin.y
