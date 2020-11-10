@@ -107,7 +107,7 @@ public class Sign : MonoBehaviour
             Debug.Log("Player is entered is " + playerIsEntered);
         }*/
        
-        //playerIsEntered = true;
+        playerIsEntered = true;
         Debug.Log("Name in is: " + other.tag);
         Debug.Log("Player is entered is " + playerIsEntered);
        
@@ -123,8 +123,8 @@ public class Sign : MonoBehaviour
         }*/
 
         
-         //playerIsEntered = false;
-         //dialogBox.SetActive(false);
+         playerIsEntered = false;
+         dialogBox.SetActive(false);
          Debug.Log("Name out is: " + other.tag);
          Debug.Log("Player is entered is " + playerIsEntered);
         

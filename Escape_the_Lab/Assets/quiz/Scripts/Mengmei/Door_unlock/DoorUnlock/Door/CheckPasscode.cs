@@ -67,7 +67,7 @@ public class CheckPasscode : MonoBehaviour
     {
         foreach (int a in answers)
         {
-            Debug.Log(a);
+            //Debug.Log(a);
             if (a > 9) return false;
         }
         return true;

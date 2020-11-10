@@ -267,11 +267,15 @@ public class UIManager : MonoBehaviour {
                 + "3rd Passcode: " + "\n" + "?" + "\n\n"
                 + "4th Passcode: " + "\n" + "?";
         }*/
+        Debug.Log("WTF: " + uIElements.ScoreText.text); 
+        Debug.Log("SH*t: " + newPasscodeStringList[0]);
         
         uIElements.ScoreText.text = "1st Quiz Passcode: " + "\n" + newPasscodeStringList[0] + "\n\n"
             + "2nd Quiz Passcode: " + "\n" + newPasscodeStringList[1] + "\n\n"
             + "3rd Quiz Passcode: " + "\n" + newPasscodeStringList[2] + "\n\n"
             + "4th Quiz Passcode: " + "\n" + newPasscodeStringList[3];
+        
+
         //var sendPasscode = newPasscodeList;
         //FindObjectOfType<CheckPasscode>().receiveNewPasscodeList(newPasscodeList);
         // Note hereeeeeeeeeeeeeeeeeeeeeeeeeeeeee
