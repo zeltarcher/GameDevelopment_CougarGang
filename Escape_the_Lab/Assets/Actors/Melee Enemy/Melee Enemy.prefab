@@ -162,7 +162,7 @@ MonoBehaviour:
   moveSpeed: 2
   detectCollisionWith:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 3072
   followRange: 4
   attackRange: 1.5
   gravitySpeed: 350

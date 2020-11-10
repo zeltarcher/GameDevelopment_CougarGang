@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
     Bounds colliderBounds, capsuleBounds;
     SpriteRenderer sprite;
     Vector2 leftRayCast, rightRayCast, topRaycast;
-    RaycastHit2D leftHit, rightHit, stunCheck;
+    RaycastHit2D leftHit, rightHit, stunCheck, leftWall, rightWall;
     Animator animate;
     State state;
     bool ground;
@@ -80,6 +80,9 @@ public class EnemyController : MonoBehaviour
                     moveSpeed *= -1;
                     ground = false;
                 }
+
+                if(leftWall || rightWall)
+                    moveSpeed *= -1;
 
                 if (Mathf.Sign(moveSpeed) > 0)
                     sprite.flipX = false;
@@ -156,7 +159,9 @@ public class EnemyController : MonoBehaviour
         topRaycast = new Vector2(capsuleBounds.center.x, capsuleBounds.max.y);
         leftHit = Physics2D.Raycast(leftRayCast, Vector2.down, .1f, detectCollisionWith);
         rightHit = Physics2D.Raycast(rightRayCast, Vector2.down, .1f, detectCollisionWith);
-        stunCheck = Physics2D.Raycast(topRaycast, Vector2.up, .1f, detectCollisionWith);
+        stunCheck = Physics2D.Raycast(topRaycast, Vector2.up, .05f, detectCollisionWith);
+        leftWall = Physics2D.Raycast(new Vector2(colliderBounds.min.x, colliderBounds.center.y), Vector2.left, .05f, detectCollisionWith);
+        rightWall = Physics2D.Raycast(new Vector2(colliderBounds.max.x, colliderBounds.center.y), Vector2.right, .1f, detectCollisionWith);
     }
 
     void terminate() { Destroy(gameObject); }
@@ -200,6 +205,7 @@ public class EnemyController : MonoBehaviour
             state = State.Hit;
             InvokeRepeating("poisonWater", 0f, .5f);
         }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -231,8 +237,6 @@ public class EnemyController : MonoBehaviour
         enemy_dieSound = Resources.Load<AudioClip>("Enemy_Death");
         enemy_slashing = Resources.Load<AudioClip>("Enemy_Sword_Attack");
         enemy_hitSound = Resources.Load<AudioClip>("Enemy_Hurt");
-
-        Debug.Log(detectCollisionWith.value);
     }
 
 
