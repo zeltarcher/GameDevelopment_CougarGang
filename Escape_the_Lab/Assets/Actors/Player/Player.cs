@@ -254,7 +254,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) && velocity.y > 0)
             velocity.y = 1f;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && shoot)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && shoot)
         {
             StartCoroutine("fireGun");
             SFX_playerSrc.PlayOneShot(main_shoot_laser);

@@ -41,14 +41,13 @@ public class Sign : MonoBehaviour
             //           + quiz.FetchQuestion(num).options;
             //dialogBoxText.text = Prob;
             //touchingName();
+            dialogBox.SetActive(true);
             gaMa.UpdateCheckSignName(touchingName());
             Debug.Log("Touch name after pressing E is: " + touchingName());
-            dialogBox.SetActive(true);
+            
             gaMa.Display();
         }
-        else {
-            touchName = "";
-        }
+
     }
     public string getTouchName() {
         return touchName;
@@ -101,32 +100,34 @@ public class Sign : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-       /* if (other.tag == "Player")
+        if (other.tag == "Player")
         {
             playerIsEntered = true;
+            Debug.Log("Name in is: " + other.tag);
             Debug.Log("Player is entered is " + playerIsEntered);
-        }*/
+        }
        
-        playerIsEntered = true;
-        Debug.Log("Name in is: " + other.tag);
-        Debug.Log("Player is entered is " + playerIsEntered);
+        //playerIsEntered = true;
+        //Debug.Log("Name in is: " + other.tag);
+        //Debug.Log("Player is entered is " + playerIsEntered);
        
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        /*if (other.tag == "Player")
+        if (other.tag == "Player")
         {
             playerIsEntered = false;
             dialogBox.SetActive(false);
+            Debug.Log("Name out is: " + other.tag);
             Debug.Log("Player is entered is " + playerIsEntered);
-        }*/
+        }
 
         
-         playerIsEntered = false;
-         dialogBox.SetActive(false);
-         Debug.Log("Name out is: " + other.tag);
-         Debug.Log("Player is entered is " + playerIsEntered);
+         //playerIsEntered = false;
+         //dialogBox.SetActive(false);
+         //Debug.Log("Name out is: " + other.tag);
+         //Debug.Log("Player is entered is " + playerIsEntered);
         
     }
     public void PlayerEntered() {

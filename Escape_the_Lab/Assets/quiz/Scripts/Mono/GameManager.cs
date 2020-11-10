@@ -10,28 +10,29 @@ public class GameManager : MonoBehaviour {
 
     #region Variables
 
-    private             Data                data                    = new Data();
+    private Data data = new Data();
 
-    [SerializeField]    GameEvents          events                  = null;
+    [SerializeField] GameEvents events = null;
 
-    [SerializeField]    Animator            timerAnimtor            = null;
-    [SerializeField]    TextMeshProUGUI     timerText               = null;
-    [SerializeField]    Color               timerHalfWayOutColor    = Color.yellow;
-    [SerializeField]    Color               timerAlmostOutColor     = Color.red;
-    private             Color               timerDefaultColor       = Color.white;
+    [SerializeField] Animator timerAnimtor = null;
+    [SerializeField] TextMeshProUGUI timerText = null;
+    [SerializeField] Color timerHalfWayOutColor = Color.yellow;
+    [SerializeField] Color timerAlmostOutColor = Color.red;
+    private Color timerDefaultColor = Color.white;
 
-    private             List<AnswerData>    PickedAnswers           = new List<AnswerData>();
-    private             List<int>           FinishedQuestions       = new List<int>();
-    private             int                 currentQuestion         = 0;
+    private List<AnswerData> PickedAnswers = new List<AnswerData>();
+    private List<int> FinishedQuestions = new List<int>();
+    private int currentQuestion = 0;
 
-    private             int                 timerStateParaHash      = 0;
+    private int timerStateParaHash = 0;
 
-    private             IEnumerator         IE_WaitTillNextRound    = null;
-    private             IEnumerator         IE_StartTimer           = null;
+    private IEnumerator IE_WaitTillNextRound = null;
+    private IEnumerator IE_StartTimer = null;
     private Sign sign;
     private string checkSignName = "";
     private List<int> passcodeList;
     private List<int> randomIndex;
+    //private int[] randomIndex = new int[4];
 
     public List<int> getPasscodeList { get { return getPasscodeList; } }
 
@@ -155,6 +156,8 @@ public class GameManager : MonoBehaviour {
     public void Display()
     {
         EraseAnswers();
+
+
         //EraseRandomQuestionIndex();
         var question = GetRandomQuestion();
 
@@ -392,38 +395,56 @@ public class GameManager : MonoBehaviour {
     Question GetRandomQuestion()
     {
         randomIndex = new List<int>(4);
+
         randomIndex = GetRandomQuestionIndex();
+        //randomIndex[0] = 0;
+        //randomIndex[1] = 1;
+        //randomIndex[2] = 2;
+        //randomIndex[3] = 3;
+
         Debug.Log("checkSignName is: " + checkSignName);
         if (checkSignName == "Sign1")
         {
             //num = quizList.list_of_quizNO[0];
-            //Debug.Log("Hit: " + checkSignName + "Question number is: " + randomIndex[0] + " and the array size is " + randomIndex.Count()
-            //    + " at index: " + 0);
+            Debug.Log("Hit: " + checkSignName + "Question number is: " + randomIndex[0] + " and the array size is " + randomIndex.Count()
+                + " at index: " + 0);
+
+
             currentQuestion = randomIndex[0];
+            //currentQuestion = 0;
         }
         else if (checkSignName == "Sign2")
         {
             //num = quizList.list_of_quizNO[1];
-            //Debug.Log("Hit: " + checkSignName + "Question number is: " + randomIndex[1] + " and the array size is " + randomIndex.Count()
-            //    + " at index: " + 1);
+            Debug.Log("Hit: " + checkSignName + "Question number is: " + randomIndex[1] + " and the array size is " + randomIndex.Count()
+                + " at index: " + 1);
+
+
             currentQuestion = randomIndex[1];
+            //currentQuestion = 1;
         }
         else if (checkSignName == "Sign3")
         {
             //num = quizList.list_of_quizNO[2];
-            //Debug.Log("Hit: " + checkSignName + "Question number is: " + randomIndex[2] + " and the array size is " + randomIndex.Count()
-            //    + " at index: " + 2);
+            Debug.Log("Hit: " + checkSignName + "Question number is: " + randomIndex[2] + " and the array size is " + randomIndex.Count()
+                + " at index: " + 2);
+
+
             currentQuestion = randomIndex[2];
+            //currentQuestion = 2;
         }
         else if (checkSignName == "Sign4")
         {
             //num = quizList.list_of_quizNO[3];
-            //Debug.Log("Hit: " + checkSignName + " Question number is: " + randomIndex[3] + " and the array size is " + randomIndex.Count()
-            //    + " at index: " + 3);
+            Debug.Log("Hit: " + checkSignName + " Question number is: " + randomIndex[3] + " and the array size is " + randomIndex.Count()
+                + " at index: " + 3);
+
+
             currentQuestion = randomIndex[3];
+            //currentQuestion = 0;
         }
         else {
-            //Debug.Log("Nothing happened" + checkSignName + " and the array size is " + randomIndex.Count());
+            Debug.Log("Nothing happened" + checkSignName + " and the array size is " + randomIndex.Count());
         }
         //currentQuestion = randomIndex;
         //Debug.Log("It can show question");
@@ -433,21 +454,26 @@ public class GameManager : MonoBehaviour {
     {
         //EraseRandomQuestionIndex();
         var random = 0;
+        Debug.Log("This is Holy Moly the while loop");
         //EraseRandomQuestionIndex();
         for (int i = 0; i < 4; i++)
         {
             
             if (FinishedQuestions.Count < data.Questions.Length || FinishedQuestions.Count < 4)
             {
+                Debug.Log("This is aboveeeeeeeeeee the while loop");
                 do
                 {
+                    Debug.Log("This is innnnnnnnnn the while loop");
                     random = UnityEngine.Random.Range(0, data.Questions.Length);
                 } while (FinishedQuestions.Contains(random) || random == currentQuestion);
                 FinishedQuestions.Add(random);
             }
+            Debug.Log("This is outtttttttttttttt the while loop");
+
 
             //return random;
-            
+
         }
         return FinishedQuestions;
     }

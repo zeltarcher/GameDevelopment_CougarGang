@@ -45,18 +45,18 @@ public class DoorUnlock : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.BoxCollider2D")
-        //{
+        if (other.tag == "Player")
+        {
             collides = true;
-        //}
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        //if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.BoxCollider2D")
-        ///{
+        if (other.tag == "Player")
+        {
             collides = false;
             dialogBox.SetActive(false);
-        //}
+        }
     }
 }
