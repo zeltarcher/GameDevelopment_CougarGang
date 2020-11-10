@@ -139,7 +139,6 @@ public class Sign : MonoBehaviour
        playerIsEntered = false;
        dialogBox.SetActive(false);
         //Debug.Log("Name in is: " + other.tag);
-        //
        Debug.Log("Player is entered is " + playerIsEntered);
     }
 }
