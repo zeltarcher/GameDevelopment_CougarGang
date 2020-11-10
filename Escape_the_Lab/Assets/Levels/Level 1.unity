@@ -1244,6 +1244,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2900564456950049338, guid: 378eb15e599fa4c07a725697cddada77, type: 3}
+      propertyPath: wave.Array.data[4].delayTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900564456950049338, guid: 378eb15e599fa4c07a725697cddada77, type: 3}
+      propertyPath: wave.Array.data[3].delayTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900564456950049338, guid: 378eb15e599fa4c07a725697cddada77, type: 3}
+      propertyPath: wave.Array.data[2].delayTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900564456950049338, guid: 378eb15e599fa4c07a725697cddada77, type: 3}
+      propertyPath: wave.Array.data[1].delayTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900564456950049338, guid: 378eb15e599fa4c07a725697cddada77, type: 3}
+      propertyPath: wave.Array.data[0].delayTime
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2900564456950049339, guid: 378eb15e599fa4c07a725697cddada77, type: 3}
       propertyPath: m_Name
       value: ObjectSpawner
@@ -2309,7 +2329,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1483552080633827949, guid: 996908dc4df75674dab3efdd2e1718f5, type: 3}
       propertyPath: waterSpeed
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483552080817765958, guid: 996908dc4df75674dab3efdd2e1718f5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -49.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483552080817765958, guid: 996908dc4df75674dab3efdd2e1718f5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.65
       objectReference: {fileID: 0}
     - target: {fileID: 1483552080817765959, guid: 996908dc4df75674dab3efdd2e1718f5, type: 3}
       propertyPath: m_Layer
@@ -2317,7 +2345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1483552080817765963, guid: 996908dc4df75674dab3efdd2e1718f5, type: 3}
       propertyPath: waterSpeed
-      value: 5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1483552081188054918, guid: 996908dc4df75674dab3efdd2e1718f5, type: 3}
       propertyPath: m_IsActive
@@ -3270,7 +3298,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5684042429677443218, guid: 5a8be217fe97582478c38daa978ea2ca, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 153.53125
+      value: 239.2409
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684042429677443218, guid: 5a8be217fe97582478c38daa978ea2ca, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1099.3208
       objectReference: {fileID: 0}
     - target: {fileID: 5684042429827598283, guid: 5a8be217fe97582478c38daa978ea2ca, type: 3}
       propertyPath: m_AnchoredPosition.y
