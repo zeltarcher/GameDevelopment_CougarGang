@@ -74,7 +74,7 @@ public class FallingObjectSpawner : MonoBehaviour
         currentTime = wave[waveIndex].delayTime;
         if (wave[waveIndex].totalSpawn > 0)
         {          
-            xPos = Random.RandomRange(player.transform.position.x - 3, player.transform.position.x + 3);  //random place from where the falling object spawns
+            xPos = Random.RandomRange(player.transform.position.x - 15, player.transform.position.x + 15);  //random place from where the falling object spawns
             SpawnObjects(xPos);
             wave[waveIndex].totalSpawn--;
         }

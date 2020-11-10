@@ -79,8 +79,8 @@ public class Player : MonoBehaviour
                 playAnimation("Walking gun");
             else if (velocity.y > 1 && controller.collisions.below == false)
                 playAnimation("Jump gun");
-            else if (velocity.y < 1 && controller.collisions.below == false)
-                playAnimation("Player falling");
+            //else if (velocity.y < 1 && controller.collisions.below == false)
+                //playAnimation("Player falling");
         }
     }
 
@@ -129,16 +129,12 @@ public class Player : MonoBehaviour
             InvokeRepeating("poisonWater", 0f, .5f);
         else if (collision.tag == "attack")
             TakeDamage(10);
-        //else if (collision.tag == "Sign")
-            //FindObjectOfType<Sign>().PlayerEntered();
     }
 
     private void OnTriggerExit2D(Collider2D collision) 
     {
         if (collision.tag == "Water")
             CancelInvoke();
-        //else if (collision.tag != "Sign")
-            //FindObjectOfType<Sign>().PlayerNotEntered();
     } 
 
     private IEnumerator playerDeath()
@@ -217,13 +213,6 @@ public class Player : MonoBehaviour
  
     void Update()
     {
-
-       /* if (Input.GetKeyDown(KeyCode.A))
-        {
-            gameObject.GetComponent<water>().testNumber = gameObject.GetComponent<water>().testNumber + 1;
-            Debug.Log(gameObject.GetComponent<water>().testNumber);
-        } */
-
         if (currentHealth <= 0)
         {
             currentHealth = 0;
