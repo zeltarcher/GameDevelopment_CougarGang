@@ -46,7 +46,10 @@ public class DoorUnlock : MonoBehaviour
             anim.SetTrigger("DoorUnlock");
             _audiosrc.PlayOneShot(success);
             isOpened = true;
-            LoadNext.LoadNextScene();
+            GameObject go = GameObject.Find("DoorClose");
+            if(go)
+                Destroy(go.gameObject);
+            //LoadNext.LoadNextScene();
         }
         else
         {
