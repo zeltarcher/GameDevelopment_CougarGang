@@ -96,10 +96,11 @@ MonoBehaviour:
   jumpAcceleration: 0.5
   movementSpeed: 5
   maxHealth: 100
-  immuneToWater: 1
+  immuneToWater: 0
   gunProjectile: {fileID: 3957025933654351209, guid: efa34e89a7923794e8235f1cf3a73352, type: 3}
   projectileSpeed: 20
   projectileDamage: 20
+  rateOfFire: 2
   currentHealth: 0
 --- !u!95 &6569727628533351410
 Animator:
@@ -157,8 +158,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1961442247
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e8b9654500f77ca42a40d58c233a8ceb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
