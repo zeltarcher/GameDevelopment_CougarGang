@@ -185,13 +185,15 @@ public class KeyPicker : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (FindObjectOfType<charChange>().p1 == true)
+            
+            if (FindObjectOfType<charChange>().p1 == true && FindObjectOfType<Inventory>().hp > 0)
             {
                 FindObjectOfType<Inventory>().hp--;
                 FindObjectOfType<Inventory>().textHP.text = FindObjectOfType<Inventory>().hp.ToString();
 
                 FindObjectOfType<Player>().currentHealth = 100;
             }
+            
         }
     }
 
