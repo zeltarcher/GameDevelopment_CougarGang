@@ -28,7 +28,7 @@ public class FallingObjectSpawner : MonoBehaviour
     {
         waveIndex = 0;
         currentTime = wave[waveIndex].delayTime;
-        player = GameObject.Find("Player").GetComponent<Player>();
+        //player = GameObject.Find("Man").GetComponent<Player>();
 
         fallingObj_audiosrc = GetComponent<AudioSource>();
         fire = Resources.Load<AudioClip>("Fire_Burning");
@@ -37,7 +37,17 @@ public class FallingObjectSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        velocity = player.GetPlayerVelocity();
+        if(FindObjectOfType<charChange>().p1 == true)
+        {
+            player = GameObject.Find("Man").GetComponent<Player>();
+            velocity = player.GetPlayerVelocity();
+        }
+        else if(FindObjectOfType<charChange>().p2 == true)
+        {
+            player = GameObject.Find("Robot").GetComponent<Player>();
+            velocity = player.GetPlayerVelocity();
+        }
+        
         ////======================
         if (velocity.x > 0)     //if player starts moving, then the falling objects start to spawn
         {

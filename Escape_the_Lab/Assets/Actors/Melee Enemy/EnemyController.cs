@@ -223,7 +223,12 @@ public class EnemyController : MonoBehaviour
         capsule = GetComponent<CapsuleCollider2D>();
         myRigidBody = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
-        player = FindObjectOfType<Player>().transform;
+        /*
+        if(FindObjectOfType<charChange>().p1 == true)
+            player = GameObject.Find("Man").GetComponent<Player>().transform;
+        else if(FindObjectOfType<charChange>().p2 == true)
+            player = GameObject.Find("Robot").GetComponent<Player>().transform;
+        */
         animate = GetComponent<Animator>();
         polygon = GetComponentInChildren<PolygonCollider2D>();
         polygon.enabled = false;
@@ -243,6 +248,12 @@ public class EnemyController : MonoBehaviour
     void FixedUpdate()
     {
         updateRaycast();
+
+        if (FindObjectOfType<charChange>().p1 == true)
+            player = GameObject.Find("Man").GetComponent<Player>().transform;
+        else if (FindObjectOfType<charChange>().p2 == true)
+            player = GameObject.Find("Robot").GetComponent<Player>().transform;
+
         distanceToPlayer = Vector3.Distance(transform.position, player.position);
         if (state != State.Hit && health > 0)
         {

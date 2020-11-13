@@ -72,7 +72,7 @@ public class playerCamera : MonoBehaviour
         }
         */
         
-        /*
+        
         if (FindObjectOfType<charChange>().p1 == true)
         {
             obj.Follow = player1.transform;
@@ -81,7 +81,7 @@ public class playerCamera : MonoBehaviour
         else if (FindObjectOfType<charChange>().p2 == true)
         {            
             obj.Follow = player2.transform;
-        }*/
+        }
         
     }
 }

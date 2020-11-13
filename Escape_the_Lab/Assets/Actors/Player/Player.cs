@@ -60,27 +60,38 @@ public class Player : MonoBehaviour
             sprite.flipX = true;
         else if (direction.x != 0)
             sprite.flipX = false;
-        if(!hit && !hasGun)
+        if(FindObjectOfType<charChange>().p1 == true)
         {
-            if (direction.x == 0 && controller.collisions.below)
-                playAnimation("Player Idle");
-            else if (controller.collisions.below)
-                playAnimation("Player Moving");
-            else if (velocity.y > 1 && controller.collisions.below == false)
-                playAnimation("Player jump loop");
-            else if (velocity.y < 1 && controller.collisions.below == false)
-                playAnimation("Player falling");
-        }
-        else if (!hit && hasGun)
-        {
-            if (direction.x == 0 && controller.collisions.below)
-                playAnimation("Idle gun");
-            else if (controller.collisions.below)
-                playAnimation("Walking gun");
-            else if (velocity.y > 1 && controller.collisions.below == false)
-                playAnimation("Jump gun");
-            //else if (velocity.y < 1 && controller.collisions.below == false)
+            if (!hit && !hasGun)
+            {
+                if (direction.x == 0 && controller.collisions.below)
+                    playAnimation("Player Idle");
+                else if (controller.collisions.below)
+                    playAnimation("Player Moving");
+                else if (velocity.y > 1 && controller.collisions.below == false)
+                    playAnimation("Player jump loop");
+                else if (velocity.y < 1 && controller.collisions.below == false)
+                    playAnimation("Player falling");
+            }
+            else if (!hit && hasGun)
+            {
+                if (direction.x == 0 && controller.collisions.below)
+                    playAnimation("Idle gun");
+                else if (controller.collisions.below)
+                    playAnimation("Walking gun");
+                else if (velocity.y > 1 && controller.collisions.below == false)
+                    playAnimation("Jump gun");
+                //else if (velocity.y < 1 && controller.collisions.below == false)
                 //playAnimation("Player falling");
+            }
+        }
+
+        else if(FindObjectOfType<charChange>().p2 == true)
+        {
+            if (direction.x == 0 && controller.collisions.below)
+                animate.SetBool("Running", false);
+            else if (controller.collisions.below)
+                animate.SetBool("Running", true);
         }
     }
 

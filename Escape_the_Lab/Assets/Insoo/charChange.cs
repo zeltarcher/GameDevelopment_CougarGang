@@ -32,6 +32,11 @@ public class charChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(p2 == true)
+        {
+            player2.GetComponent<Player>().currentHealth = 100;
+        }
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             transformSuper();
@@ -66,7 +71,7 @@ public class charChange : MonoBehaviour
 
     public void showCountDown()
     {
-        Vector3 newPos = new Vector3(player2.transform.position.x - 0.2f, player2.transform.position.y + 3f);
+        Vector3 newPos = new Vector3(player2.transform.position.x - 0.2f, player2.transform.position.y + 2f);
         Instantiate(countDown, newPos, Quaternion.identity, player2.transform);
     }
 
@@ -79,7 +84,7 @@ public class charChange : MonoBehaviour
 
     void backToNomal()
     {
-        robo_audiosrc.PlayOneShot(robo_end);
+        //robo_audiosrc.PlayOneShot(robo_end);
         if (p1 == false && p2 == true)
         {
             player1.SetActive(true);
