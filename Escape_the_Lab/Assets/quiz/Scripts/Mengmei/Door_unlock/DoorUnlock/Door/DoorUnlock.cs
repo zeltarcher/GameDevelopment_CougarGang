@@ -9,6 +9,7 @@ public class DoorUnlock : MonoBehaviour
     private bool isOpened;
     private Animator anim;
     private LoadScene LoadNext;
+    public bool khaBomb = false;
 
     //Password
     public GameObject dialogBox;
@@ -34,6 +35,12 @@ public class DoorUnlock : MonoBehaviour
 
     void Update()
     {
+        if(khaBomb == true)
+        {
+            bombDoor();
+            khaBomb = false;
+        }
+
         if (collides && Input.GetKeyDown(KeyCode.E))
         {
             dialogBox.SetActive(true);
@@ -55,6 +62,19 @@ public class DoorUnlock : MonoBehaviour
         {
             //_audiosrc.PlayOneShot(failed);
         }
+    }
+
+    void bombDoor()
+    {
+        dialogBox.SetActive(false);
+        anim.enabled = true;
+        anim.SetTrigger("DoorUnlock");
+        // _audiosrc.PlayOneShot(success);
+        isOpened = true;
+        GameObject go = GameObject.Find("DoorClose");
+        if (go)
+            Destroy(go.gameObject);
+        //LoadNext.LoadNextScene();
     }
 
 

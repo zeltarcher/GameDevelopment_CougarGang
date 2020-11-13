@@ -174,6 +174,7 @@ public class KeyPicker : MonoBehaviour
                 FindObjectOfType<Inventory>().textBomb.text = FindObjectOfType<Inventory>().bomb.ToString();
 
                 FindObjectOfType<water>().waterSpeed = 0.01f;
+                FindObjectOfType<DoorUnlock>().khaBomb = true;
                 //gameObject.GetComponent<water>().waterSpeed = gameObject.GetComponent<water>().waterSpeed * 10;
                 //Debug.Log(gameObject.GetComponent<water>().waterSpeed);
 
