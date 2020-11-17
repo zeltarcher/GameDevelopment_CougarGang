@@ -26,6 +26,8 @@ public class FallingObjectSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Man").GetComponent<Player>();
+        velocity = player.GetPlayerVelocity();
         waveIndex = 0;
         currentTime = wave[waveIndex].delayTime;
         //player = GameObject.Find("Man").GetComponent<Player>();

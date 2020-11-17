@@ -18,6 +18,9 @@ TagManager:
   - attack
   - Sign
   - Quiz
+  - BombTrade
+  - HPTrade
+  - SuperTrade
   layers:
   - Default
   - TransparentFX
