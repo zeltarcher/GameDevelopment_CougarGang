@@ -51,7 +51,7 @@ public class DoorUnlock : MonoBehaviour
             dialogBox.SetActive(false);
             anim.enabled = true;
             anim.SetTrigger("DoorUnlock");
-           // _audiosrc.PlayOneShot(success);
+           _audiosrc.PlayOneShot(success);
             isOpened = true;
             GameObject go = GameObject.Find("DoorClose");
             if(go)
@@ -60,7 +60,7 @@ public class DoorUnlock : MonoBehaviour
         }
         else
         {
-            //_audiosrc.PlayOneShot(failed);
+            _audiosrc.PlayOneShot(failed);
         }
     }
 
@@ -69,7 +69,7 @@ public class DoorUnlock : MonoBehaviour
         dialogBox.SetActive(false);
         anim.enabled = true;
         anim.SetTrigger("DoorUnlock");
-        // _audiosrc.PlayOneShot(success);
+        _audiosrc.PlayOneShot(success);
         isOpened = true;
         GameObject go = GameObject.Find("DoorClose");
         if (go)
