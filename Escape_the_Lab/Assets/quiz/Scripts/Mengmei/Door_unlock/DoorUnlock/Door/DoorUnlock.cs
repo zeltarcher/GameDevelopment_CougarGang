@@ -44,6 +44,14 @@ public class DoorUnlock : MonoBehaviour
         if (collides && Input.GetKeyDown(KeyCode.E))
         {
             dialogBox.SetActive(true);
+            if(checkPasscode.CodePassed())
+            {
+                _audiosrc.PlayOneShot(success);
+            }
+            else
+            {
+                _audiosrc.PlayOneShot(failed);
+            }
         }
 
         if(collides && !isOpened && checkPasscode.CodePassed())
@@ -51,17 +59,13 @@ public class DoorUnlock : MonoBehaviour
             dialogBox.SetActive(false);
             anim.enabled = true;
             anim.SetTrigger("DoorUnlock");
-           _audiosrc.PlayOneShot(success);
             isOpened = true;
             GameObject go = GameObject.Find("DoorClose");
             if(go)
                 Destroy(go.gameObject);
             //LoadNext.LoadNextScene();
         }
-        else
-        {
-            _audiosrc.PlayOneShot(failed);
-        }
+        
     }
 
     void bombDoor()
