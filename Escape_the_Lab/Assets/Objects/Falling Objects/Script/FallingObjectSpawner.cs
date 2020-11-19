@@ -69,7 +69,8 @@ public class FallingObjectSpawner : MonoBehaviour
 
     void SpawnObjects(float xPos)
     {
-        //fallingObj_audiosrc.PlayOneShot(fire);
+        if(!fallingObj_audiosrc.isPlaying)
+            fallingObj_audiosrc.PlayOneShot(fire);
 
         int r = Random.Range(0, fallObjName.Length);    
         string FallObjType = fallObjName[r];

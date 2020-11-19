@@ -18,6 +18,7 @@ public class KeyPicker : MonoBehaviour
     private float drug = 0;
     public float superPotion = 0;
 
+    public Player player;
     /*
     public TextMeshProUGUI txtCoin;
     public TextMeshProUGUI txtBomb;
@@ -41,6 +42,7 @@ public class KeyPicker : MonoBehaviour
     }
     private void Start()
     {
+        player = GameObject.Find("Man").GetComponent<Player>();
         item_audiosrc = GetComponent<AudioSource>();
         ac_coin = Resources.Load<AudioClip>("Pickup_Coin");
         ac_bomb = Resources.Load<AudioClip>("Pickup_Item");
