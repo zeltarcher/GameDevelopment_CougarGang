@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     Animator animate;
     SpriteRenderer sprite;
     public int currentHealth;
-    bool hit, shoot, hasGun;
+    public bool hit, shoot, hasGun;
     float timer;//use to do plaer's animated Healthbar
     Vector2 bulletPosition;
     Projectile projectile;
@@ -215,8 +215,8 @@ public class Player : MonoBehaviour
         main_shoot_laser = Resources.Load<AudioClip>("Main_LaserShoot");
 
         SFX_playerSrc = GetComponent<AudioSource>();
-        shoot = true;
-        hasGun = true;
+        shoot = false;
+        hasGun = false;
         projectile = gunProjectile.GetComponent<Projectile>();
         projectile.speed = projectileSpeed;
         projectile.damage = projectileDamage;
