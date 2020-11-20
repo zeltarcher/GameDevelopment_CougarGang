@@ -15,7 +15,11 @@ public class Boss : MonoBehaviour
     public float health = 100;
     public Sprite stunnedSprite;
     public float stunnedDuration = 1f;
-    Transform player;
+    public GameObject gunProjectile;
+    public float projectileSpeed = 20;
+    public int projectileDamage = 20;
+    public int NumOfProjectiles = 5;
+    Transform player, man, robot;
     Rigidbody2D myRigidBody;
     BoxCollider2D box;
     PolygonCollider2D polygon;
@@ -24,24 +28,20 @@ public class Boss : MonoBehaviour
     Vector2 leftRayCast, rightRayCast, topRaycast;
     RaycastHit2D leftHit, rightHit, stunCheck, leftWall, rightWall;
     Animator animate;
+    charChange character;
     State state;
     bool ground;
-    float distanceToPlayer;
+    float YdistanceToPlayer, distanceToPlayer;
     float gravity;
-
-    //healthbar
-    Transform healthBar;
-    float hb_max;
-
-    //sound
-    AudioSource SFX_enemySrc;
-    AudioClip enemy_dieSound, enemy_hitSound, enemy_slashing;
+    Vector2 bulletPosition;
+    Projectile projectile;
 
     private enum State
     {
         Walking,
         Chase,
-        Attack,
+        MeleeAttack,
+        RangedAttack,
         Hit,
         Death,
         Stunned
@@ -53,6 +53,14 @@ public class Boss : MonoBehaviour
         yield return new WaitForSecondsRealtime(stunnedDuration);
         enabled = true;
         animate.enabled = true;
+        state = State.Walking;
+    }
+
+    private IEnumerator shootGun()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        state = State.RangedAttack;
+        yield return new WaitForSecondsRealtime(1);
         state = State.Walking;
     }
 
@@ -73,35 +81,26 @@ public class Boss : MonoBehaviour
         switch (state)
         {
             case State.Walking:
-                playAnimation("boss walking");
-                if (leftHit != rightHit && ground == true)
-                {
-                    moveSpeed *= -1;
-                    ground = false;
-                }
-
-                if (leftWall || rightWall)
-                    moveSpeed *= -1;
-
-                if (Mathf.Sign(moveSpeed) > 0)
-                    sprite.flipX = false;
-                else
-                    sprite.flipX = true;
-
-                myRigidBody.velocity = new Vector2(moveSpeed, gravity);
-                if (leftHit == rightHit)
-                    ground = true;
-                Debug.Log("going through case");
+                disableAttack();
+                playAnimation("boss idle");
+                myRigidBody.velocity = new Vector2(0, gravity);
                 break;
 
             case State.Chase:
+                disableAttack();
                 playAnimation("boss walking");
+
+                if (Math.Abs(transform.position.y - player.position.y) < .6f)
+                {
+                    StartCoroutine("shootGun");
+                }
+
                 if (transform.position.x > player.position.x)
                 {
                     sprite.flipX = true;
                     moveSpeed = -Mathf.Abs(moveSpeed);
                 }
-                else
+                else if (transform.position.x < player.position.x)
                 {
                     moveSpeed = Mathf.Abs(moveSpeed);
                     sprite.flipX = false;
@@ -109,14 +108,15 @@ public class Boss : MonoBehaviour
                 myRigidBody.velocity = new Vector2(moveSpeed * 1.5f, gravity);
                 break;
 
-            case State.Attack:
+            case State.MeleeAttack:
                 playAnimation("boss idle melee attack");
                 myRigidBody.velocity = new Vector2(0, gravity);
-
                 break;
+
             case State.Hit:
                 myRigidBody.velocity = new Vector2(0, gravity);
                 break;
+
             case State.Death:
                 playAnimation("boss dying");
                 health = 0;
@@ -125,11 +125,17 @@ public class Boss : MonoBehaviour
                 myRigidBody.velocity = new Vector2(0, gravity);
                 enabled = false;
                 break;
+
             case State.Stunned:
                 myRigidBody.velocity = new Vector2(0, gravity);
                 animate.enabled = false;
                 sprite.sprite = stunnedSprite;
                 StartCoroutine("stunned");
+                break;
+
+            case State.RangedAttack:
+                playAnimation("boss idle shooting");
+                myRigidBody.velocity = new Vector2(0, gravity);
                 break;
         }
     }
@@ -147,6 +153,25 @@ public class Boss : MonoBehaviour
         rightWall = Physics2D.Raycast(new Vector2(colliderBounds.max.x, colliderBounds.center.y), Vector2.right, .1f, detectCollisionWith);
     }
 
+    private void fireGun()
+    {
+        SpriteRenderer projectileSprite = gunProjectile.GetComponent<SpriteRenderer>();
+        Bounds bounds = GetComponent<BoxCollider2D>().bounds;
+        if (sprite.flipX)
+        {
+            projectileSprite.flipX = true;
+            bulletPosition = new Vector2(bounds.min.x - 1f, bounds.center.y);
+            projectile.speed = -projectileSpeed;
+        }
+        else
+        {
+            bulletPosition = new Vector2(bounds.max.x + 1f, bounds.center.y);
+            projectile.speed = projectileSpeed;
+            projectileSprite.flipX = false;
+        }
+        Instantiate(gunProjectile, bulletPosition, quaternion.identity);
+    }
+
     void terminate() { Destroy(gameObject); }
     void enableAttack() { polygon.enabled = true; }
     void disableAttack() { polygon.enabled = false; }
@@ -156,8 +181,6 @@ public class Boss : MonoBehaviour
         animate.SetTrigger("boss hit");
         state = State.Hit;
         health -= damage;
-
-
     }
     void poisonWater() { TakeDamage(10); }
 
@@ -199,16 +222,16 @@ public class Boss : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         animate = GetComponent<Animator>();
         polygon = GetComponentInChildren<PolygonCollider2D>();
+        character = FindObjectOfType<charChange>();
+        man = GameObject.Find("Man").GetComponent<Player>().transform;
+        robot = GameObject.Find("Robot").GetComponent<Player>().transform;
+        projectile = gunProjectile.GetComponent<Projectile>();
+
         polygon.enabled = false;
         state = State.Walking;
         gravity = -gravitySpeed / 100;
-        healthBar = gameObject.transform.Find("HealthBar");
-        hb_max = health;
-
-        SFX_enemySrc = GetComponent<AudioSource>();
-        enemy_dieSound = Resources.Load<AudioClip>("Enemy_Death");
-        enemy_slashing = Resources.Load<AudioClip>("Enemy_Sword_Attack");
-        enemy_hitSound = Resources.Load<AudioClip>("Enemy_Hurt");
+        projectile.speed = projectileSpeed;
+        projectile.damage = projectileDamage;
     }
 
 
@@ -216,18 +239,21 @@ public class Boss : MonoBehaviour
     {
         updateRaycast();
 
-        if (FindObjectOfType<charChange>().p1 == true)
-            player = GameObject.Find("Man").GetComponent<Player>().transform;
-        else if (FindObjectOfType<charChange>().p2 == true)
-            player = GameObject.Find("Robot").GetComponent<Player>().transform;
+        if (character.p1 == true)
+            player = man;
+        else if (character.p2 == true)
+            player = robot;
 
         distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        if (state != State.Hit && health > 0)
+
+        if (state != State.Hit && state != State.RangedAttack && health > 0)
         {
-            if (distanceToPlayer <= followRange && distanceToPlayer >= attackRange)
+            if (distanceToPlayer <= followRange && 
+                distanceToPlayer >= attackRange && 
+                Math.Abs(transform.position.x - player.position.x) > .5f)
                 state = State.Chase;
             else if (distanceToPlayer <= attackRange)
-                state = State.Attack;
+                state = State.MeleeAttack;
             else
                 state = State.Walking;
         }
@@ -235,10 +261,9 @@ public class Boss : MonoBehaviour
         {
             state = State.Death;
         }
-
         if (stunCheck)
             state = State.Stunned;
-        Debug.Log("velocity is" + myRigidBody.velocity + "state is " + state);
+
         updateState();
     }
 }
