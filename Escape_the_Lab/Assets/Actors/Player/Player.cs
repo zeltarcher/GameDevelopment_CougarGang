@@ -187,7 +187,20 @@ public class Player : MonoBehaviour
         }
         Instantiate(gunProjectile, bulletPosition, quaternion.identity);
         yield return new WaitForSecondsRealtime(1f / rateOfFire);
+        FindObjectOfType<Inventory>().ammo--;
         shoot = true;
+    }
+
+    private void reLoad()
+    {
+        if(hasGun == true && FindObjectOfType<Inventory>().ammo > 0)
+        {
+            shoot = true;
+        }
+        else if(FindObjectOfType<Inventory>().ammo < 1)
+        {
+            shoot = false;
+        }
     }
 
 
@@ -224,6 +237,10 @@ public class Player : MonoBehaviour
  
     void Update()
     {
+        reLoad();
+
+
+
         if (currentHealth <= 0)
         {
             currentHealth = 0;

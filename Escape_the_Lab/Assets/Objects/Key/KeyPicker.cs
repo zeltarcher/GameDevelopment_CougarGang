@@ -101,6 +101,20 @@ public class KeyPicker : MonoBehaviour
 
         }
 
+        else if(other.transform.tag == "Ammo")
+        {
+            Destroy(other.gameObject);
+            FindObjectOfType<Inventory>().ammo = FindObjectOfType<Inventory>().ammo + 20;
+            FindObjectOfType<Inventory>().textAmmo.text = FindObjectOfType<Inventory>().ammo.ToString();
+
+        }
+
+        else if(other.transform.tag == "Gun")
+        {
+            Destroy(other.gameObject);
+            FindObjectOfType<Player>().hasGun = true;
+        }
+
         else if (other.transform.tag == "superPotion")
         {
             item_audiosrc.PlayOneShot(ac_super);

@@ -21,6 +21,8 @@ TagManager:
   - BombTrade
   - HPTrade
   - SuperTrade
+  - Gun
+  - Ammo
   layers:
   - Default
   - TransparentFX
