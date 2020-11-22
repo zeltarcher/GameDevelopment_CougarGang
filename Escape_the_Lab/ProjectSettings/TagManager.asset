@@ -23,6 +23,8 @@ TagManager:
   - SuperTrade
   - Gun
   - Ammo
+  - AmmoTrade
+  - ShopCorridor
   layers:
   - Default
   - TransparentFX

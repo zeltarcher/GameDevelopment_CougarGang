@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Cinemachine;
+
 
 public class KeyPicker : MonoBehaviour
 {
+    public Camera camera;
+    public CinemachineVirtualCamera CVC;
+    public CinemachineBrain CMB;
 
     // from key picker
     //=============================
 
+    public bool check = true;
     private float coin = 0;
     public float bomb = 0;
     private float immute = 0;
@@ -42,6 +48,13 @@ public class KeyPicker : MonoBehaviour
     }
     private void Start()
     {
+
+        camera = Camera.main;
+        CMB = camera.GetComponent<CinemachineBrain>();
+        CVC = CMB.ActiveVirtualCamera as CinemachineVirtualCamera;
+        
+
+
         player = GameObject.Find("Man").GetComponent<Player>();
         item_audiosrc = GetComponent<AudioSource>();
         ac_coin = Resources.Load<AudioClip>("Pickup_Coin");
@@ -55,6 +68,20 @@ public class KeyPicker : MonoBehaviour
     }
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (check == true)
+            {
+                CVC.m_Lens.OrthographicSize = 20f;
+                check = false;
+            }
+            else if (check == false)
+            {
+                CVC.m_Lens.OrthographicSize = 7f;
+                check = true;
+            }
+        }
 
         khaBomb();
         healing();
@@ -88,6 +115,8 @@ public class KeyPicker : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
+               
 
         // from key picker
         //======================================================
@@ -173,6 +202,55 @@ public class KeyPicker : MonoBehaviour
             //FindObjectOfType<Sign>().PlayerNotEntered();
         //}
         //======================================================
+        else if(other.transform.tag == "BombTrade" && other.transform.tag == "ShopCorridor")
+        {
+            FindObjectOfType<Shop>().greetings.SetActive(false);
+            FindObjectOfType<Shop>().bombTag.SetActive(true);
+            FindObjectOfType<Shop>().superTag.SetActive(false);
+            FindObjectOfType<Shop>().hpTag.SetActive(false);
+            FindObjectOfType<Shop>().ammoTag.SetActive(false);
+            FindObjectOfType<Shop>().shopTag.SetActive(true);
+        }
+
+        else if (other.transform.tag == "SuperTrade" && other.transform.tag == "ShopCorridor")
+        {
+            FindObjectOfType<Shop>().greetings.SetActive(false);
+            FindObjectOfType<Shop>().bombTag.SetActive(false);
+            FindObjectOfType<Shop>().superTag.SetActive(true);
+            FindObjectOfType<Shop>().hpTag.SetActive(false);
+            FindObjectOfType<Shop>().ammoTag.SetActive(false);
+            FindObjectOfType<Shop>().shopTag.SetActive(true);
+        }
+
+        else if (other.transform.tag == "HPTrade" && other.transform.tag == "ShopCorridor")
+        {
+            FindObjectOfType<Shop>().greetings.SetActive(false);
+            FindObjectOfType<Shop>().bombTag.SetActive(false);
+            FindObjectOfType<Shop>().superTag.SetActive(false);
+            FindObjectOfType<Shop>().hpTag.SetActive(true);
+            FindObjectOfType<Shop>().ammoTag.SetActive(false);
+            FindObjectOfType<Shop>().shopTag.SetActive(true);
+        }
+
+        else if (other.transform.tag == "AmmoTrade" && other.transform.tag == "ShopCorridor")
+        {
+            FindObjectOfType<Shop>().greetings.SetActive(false);
+            FindObjectOfType<Shop>().bombTag.SetActive(false);
+            FindObjectOfType<Shop>().superTag.SetActive(false);
+            FindObjectOfType<Shop>().hpTag.SetActive(false);
+            FindObjectOfType<Shop>().ammoTag.SetActive(true);
+            FindObjectOfType<Shop>().shopTag.SetActive(true);
+        }
+
+        else if(other.transform.tag == "ShopCorridor")
+        {
+            FindObjectOfType<Shop>().greetings.SetActive(true);
+            FindObjectOfType<Shop>().bombTag.SetActive(false);
+            FindObjectOfType<Shop>().superTag.SetActive(false);
+            FindObjectOfType<Shop>().hpTag.SetActive(false);
+            FindObjectOfType<Shop>().ammoTag.SetActive(false);
+            FindObjectOfType<Shop>().shopTag.SetActive(false);
+        }
 
     }
 

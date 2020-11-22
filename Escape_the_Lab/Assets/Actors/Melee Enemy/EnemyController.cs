@@ -219,7 +219,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Man").GetComponent<Player>().transform;
+        
         box = GetComponent<BoxCollider2D>();
         capsule = GetComponent<CapsuleCollider2D>();
         myRigidBody = GetComponent<Rigidbody2D>();
