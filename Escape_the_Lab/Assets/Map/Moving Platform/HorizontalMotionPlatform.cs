@@ -41,7 +41,7 @@ public class HorizontalMotionPlatform : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("AHHHHHHHHHHHHHHHHHHH");
-        if (collision.collider.tag == "Player")
+        if (collision.collider.tag == "Player" || collision.collider.tag == "Platform")
         {
             Debug.Log("PLAYERRRRRRRRRRRRRR");
             collision.transform.position = new Vector2(collision.transform.position.x + moveSpeed * Time.deltaTime, collision.transform.position.y);

@@ -20,11 +20,12 @@ public class DoorUnlock : MonoBehaviour
 
     void Start()
     {
+        collides = false;
         isOpened = false;
         anim = GetComponent<Animator>();
         anim.enabled = false;
         LoadNext = GetComponent<LoadScene>();
-
+        //dialogBox = GetComponent<GameObject>();
         dialogBox.SetActive(false);
         checkPasscode = FindObjectOfType<CheckPasscode>();
 
