@@ -25,7 +25,7 @@ public class DoorUnlock : MonoBehaviour
         anim.enabled = false;
         LoadNext = GetComponent<LoadScene>();
 
-        //dialogBox.SetActive(false);
+        dialogBox.SetActive(false);
         checkPasscode = FindObjectOfType<CheckPasscode>();
 
         _audiosrc = GetComponent<AudioSource>();
