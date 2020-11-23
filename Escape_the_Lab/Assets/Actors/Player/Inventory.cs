@@ -39,6 +39,11 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        textCoin.text = coin.ToString();
+        textBomb.text = bomb.ToString();
+        textHP.text = hp.ToString();
+        textSuper.text = superPotion.ToString();
+        textAmmo.text = ammo.ToString();
 
     }
 }

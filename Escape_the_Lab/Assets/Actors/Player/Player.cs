@@ -7,6 +7,7 @@ using TMPro;
 using System;
 using System.Net;
 using Unity.Mathematics;
+using Cinemachine;
 
 [RequireComponent (typeof (Controller2D))]
 [RequireComponent(typeof(HealthBar))]
@@ -14,6 +15,11 @@ public class Player : MonoBehaviour
 {
     //                          Class variables
     //====================================================================
+    public Collider2D oneone;
+    public Collider2D twotwo; 
+    public Camera camera;
+    public CinemachineVirtualCamera CVC;
+    public CinemachineBrain CMB;
 
     public float jumpHeight = 4f;
     public float jumpAcceleration = .4f;
@@ -203,13 +209,38 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void shopEnter()
+    {
+        if(FindObjectOfType<charChange>().p1 == true)
+        {
+            oneone = GameObject.Find("Man").GetComponent<Collider2D>();
+        }
+        else if(FindObjectOfType<charChange>().p2 == true)
+        {
+            oneone = GameObject.Find("Robot").GetComponent<Collider2D>();
+        }
+
+        twotwo = GameObject.Find("Shop Corridor").GetComponent<Collider2D>();
+        
+        if (oneone.IsTouching(twotwo))
+        {
+            CVC.m_Lens.OrthographicSize = 15f;
+        }
+        else
+        {
+            CVC.m_Lens.OrthographicSize = 7f;
+        }
+
+    }
+
 
 
     //                      Run time methods
     //=====================================================================
     void Start()
     {
-        
+        //collider = GetComponent<BoxCollider2D>();
+
         healthBar = FindObjectOfType<HealthBar>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
@@ -238,7 +269,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         reLoad();
-
+        shopEnter();
 
 
         if (currentHealth <= 0)

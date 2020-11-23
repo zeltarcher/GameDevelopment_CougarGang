@@ -102,6 +102,9 @@ MonoBehaviour:
   projectileDamage: 20
   rateOfFire: 2
   currentHealth: 0
+  hit: 0
+  shoot: 0
+  hasGun: 0
 --- !u!95 &6569727628533351410
 Animator:
   serializedVersion: 3
@@ -184,8 +187,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dedc09328034047a19694557dd6ca107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+  CVC: {fileID: 0}
+  CMB: {fileID: 0}
+  check: 1
   bomb: 0
   superPotion: 0
+  player: {fileID: 0}
 --- !u!82 &6569727628533351414
 AudioSource:
   m_ObjectHideFlags: 0

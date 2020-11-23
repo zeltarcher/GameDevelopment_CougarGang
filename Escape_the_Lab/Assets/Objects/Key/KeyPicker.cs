@@ -55,7 +55,7 @@ public class KeyPicker : MonoBehaviour
         
 
 
-        player = GameObject.Find("Man").GetComponent<Player>();
+        
         item_audiosrc = GetComponent<AudioSource>();
         ac_coin = Resources.Load<AudioClip>("Pickup_Coin");
         ac_bomb = Resources.Load<AudioClip>("Pickup_Item");
@@ -68,6 +68,26 @@ public class KeyPicker : MonoBehaviour
     }
     void Update()
     {
+        if(FindObjectOfType<charChange>().p1 == true)
+        {
+            player = GameObject.Find("Man").GetComponent<Player>();
+        }
+        else if(FindObjectOfType<charChange>().p2 == true)
+        {
+            player = GameObject.Find("Robot").GetComponent<Player>();
+        }
+
+        /*
+        if (player.collider.IsTouchingLayers(LayerMask.GetMask("ShopCorridor")))
+        {
+            CVC.m_Lens.OrthographicSize = 20f;
+            print("is touching?");
+        }
+        else
+        {
+            CVC.m_Lens.OrthographicSize = 7f;
+        }
+        
 
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -82,6 +102,7 @@ public class KeyPicker : MonoBehaviour
                 check = true;
             }
         }
+        */
 
         khaBomb();
         healing();
@@ -91,11 +112,9 @@ public class KeyPicker : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
-            print("ok");
 
             if (FindObjectOfType<Inventory>().superPotion > 0)
             {
-                print("then?");
                 if (FindObjectOfType<charChange>().p1 == true && FindObjectOfType<charChange>().p2 == false)
                 {
                     FindObjectOfType<Inventory>().superPotion--;
@@ -202,6 +221,7 @@ public class KeyPicker : MonoBehaviour
             //FindObjectOfType<Sign>().PlayerNotEntered();
         //}
         //======================================================
+        /*
         else if(other.transform.tag == "BombTrade" && other.transform.tag == "ShopCorridor")
         {
             FindObjectOfType<Shop>().greetings.SetActive(false);
@@ -209,7 +229,6 @@ public class KeyPicker : MonoBehaviour
             FindObjectOfType<Shop>().superTag.SetActive(false);
             FindObjectOfType<Shop>().hpTag.SetActive(false);
             FindObjectOfType<Shop>().ammoTag.SetActive(false);
-            FindObjectOfType<Shop>().shopTag.SetActive(true);
         }
 
         else if (other.transform.tag == "SuperTrade" && other.transform.tag == "ShopCorridor")
@@ -219,7 +238,6 @@ public class KeyPicker : MonoBehaviour
             FindObjectOfType<Shop>().superTag.SetActive(true);
             FindObjectOfType<Shop>().hpTag.SetActive(false);
             FindObjectOfType<Shop>().ammoTag.SetActive(false);
-            FindObjectOfType<Shop>().shopTag.SetActive(true);
         }
 
         else if (other.transform.tag == "HPTrade" && other.transform.tag == "ShopCorridor")
@@ -229,7 +247,6 @@ public class KeyPicker : MonoBehaviour
             FindObjectOfType<Shop>().superTag.SetActive(false);
             FindObjectOfType<Shop>().hpTag.SetActive(true);
             FindObjectOfType<Shop>().ammoTag.SetActive(false);
-            FindObjectOfType<Shop>().shopTag.SetActive(true);
         }
 
         else if (other.transform.tag == "AmmoTrade" && other.transform.tag == "ShopCorridor")
@@ -239,7 +256,6 @@ public class KeyPicker : MonoBehaviour
             FindObjectOfType<Shop>().superTag.SetActive(false);
             FindObjectOfType<Shop>().hpTag.SetActive(false);
             FindObjectOfType<Shop>().ammoTag.SetActive(true);
-            FindObjectOfType<Shop>().shopTag.SetActive(true);
         }
 
         else if(other.transform.tag == "ShopCorridor")
@@ -249,8 +265,8 @@ public class KeyPicker : MonoBehaviour
             FindObjectOfType<Shop>().superTag.SetActive(false);
             FindObjectOfType<Shop>().hpTag.SetActive(false);
             FindObjectOfType<Shop>().ammoTag.SetActive(false);
-            FindObjectOfType<Shop>().shopTag.SetActive(false);
         }
+        */
 
     }
 
