@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireSpeed: 15
-  des: 1000
+  des: 1175
   targetPoint: {x: 0, y: 0, z: 0}
 --- !u!50 &2748849427150843521
 Rigidbody2D:
