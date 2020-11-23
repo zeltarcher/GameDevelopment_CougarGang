@@ -38,13 +38,14 @@ public class HorizontalMotionPlatform : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("AHHHHHHHHHHHHHHHHHHH");
-        if (collision.collider.tag == "Player")
+        if (collision.tag == "Platform")
         {
-            Debug.Log("PLAYERRRRRRRRRRRRRR");
-            collision.transform.position = new Vector2(collision.transform.position.x + moveSpeed * Time.deltaTime, collision.transform.position.y);
+            Debug.Log("Hit "+ collision.tag);
+            // collision.transform.position = new Vector2(collision.transform.position.x + moveSpeed * Time.deltaTime *-1, collision.transform.position.y);
+            moveSpeed *= -1;
         }
     }
 }
