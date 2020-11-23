@@ -18,8 +18,13 @@ public class DropTile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Invoke("StartDropping", droppingDelay);
-        //Invoke("StopDropping", stopDelay);
+        if (other.tag == "Player")
+        {
+
+
+            Invoke("StartDropping", droppingDelay);
+            //Invoke("StopDropping", stopDelay);
+        }
     }
 
     void StartDropping()
