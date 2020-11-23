@@ -25,6 +25,8 @@ TagManager:
   - Ammo
   - AmmoTrade
   - ShopCorridor
+  - Undefined
+  - Boss
   layers:
   - Default
   - TransparentFX

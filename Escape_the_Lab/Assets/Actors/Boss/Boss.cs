@@ -18,7 +18,9 @@ public class Boss : MonoBehaviour
     public GameObject gunProjectile;
     public float projectileSpeed = 20;
     public int projectileDamage = 20;
-    public int NumOfProjectiles = 5;
+    public float rateOfFire = 1f;
+    public float timeBetweenShooting = 2f;
+    public float shootingDuration = 1f;
     Transform player, man, robot;
     Rigidbody2D myRigidBody;
     BoxCollider2D box;
@@ -30,7 +32,7 @@ public class Boss : MonoBehaviour
     Animator animate;
     charChange character;
     State state;
-    bool ground;
+    bool isShooting;
     float YdistanceToPlayer, distanceToPlayer;
     float gravity;
     Vector2 bulletPosition;
@@ -58,10 +60,14 @@ public class Boss : MonoBehaviour
 
     private IEnumerator shootGun()
     {
-        yield return new WaitForSecondsRealtime(1);
+        isShooting = true;
+        yield return new WaitForSecondsRealtime(timeBetweenShooting);
+        animate.speed = rateOfFire;
         state = State.RangedAttack;
-        yield return new WaitForSecondsRealtime(1);
-        state = State.Walking;
+        yield return new WaitForSecondsRealtime(shootingDuration);
+        state = State.Chase;
+        animate.speed = 1;
+        isShooting = false;
     }
 
     private void playAnimation(String name)
@@ -90,7 +96,7 @@ public class Boss : MonoBehaviour
                 disableAttack();
                 playAnimation("boss walking");
 
-                if (Math.Abs(transform.position.y - player.position.y) < .6f)
+                if (Math.Abs(transform.position.y - player.position.y) < .6f && !isShooting)
                 {
                     StartCoroutine("shootGun");
                 }
@@ -105,10 +111,12 @@ public class Boss : MonoBehaviour
                     moveSpeed = Mathf.Abs(moveSpeed);
                     sprite.flipX = false;
                 }
+                animate.speed = 1.3f;
                 myRigidBody.velocity = new Vector2(moveSpeed * 1.5f, gravity);
                 break;
 
             case State.MeleeAttack:
+                animate.speed = 1;
                 playAnimation("boss idle melee attack");
                 myRigidBody.velocity = new Vector2(0, gravity);
                 break;
@@ -118,12 +126,13 @@ public class Boss : MonoBehaviour
                 break;
 
             case State.Death:
+                animate.speed = 1;
                 playAnimation("boss dying");
                 health = 0;
                 foreach (Collider c in GetComponents<Collider>())
                     c.enabled = false;
                 myRigidBody.velocity = new Vector2(0, gravity);
-                enabled = false;
+                //enabled = false;
                 break;
 
             case State.Stunned:
@@ -134,6 +143,7 @@ public class Boss : MonoBehaviour
                 break;
 
             case State.RangedAttack:
+                animate.speed = 1;
                 playAnimation("boss idle shooting");
                 myRigidBody.velocity = new Vector2(0, gravity);
                 break;
@@ -172,14 +182,14 @@ public class Boss : MonoBehaviour
         Instantiate(gunProjectile, bulletPosition, quaternion.identity);
     }
 
-    void terminate() { Destroy(gameObject); }
+    void terminate() { animate.enabled = false; Destroy(gameObject); }
     void enableAttack() { polygon.enabled = true; }
     void disableAttack() { polygon.enabled = false; }
     void endHit() { state = State.Walking; }
     public void TakeDamage(int damage)
     {
-        animate.SetTrigger("boss hit");
-        state = State.Hit;
+        //animate.SetTrigger("boss hit");
+        //state = State.Hit;
         health -= damage;
     }
     void poisonWater() { TakeDamage(10); }
@@ -214,7 +224,6 @@ public class Boss : MonoBehaviour
             CancelInvoke();
         }
     }
-
     void Start()
     {
         box = GetComponent<BoxCollider2D>();
@@ -227,6 +236,7 @@ public class Boss : MonoBehaviour
         robot = GameObject.Find("Robot").GetComponent<Player>().transform;
         projectile = gunProjectile.GetComponent<Projectile>();
 
+        isShooting = false;
         polygon.enabled = false;
         state = State.Walking;
         gravity = -gravitySpeed / 100;
@@ -264,6 +274,7 @@ public class Boss : MonoBehaviour
         if (stunCheck)
             state = State.Stunned;
 
+        //Debug.Log(state);
         updateState();
     }
 }

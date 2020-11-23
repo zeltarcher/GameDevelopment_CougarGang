@@ -28,6 +28,11 @@ public class Projectile : MonoBehaviour
             otherCollider.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
             Destroy(gameObject);
         }
+        if (otherCollider.tag == "Boss")
+        {
+            otherCollider.gameObject.GetComponent<Boss>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
         else
             Destroy(gameObject);
     }
