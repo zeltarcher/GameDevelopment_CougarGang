@@ -174,6 +174,5 @@ public class Shop : MonoBehaviour
     void Update()
     {
         shopEnter();
-        //purchase();
     }
 }
