@@ -10,6 +10,7 @@ public class Shop : MonoBehaviour
     public GameObject superTag;
     public GameObject hpTag;
     public GameObject ammoTag;
+    public GameObject dontTag;
 
     public GameObject buyTag;
 
@@ -44,7 +45,8 @@ public class Shop : MonoBehaviour
                 }
                 else
                 {
-                    print("not enough money");
+                    dontTag.SetActive(true);
+
                 }
             }
             greetings.SetActive(false);
@@ -63,6 +65,10 @@ public class Shop : MonoBehaviour
                     FindObjectOfType<Inventory>().coin = FindObjectOfType<Inventory>().coin - 3;
                     FindObjectOfType<Inventory>().superPotion++;
                 }
+                else
+                {
+                    dontTag.SetActive(true);
+                }
             }
             greetings.SetActive(false);
             buyTag.SetActive(true);
@@ -80,6 +86,10 @@ public class Shop : MonoBehaviour
                     FindObjectOfType<Inventory>().coin = FindObjectOfType<Inventory>().coin - 2;
                     FindObjectOfType<Inventory>().hp++;
                 }
+                else
+                {
+                    dontTag.SetActive(true);
+                }
             }
             greetings.SetActive(false);
             buyTag.SetActive(true);
@@ -96,6 +106,10 @@ public class Shop : MonoBehaviour
                 {
                     FindObjectOfType<Inventory>().coin--;
                     FindObjectOfType<Inventory>().ammo = FindObjectOfType<Inventory>().ammo + 20;
+                }
+                else
+                {
+                    dontTag.SetActive(true);
                 }
             }
             else
@@ -121,66 +135,11 @@ public class Shop : MonoBehaviour
             superTag.SetActive(false);
             hpTag.SetActive(false);
             ammoTag.SetActive(false);
+            dontTag.SetActive(false);
         }
 
     }
 
-    void buy()
-    {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-
-        }
-    }
-    /*
-    void purchase()
-    {
-        if (oneone.IsTouching(bombShop))
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                if(FindObjectOfType<Inventory>().coin >= 4)
-                {
-                    FindObjectOfType<Inventory>().coin = FindObjectOfType<Inventory>().coin - 4;
-                    FindObjectOfType<Inventory>().bomb++;
-                }
-            }
-        }
-        else if (oneone.IsTouching(superShop))
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                if (FindObjectOfType<Inventory>().coin >= 3)
-                {
-                    FindObjectOfType<Inventory>().coin = FindObjectOfType<Inventory>().coin - 3;
-                    FindObjectOfType<Inventory>().superPotion++;
-                }
-            }
-        }
-        else if (oneone.IsTouching(HPShop))
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                if (FindObjectOfType<Inventory>().coin >= 2)
-                {
-                    FindObjectOfType<Inventory>().coin = FindObjectOfType<Inventory>().coin - 2;
-                    FindObjectOfType<Inventory>().hp++;
-                }
-            }
-        }
-        else if (oneone.IsTouching(ammoShop))
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                if (FindObjectOfType<Inventory>().coin >= 1)
-                {
-                    FindObjectOfType<Inventory>().coin--;
-                    FindObjectOfType<Inventory>().ammo = FindObjectOfType<Inventory>().ammo + 20;
-                }
-            }
-        }
-    }
-    */
 
     // Start is called before the first frame update
     void Start()
@@ -198,6 +157,7 @@ public class Shop : MonoBehaviour
         superTag = GameObject.Find("3coin");
         hpTag = GameObject.Find("2coin");
         ammoTag = GameObject.Find("1coin");
+        dontTag = GameObject.Find("you dont have");
 
         greetings.SetActive(true);
         buyTag.SetActive(false);
@@ -205,6 +165,7 @@ public class Shop : MonoBehaviour
         superTag.SetActive(false);
         hpTag.SetActive(false);
         ammoTag.SetActive(false);
+        dontTag.SetActive(false);
 
     }
     
