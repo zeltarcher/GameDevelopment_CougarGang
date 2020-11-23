@@ -23,6 +23,7 @@ public class KeyPicker : MonoBehaviour
     private float key = 0;
     private float drug = 0;
     public float superPotion = 0;
+    public float ammo = 0;
 
     public Player player;
     /*
@@ -40,7 +41,7 @@ public class KeyPicker : MonoBehaviour
     //==============================
 
     AudioSource item_audiosrc;
-    AudioClip ac_coin, ac_bomb, ac_immute, ac_hp, ac_key, ac_drug, ac_super,ac_bomb_explore;
+    AudioClip ac_ammo, ac_coin, ac_bomb, ac_immute, ac_hp, ac_key, ac_drug, ac_super,ac_bomb_explore;
 
     public float getKeys()
     {
@@ -59,6 +60,7 @@ public class KeyPicker : MonoBehaviour
         item_audiosrc = GetComponent<AudioSource>();
         ac_coin = Resources.Load<AudioClip>("Pickup_Coin");
         ac_bomb = Resources.Load<AudioClip>("Pickup_Item");
+        ac_ammo = Resources.Load<AudioClip>("Pickup_Item");
         ac_immute = Resources.Load<AudioClip>("Pickup_Item1");
         ac_hp = Resources.Load<AudioClip>("Pickup_Item1");
         ac_key = Resources.Load<AudioClip>("Pickup_Item2");
