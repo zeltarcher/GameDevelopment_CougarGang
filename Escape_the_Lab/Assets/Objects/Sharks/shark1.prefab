@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity_x: -0.1
-  velocity_y: 0.1
+  velocity_y: 0.15
   gravity: -0.05
 --- !u!61 &-5061496572613698385
 BoxCollider2D:
