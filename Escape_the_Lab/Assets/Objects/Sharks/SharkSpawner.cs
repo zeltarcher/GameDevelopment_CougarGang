@@ -12,7 +12,10 @@ public class SharkSpawner : MonoBehaviour
     private Vector3 velocity;          //used to check whether the player starts moving
     private bool StartSpawn = false;
     private float xPos = 0.0f;
-    GameObject risingWater;
+    private GameObject risingWater;
+    private ObjectTrigger objTrigger;
+
+    //private ObjectTrigger 
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,16 @@ public class SharkSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        risingWater = GameObject.FindGameObjectWithTag("Water");
+        objTrigger = GameObject.Find("FallObjOff").GetComponent<ObjectTrigger>();
+
+        if (objTrigger.isLevel1 == true)
+        {
+            risingWater = GameObject.Find("Rising Water");
+        }
+        else
+        {
+            risingWater = GameObject.Find("Rising Water 2");
+        }
 
         if (FindObjectOfType<charChange>().p1 == true)
         {
@@ -61,7 +73,8 @@ public class SharkSpawner : MonoBehaviour
         currentTime = wave[waveIndex].delayTime;
         if (wave[waveIndex].totalSpawn > 0)
         {
-            xPos = Random.Range(player.transform.position.x - 20, player.transform.position.x + 20);
+            xPos = Random.Range(risingWater.transform.position.x - risingWater.transform.localScale.x,
+                risingWater.transform.position.x + risingWater.transform.localScale.x);
             SpawnSharks(xPos);
             wave[waveIndex].totalSpawn--;    
         }

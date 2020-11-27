@@ -10,9 +10,11 @@ public class Shark : MonoBehaviour
     private int flip;
 
     private Player player;
-    GameObject risingWater;
-    SpriteRenderer sprite;
+    private SpriteRenderer sprite;
     private Animator anim;
+
+    private GameObject risingWater;
+    private ObjectTrigger objTrigger;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +36,16 @@ public class Shark : MonoBehaviour
         velocity_y += gravity * Time.deltaTime;
         transform.Translate(velocity_x, velocity_y, 0);
 
-        risingWater = GameObject.FindGameObjectWithTag("Water");
+        objTrigger = GameObject.Find("FallObjOff").GetComponent<ObjectTrigger>();
+
+        if (objTrigger.isLevel1 == true)
+        {
+            risingWater = GameObject.Find("Rising Water");
+        }
+        else
+        {
+            risingWater = GameObject.Find("Rising Water 2");
+        }
 
         if (transform.position.y < risingWater.transform.position.y - 2 * risingWater.transform.localScale.y)
             Destroy(this.gameObject);
