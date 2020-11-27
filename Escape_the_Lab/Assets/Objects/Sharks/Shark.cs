@@ -63,7 +63,6 @@ public class Shark : MonoBehaviour
         {
             anim.enabled = true;
             player.TakeDamage(10);
-            Debug.Log(player.currentHealth);
         }
     }
 }
