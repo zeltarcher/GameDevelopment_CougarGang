@@ -1,7 +1,283 @@
 fileFormatVersion: 2
 guid: 9d98b996336af6341b9070e0721d6b6f
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 3658020894907574460
+    second: black platform_0
+  - first:
+      213: 8051187852281751387
+    second: black platform_1
+  - first:
+      213: -1437771379814063493
+    second: black platform_2
+  - first:
+      213: -5829460026756016842
+    second: black platform_3
+  - first:
+      213: -5777406515457996253
+    second: black platform_4
+  - first:
+      213: -5396798149938649999
+    second: black platform_5
+  - first:
+      213: 6912597199196397118
+    second: black platform_6
+  - first:
+      213: -1498136264137581356
+    second: black platform_7
+  - first:
+      213: 354791847831982765
+    second: black platform_8
+  - first:
+      213: -5305388125425868611
+    second: black platform_9
+  - first:
+      213: -3134335105370894809
+    second: black platform_10
+  - first:
+      213: 4044647181731183651
+    second: black platform_11
+  - first:
+      213: -1485463740343960872
+    second: black platform_12
+  - first:
+      213: -2535406554241260005
+    second: black platform_13
+  - first:
+      213: -6302768563726467331
+    second: black platform_14
+  - first:
+      213: 7405622127498568252
+    second: black platform_15
+  - first:
+      213: -7529866335466638726
+    second: black platform_16
+  - first:
+      213: 8072260395527964332
+    second: black platform_17
+  - first:
+      213: -8655716246757035888
+    second: black platform_18
+  - first:
+      213: -5147249900862429108
+    second: black platform_19
+  - first:
+      213: -3568410676645998237
+    second: black platform_20
+  - first:
+      213: -8944055181241115550
+    second: black platform_21
+  - first:
+      213: -633533411395296946
+    second: black platform_22
+  - first:
+      213: -1324013150140624350
+    second: black platform_23
+  - first:
+      213: -3978965296361323266
+    second: black platform_24
+  - first:
+      213: 2565594691888683103
+    second: black platform_25
+  - first:
+      213: -2400862546777189179
+    second: black platform_26
+  - first:
+      213: 7291580525724524425
+    second: black platform_27
+  - first:
+      213: -835228827065370217
+    second: black platform_28
+  - first:
+      213: -5778591722735989552
+    second: black platform_29
+  - first:
+      213: -1979684156835434522
+    second: black platform_30
+  - first:
+      213: 868857584542974472
+    second: black platform_31
+  - first:
+      213: 6336884444087660416
+    second: black platform_32
+  - first:
+      213: 7593896653451153106
+    second: black platform_33
+  - first:
+      213: 6377226397178967954
+    second: black platform_34
+  - first:
+      213: -3627686408289835440
+    second: black platform_35
+  - first:
+      213: 3219449654811481991
+    second: black platform_36
+  - first:
+      213: -1868404557149585842
+    second: black platform_37
+  - first:
+      213: 2246539863545136060
+    second: black platform_38
+  - first:
+      213: 5000354692619939465
+    second: black platform_39
+  - first:
+      213: 1358960604906185107
+    second: black platform_40
+  - first:
+      213: -1786318285704063271
+    second: black platform_41
+  - first:
+      213: -7336315860262593013
+    second: black platform_42
+  - first:
+      213: 6019342850444575920
+    second: black platform_43
+  - first:
+      213: -6788450184982771039
+    second: black platform_44
+  - first:
+      213: 1907592139061654127
+    second: black platform_45
+  - first:
+      213: 1641997319602059207
+    second: black platform_46
+  - first:
+      213: 222718708315336589
+    second: black platform_47
+  - first:
+      213: -1167389596680543856
+    second: black platform_48
+  - first:
+      213: -4877944564214668727
+    second: black platform_49
+  - first:
+      213: 1791611304121071169
+    second: black platform_50
+  - first:
+      213: -7524128381073769479
+    second: black platform_51
+  - first:
+      213: 776473800796831894
+    second: black platform_52
+  - first:
+      213: -6013706741483725203
+    second: black platform_53
+  - first:
+      213: 7973826545811140290
+    second: black platform_54
+  - first:
+      213: -7794942456590051481
+    second: black platform_55
+  - first:
+      213: 795191879614578899
+    second: black platform_56
+  - first:
+      213: -8145706695084863265
+    second: black platform_57
+  - first:
+      213: -2792845765770875631
+    second: black platform_58
+  - first:
+      213: -8625582484345114608
+    second: black platform_59
+  - first:
+      213: 4350491234737862018
+    second: black platform_60
+  - first:
+      213: 1972432667995144298
+    second: black platform_61
+  - first:
+      213: -7095435111629493280
+    second: black platform_62
+  - first:
+      213: -7077787812513234297
+    second: black platform_63
+  - first:
+      213: -6567978209254887392
+    second: black platform_64
+  - first:
+      213: 1247989362484829299
+    second: black platform_65
+  - first:
+      213: -2906385238632027816
+    second: black platform_66
+  - first:
+      213: 6576304296222881465
+    second: black platform_67
+  - first:
+      213: -4997999975427829574
+    second: black platform_68
+  - first:
+      213: 7857006673337198181
+    second: black platform_69
+  - first:
+      213: 2865157775421309031
+    second: black platform_70
+  - first:
+      213: 718646053300992310
+    second: black platform_71
+  - first:
+      213: -2774454371722934053
+    second: black platform_72
+  - first:
+      213: -6324659755232477358
+    second: black platform_73
+  - first:
+      213: 7496249736741493644
+    second: black platform_74
+  - first:
+      213: -8094986947855231930
+    second: black platform_75
+  - first:
+      213: 5449190362386205005
+    second: black platform_76
+  - first:
+      213: 1107065519596927127
+    second: black platform_77
+  - first:
+      213: 458077238234481055
+    second: black platform_78
+  - first:
+      213: -8739955649707532025
+    second: black platform_79
+  - first:
+      213: -7064640760602322028
+    second: black platform_80
+  - first:
+      213: 4388816219753873167
+    second: black platform_81
+  - first:
+      213: 8114453545573278798
+    second: black platform_82
+  - first:
+      213: -6613466050913127587
+    second: black platform_83
+  - first:
+      213: 8763228843672879732
+    second: black platform_84
+  - first:
+      213: -4227330913895892599
+    second: black platform_85
+  - first:
+      213: -3832947130592187020
+    second: black platform_86
+  - first:
+      213: 6172919838624873054
+    second: black platform_87
+  - first:
+      213: -3178443585150048152
+    second: black platform_88
+  - first:
+      213: 1215791561454545388
+    second: black platform_89
+  - first:
+      213: 461268781482138669
+    second: black platform_90
+  - first:
+      213: 6834261832749895330
+    second: black platform_91
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -73,9 +349,54 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: black platform_0
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 932
+        width: 1891
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb82ce57f96e3c230800000000000000
+      internalID: 3658020894907574460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
