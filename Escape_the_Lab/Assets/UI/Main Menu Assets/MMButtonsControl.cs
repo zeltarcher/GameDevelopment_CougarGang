@@ -7,42 +7,30 @@ using UnityEngine.UIElements;
 
 public class MMButtonsControl : MonoBehaviour
 {
-    private GameObject ButtonContainer;
-    private GameObject OptionsContainer;
-    private GameObject InfoContainer;
+    public GameObject InfoContainer;
     private GameObject MMCanvas;
-    private GameObject HUDCanvas;
 
-    void Start()
+    void Awake()
     {
-        MMCanvas = GameObject.Find("Canvas-MM");
-        ButtonContainer = GameObject.Find("ButtonContainer");
-        OptionsContainer = GameObject.Find("OptionsContainer");
-        InfoContainer = GameObject.Find("InfoContainer");
-        /*if (OptionsContainer != null || InfoContainer != null || HUDCanvas != null)
-            if (OptionsContainer.activeSelf == false || InfoContainer.activeSelf == false || HUDCanvas.activeSelf == false)
-            {
-                OptionsContainer.SetActive(false);
-                InfoContainer.SetActive(false);
-                HUDCanvas.SetActive(false);
-            }
-        System.Console.WriteLine("Start app");*/
+        MMCanvas = GameObject.Find("Panel-center");
+        
+        InfoContainer = GameObject.Find("Panel info");
     }
     public void StartGame(string gameplayScene)
     {
         SceneManager.LoadSceneAsync(gameplayScene);
     }
 
-    public void OptionsOpen()
+    public void InfoOpen()
     {
-        OptionsContainer.SetActive(true);
-        ButtonContainer.SetActive(false);
+        InfoContainer.SetActive(true);
+        MMCanvas.SetActive(false);
     }
 
-    public void OptionsClose()
+    public void InfoClose()
     {
-        OptionsContainer.SetActive(false);
-        ButtonContainer.SetActive(true);
+        InfoContainer.SetActive(false);
+        MMCanvas.SetActive(true);
     }
 
     public void ExitGame()
