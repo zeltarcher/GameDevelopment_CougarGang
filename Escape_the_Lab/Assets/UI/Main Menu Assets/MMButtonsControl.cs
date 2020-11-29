@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 
 public class MMButtonsControl : MonoBehaviour
 {
-
     public void ExitGame()
     {
         Application.Quit();
