@@ -2375,7 +2375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728767f7e27ae964da53f38c70d26fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InfoContainer: {fileID: 809129115}
 --- !u!1 &1004373325
 GameObject:
   m_ObjectHideFlags: 0
@@ -3662,10 +3661,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 948916185}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1134570382}
+        m_TargetAssemblyTypeName: ddDifficulLv, Assembly-CSharp
         m_MethodName: StartGame
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
