@@ -22,6 +22,7 @@ public class ObjectTrigger : MonoBehaviour
         fallObj = GameObject.Find("ObjectSpawner");
         water1 = GameObject.Find("Rising Water");
         water2 = GameObject.Find("Rising Water 2");
+        water2.SetActive(false);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -34,7 +35,7 @@ public class ObjectTrigger : MonoBehaviour
                 shark.SetActive(false);
                 fallObj.SetActive(false);
                 water1.SetActive(false);
-                water2.SetActive(false);
+                
             }
 
             if (this.gameObject.name == "FallObjOn")
