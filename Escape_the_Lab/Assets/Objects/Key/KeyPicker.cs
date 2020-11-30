@@ -115,7 +115,7 @@ public class KeyPicker : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
 
-            if (FindObjectOfType<Inventory>().superPotion > 0)
+            if (FindObjectOfType<Inventory>().superPotion > 0 && FindObjectOfType<Player>().currentHealth > 0)
             {
                 if (FindObjectOfType<charChange>().p1 == true && FindObjectOfType<charChange>().p2 == false)
                 {
@@ -285,7 +285,7 @@ public class KeyPicker : MonoBehaviour
                 FindObjectOfType<Inventory>().bomb--;
                 FindObjectOfType<Inventory>().textBomb.text = FindObjectOfType<Inventory>().bomb.ToString();
 
-                FindObjectOfType<water>().waterSpeed = 0.001f;
+                //FindObjectOfType<water>().waterSpeed = 0.001f;
                 FindObjectOfType<DoorUnlock>().khaBomb = true;
                 //gameObject.GetComponent<water>().waterSpeed = gameObject.GetComponent<water>().waterSpeed * 10;
                 //Debug.Log(gameObject.GetComponent<water>().waterSpeed);
