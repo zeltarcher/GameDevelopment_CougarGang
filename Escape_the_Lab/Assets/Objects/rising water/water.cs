@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class water : MonoBehaviour
 {
-    public int testNumber = 0;
     public float waterSpeed;
     private Vector3 velocity;
     SpriteRenderer sprite;
@@ -13,6 +12,7 @@ public class water : MonoBehaviour
     bool checkY = false;
     AudioSource water_AudioSrc;
     AudioClip water_raisingSound;
+    Rigidbody2D waterBody;
     //HealthController Health;
     //public int damageAmount = 10;
     //public float damageInterval = .5f;
@@ -66,7 +66,8 @@ public class water : MonoBehaviour
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
-        waterSpeed = waterSpeed / 100000;
+        waterBody = GetComponent<Rigidbody2D>();
+        waterSpeed = waterSpeed / 10;
         InvokeRepeating("flipSpriteX", 1f, .5f); 
         InvokeRepeating("flipSpriteY", .8f, .5f);
 
@@ -76,9 +77,7 @@ public class water : MonoBehaviour
 
     void FixedUpdate()
     {
-            velocity.y += waterSpeed * Time.deltaTime;
-
-        transform.Translate(velocity);
+        waterBody.velocity = new Vector2(0, waterSpeed);
 
         //SFX
         if (water_AudioSrc.time >= water_raisingSound.length || water_AudioSrc.time <= 0)

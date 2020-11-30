@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     SpriteRenderer sprite;
     public int currentHealth;
     public bool hit, shoot, hasGun;
-    float timer;//use to do plaer's animated Healthbar
+    float timer;
     Vector2 bulletPosition;
     Projectile projectile;
 
@@ -111,21 +111,17 @@ public class Player : MonoBehaviour
         return deltaMove;
     }
 
-
-    //I changed to public to make FallObject to call it.
     public void TakeDamage(int damage)
     {
         if (!hit)
         {
-            //For health bar animation
             timer = 0.0f;
             healthBar.HBar_GetHitAnimated();
 
             hit = true;
             playAnimation("Player Hit");
             currentHealth -= damage;
-            //healthBar.SetHealth(currentHealth);
-            //SFX
+
             if (currentHealth > 0)
                 SFX_playerSrc.PlayOneShot(main_hitSound);
             else if (currentHealth == 0)
@@ -156,6 +152,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator playerDeath()
     {
+        enabled = false;
         Time.timeScale = 0;
         playAnimation("Player Death");
         yield return new WaitForSecondsRealtime(3f);
@@ -168,7 +165,6 @@ public class Player : MonoBehaviour
         animate.enabled = false;
     }
 
-    //Get player velocity for FallingObjectSpawners
     public Vector3 GetPlayerVelocity()
     {
         return velocity;
@@ -268,10 +264,6 @@ public class Player : MonoBehaviour
  
     void Update()
     {
-        reLoad();
-        shopEnter();
-
-
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -293,11 +285,7 @@ public class Player : MonoBehaviour
             playAnimation("Player jump start");
             velocity.y = jumpSpeed;
 
-            //SFX
             SFX_playerSrc.PlayOneShot(main_jumpSound);
-
-            //handle jump out of moving platform
-            //transform.parent = null;
         }
         if (Input.GetKeyUp(KeyCode.Space) && velocity.y > 0)
             velocity.y = 1f;
@@ -308,16 +296,12 @@ public class Player : MonoBehaviour
             SFX_playerSrc.PlayOneShot(main_shoot_laser);
         }
             
+        updateAnimation();
+        Vector3 newVelocity = calculateVelocity(ref velocity, direction);
+        controller.move(newVelocity);
 
-        if (Time.timeScale != 0)
-        {
-            updateAnimation();
-            Vector3 newVelocity = calculateVelocity(ref velocity, direction);
-            controller.move(newVelocity);
-
-            //SFX
-            //SFX_playerSrc.PlayOneShot(main_walkSound);
-        }
+        reLoad();
+        shopEnter();
 
         timer += Time.deltaTime;
         float seconds = timer % 60;
@@ -325,12 +309,5 @@ public class Player : MonoBehaviour
         {
             healthBar.HBar_Normalized();
         }
-        //Debug.Log(seconds);
     }
-
-    
-
-    
-
-
 }
