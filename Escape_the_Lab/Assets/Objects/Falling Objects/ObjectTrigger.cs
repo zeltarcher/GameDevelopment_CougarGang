@@ -13,20 +13,21 @@ public class ObjectTrigger : MonoBehaviour
     private GameObject water2;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         isLevel1 = true;
-        isLevel2 = false;
-
         shark = GameObject.Find("sharkSpawner");
         fallObj = GameObject.Find("ObjectSpawner");
         water1 = GameObject.Find("Rising Water");
         water2 = GameObject.Find("Rising Water 2");
     }
 
+    private void Start()
+    {
+        water2.SetActive(false);
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
-       
         if(this.gameObject.name == "FallObjOff" && other.gameObject.CompareTag("Player"))
         {
             isLevel1 = false;
@@ -38,11 +39,10 @@ public class ObjectTrigger : MonoBehaviour
 
         if (this.gameObject.name == "FallObjOn" && other.gameObject.CompareTag("Player"))
         {
-            isLevel2 = true;
+
             shark.SetActive(true);
             fallObj.SetActive(true);
             water2.SetActive(true);
-        }
-        
+        }  
     }
 }
