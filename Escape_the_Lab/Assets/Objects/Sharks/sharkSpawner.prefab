@@ -45,7 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shark: {fileID: 9102838375817423801, guid: 787d4793657c14fe5a3408c0ff238e65, type: 3}
   wave:
+  - delayTime: 7
+    totalSpawn: 5
+  - delayTime: 5
+    totalSpawn: 10
   - delayTime: 4
     totalSpawn: 10
-  - delayTime: 1
+  - delayTime: 3
     totalSpawn: 10
