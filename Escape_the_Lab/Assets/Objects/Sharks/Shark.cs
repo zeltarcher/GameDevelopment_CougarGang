@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Shark : MonoBehaviour
 {
-    public float velocity_x = -0.1f;
-    public float velocity_y = 0.15f;
-    public float gravity = -0.05f;
+    public float velocity_x = -0.2f;
+    public float velocity_y = 0.2f;
+    public float gravity = -0.2f;
     private int flip;
 
     private Player player;
@@ -42,13 +42,19 @@ public class Shark : MonoBehaviour
         {
             risingWater = GameObject.Find("Rising Water");
         }
-        else
-        {
-            risingWater = GameObject.Find("Rising Water 2");
+        else 
+        { 
+            risingWater = GameObject.Find("Rising Water 2"); 
         }
 
-        if (transform.position.y < risingWater.transform.position.y - 2 * risingWater.transform.localScale.y)
+        //if (risingWater.active == true)
+        //{
+        //    if (transform.position.y < risingWater.transform.position.y - 2 * risingWater.transform.localScale.y)
+        //        Destroy(this.gameObject);
+        //}
+        if (transform.position.y < -500)
             Destroy(this.gameObject);
+
     }
 
 

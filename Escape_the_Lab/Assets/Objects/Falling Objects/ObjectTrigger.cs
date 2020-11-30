@@ -22,29 +22,27 @@ public class ObjectTrigger : MonoBehaviour
         fallObj = GameObject.Find("ObjectSpawner");
         water1 = GameObject.Find("Rising Water");
         water2 = GameObject.Find("Rising Water 2");
-        water2.SetActive(false);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+       
+        if(this.gameObject.name == "FallObjOff" && other.gameObject.CompareTag("Player"))
         {
-            if(this.gameObject.name == "FallObjOff")
-            {
-                isLevel1 = false;
-                shark.SetActive(false);
-                fallObj.SetActive(false);
-                water1.SetActive(false);
-                
-            }
-
-            if (this.gameObject.name == "FallObjOn")
-            {
-                isLevel2 = true;
-                shark.SetActive(true);
-                fallObj.SetActive(true);
-                water2.SetActive(true);
-            }
+            isLevel1 = false;
+            shark.SetActive(false);
+            fallObj.SetActive(false);
+            water1.SetActive(false);
+            water2.SetActive(false);
         }
+
+        if (this.gameObject.name == "FallObjOn" && other.gameObject.CompareTag("Player"))
+        {
+            isLevel2 = true;
+            shark.SetActive(true);
+            fallObj.SetActive(true);
+            water2.SetActive(true);
+        }
+        
     }
 }

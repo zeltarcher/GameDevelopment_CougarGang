@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3209303502550796314}
   - component: {fileID: 5619528155384135920}
   - component: {fileID: 1438583265211887719}
-  - component: {fileID: 2766300801870691522}
   - component: {fileID: -5061496572613698385}
   - component: {fileID: 1509345683196612804}
+  - component: {fileID: -5216742291954764717}
   m_Layer: 0
   m_Name: shark1
   m_TagString: Untagged
@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 9102838375817423801}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bd937fb5286ab425189c90c1a6793a3e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7ac2d47faa95742d0bd02ca0b0950f06, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -105,21 +105,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2766300801870691522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9102838375817423801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6be0aa3f092b043eaae8f82688d6de22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity_x: -0.15
-  velocity_y: 0.2
-  gravity: -0.2
 --- !u!61 &-5061496572613698385
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -167,3 +152,18 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &-5216742291954764717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9102838375817423801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be0aa3f092b043eaae8f82688d6de22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity_x: -0.2
+  velocity_y: 0.2
+  gravity: -0.2
