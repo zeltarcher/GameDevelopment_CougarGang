@@ -21,6 +21,9 @@ public class Boss : MonoBehaviour
     public float rateOfFire = 1f;
     public float timeBetweenShooting = 2f;
     public float shootingDuration = 1f;
+    public GameObject grenadeObject;
+    public float throwDistance = 300f;
+    public float explosionDelay = 2f;
     Transform player, man, robot;
     Rigidbody2D myRigidBody;
     BoxCollider2D box;
@@ -32,11 +35,12 @@ public class Boss : MonoBehaviour
     Animator animate;
     charChange character;
     State state;
-    bool isShooting;
+    bool isShooting, isThrowing;
     float YdistanceToPlayer, distanceToPlayer;
     float gravity;
     Vector2 bulletPosition;
     Projectile projectile;
+    Grenade grenade;
 
     private enum State
     {
@@ -44,7 +48,7 @@ public class Boss : MonoBehaviour
         Chase,
         MeleeAttack,
         RangedAttack,
-        Hit,
+        Throwing,
         Death,
         Stunned
     }
@@ -68,6 +72,15 @@ public class Boss : MonoBehaviour
         state = State.Chase;
         animate.speed = 1;
         isShooting = false;
+    }
+    private IEnumerator throwObject()
+    {
+        isThrowing = true;
+        state = State.Throwing;
+        animate.SetTrigger("boss idle throwing");
+        yield return new WaitForSecondsRealtime(1.3f);
+        state = State.Chase;
+        isThrowing = false;
     }
 
     private void playAnimation(String name)
@@ -96,10 +109,13 @@ public class Boss : MonoBehaviour
                 disableAttack();
                 playAnimation("boss walking");
 
-                if (Math.Abs(transform.position.y - player.position.y) < .6f && !isShooting)
+                if (Math.Abs(transform.position.y - player.position.y) < .6f && !isShooting && !isThrowing)
                 {
                     StartCoroutine("shootGun");
                 }
+
+                if (Math.Abs(transform.position.y - player.position.y) > 1f && !isShooting && !isThrowing)
+                    StartCoroutine("throwObject");
 
                 if (transform.position.x > player.position.x)
                 {
@@ -111,6 +127,7 @@ public class Boss : MonoBehaviour
                     moveSpeed = Mathf.Abs(moveSpeed);
                     sprite.flipX = false;
                 }
+
                 animate.speed = 1.3f;
                 myRigidBody.velocity = new Vector2(moveSpeed * 1.5f, gravity);
                 break;
@@ -121,18 +138,18 @@ public class Boss : MonoBehaviour
                 myRigidBody.velocity = new Vector2(0, gravity);
                 break;
 
-            case State.Hit:
+            case State.Throwing:
                 myRigidBody.velocity = new Vector2(0, gravity);
+                StartCoroutine("throwObject");
                 break;
 
             case State.Death:
-                animate.speed = 1;
                 playAnimation("boss dying");
+                myRigidBody.velocity = new Vector2(0, gravity);
                 health = 0;
                 foreach (Collider c in GetComponents<Collider>())
                     c.enabled = false;
-                myRigidBody.velocity = new Vector2(0, gravity);
-                //enabled = false;
+                enabled = false;
                 break;
 
             case State.Stunned:
@@ -182,6 +199,22 @@ public class Boss : MonoBehaviour
         Instantiate(gunProjectile, bulletPosition, quaternion.identity);
     }
 
+    private void throwGrenade()
+    {
+        Bounds bounds = GetComponent<BoxCollider2D>().bounds;
+        if (sprite.flipX)
+        {
+            bulletPosition = new Vector2(bounds.min.x, bounds.center.y + .1f);
+            grenade.throwDistance = -throwDistance;
+        }
+        else
+        {
+            bulletPosition = new Vector2(bounds.max.x, bounds.center.y + .1f);
+            grenade.throwDistance = throwDistance;
+        }
+        Instantiate(grenadeObject, bulletPosition, quaternion.identity);
+    }
+
     void terminate() { animate.enabled = false; Destroy(gameObject); }
     void enableAttack() { polygon.enabled = true; }
     void disableAttack() { polygon.enabled = false; }
@@ -210,7 +243,7 @@ public class Boss : MonoBehaviour
     {
         if (collision.tag == "Water")
         {
-            state = State.Hit;
+            //state = State.Hit;
             InvokeRepeating("poisonWater", 0f, .5f);
         }
 
@@ -235,6 +268,7 @@ public class Boss : MonoBehaviour
         man = GameObject.Find("Man").GetComponent<Player>().transform;
         robot = GameObject.Find("Robot").GetComponent<Player>().transform;
         projectile = gunProjectile.GetComponent<Projectile>();
+        grenade = grenadeObject.GetComponent<Grenade>();
 
         isShooting = false;
         polygon.enabled = false;
@@ -242,6 +276,9 @@ public class Boss : MonoBehaviour
         gravity = -gravitySpeed / 100;
         projectile.speed = projectileSpeed;
         projectile.damage = projectileDamage;
+        grenade.throwDistance = throwDistance;
+        grenade.explosionDelay = explosionDelay;
+
     }
 
 
@@ -256,7 +293,7 @@ public class Boss : MonoBehaviour
 
         distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (state != State.Hit && state != State.RangedAttack && health > 0)
+        if (state != State.RangedAttack && health > 0)
         {
             if (distanceToPlayer <= followRange && 
                 distanceToPlayer >= attackRange && 
