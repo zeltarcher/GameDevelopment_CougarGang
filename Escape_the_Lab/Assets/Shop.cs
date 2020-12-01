@@ -38,9 +38,9 @@ public class Shop : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.M))
             {
-                if (FindObjectOfType<Inventory>().coin >= 4)
+                if (FindObjectOfType<Inventory>().coin >= 30)
                 {
-                    FindObjectOfType<Inventory>().coin = FindObjectOfType<Inventory>().coin - 4;
+                    FindObjectOfType<Inventory>().coin = FindObjectOfType<Inventory>().coin - 30;
                     FindObjectOfType<Inventory>().bomb++;
                 }
                 else
@@ -60,9 +60,9 @@ public class Shop : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.M))
             {
-                if (FindObjectOfType<Inventory>().coin >= 3)
+                if (FindObjectOfType<Inventory>().coin >= 20)
                 {
-                    FindObjectOfType<Inventory>().coin = FindObjectOfType<Inventory>().coin - 3;
+                    FindObjectOfType<Inventory>().coin = FindObjectOfType<Inventory>().coin - 20;
                     FindObjectOfType<Inventory>().superPotion++;
                 }
                 else
@@ -81,9 +81,9 @@ public class Shop : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.M))
             {
-                if (FindObjectOfType<Inventory>().coin >= 2)
+                if (FindObjectOfType<Inventory>().coin >= 10)
                 {
-                    FindObjectOfType<Inventory>().coin = FindObjectOfType<Inventory>().coin - 2;
+                    FindObjectOfType<Inventory>().coin = FindObjectOfType<Inventory>().coin - 10;
                     FindObjectOfType<Inventory>().hp++;
                 }
                 else
@@ -102,9 +102,9 @@ public class Shop : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.M))
             {
-                if (FindObjectOfType<Inventory>().coin >= 1)
+                if (FindObjectOfType<Inventory>().coin >= 5)
                 {
-                    FindObjectOfType<Inventory>().coin--;
+                    FindObjectOfType<Inventory>().coin = FindObjectOfType<Inventory>().coin - 5;
                     FindObjectOfType<Inventory>().ammo = FindObjectOfType<Inventory>().ammo + 20;
                 }
                 else
@@ -153,10 +153,10 @@ public class Shop : MonoBehaviour
 
         buyTag = GameObject.Find("MtoBuy");
         greetings = GameObject.Find("greetings");
-        bombTag = GameObject.Find("4coin");
-        superTag = GameObject.Find("3coin");
-        hpTag = GameObject.Find("2coin");
-        ammoTag = GameObject.Find("1coin");
+        bombTag = GameObject.Find("30coin");
+        superTag = GameObject.Find("20coin");
+        hpTag = GameObject.Find("10coin");
+        ammoTag = GameObject.Find("5coin");
         dontTag = GameObject.Find("you dont have");
 
         greetings.SetActive(true);
