@@ -123,8 +123,11 @@ public class Player : MonoBehaviour
             currentHealth -= damage;
 
             if (currentHealth > 0)
-                SFX_playerSrc.PlayOneShot(main_hitSound);
-            else if (currentHealth == 0)
+            {
+                if (!SFX_playerSrc.isPlaying)
+                    SFX_playerSrc.PlayOneShot(main_hitSound);
+            }
+            else if (currentHealth <= 0)
                 SFX_playerSrc.PlayOneShot(main_dieSound);
         }
     }
