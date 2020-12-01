@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2748849427150843520}
   - component: {fileID: 2579552437443345541}
   m_Layer: 0
-  m_Name: FileBulletVertical
+  m_Name: FileBulletVertical_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireSpeed: 15
-  des: 1175
+  des: 500
   targetPoint: {x: 0, y: 0, z: 0}
 --- !u!50 &2748849427150843521
 Rigidbody2D:
