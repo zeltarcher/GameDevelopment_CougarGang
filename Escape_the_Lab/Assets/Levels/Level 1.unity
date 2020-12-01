@@ -12724,6 +12724,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7064566545890696786, guid: ea535e56185ec4c938d79d0976c6aa9f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 855031bf84acc4ce79dc86a314ac3263, type: 3}
+    - target: {fileID: 7064566545890696812, guid: ea535e56185ec4c938d79d0976c6aa9f, type: 3}
+      propertyPath: m_Name
+      value: 20coin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064566545923372473, guid: ea535e56185ec4c938d79d0976c6aa9f, type: 3}
+      propertyPath: m_Name
+      value: 10coin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064566545923372479, guid: ea535e56185ec4c938d79d0976c6aa9f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b618762e791fe437a94cae96cd08c403, type: 3}
     - target: {fileID: 7064566545965624636, guid: ea535e56185ec4c938d79d0976c6aa9f, type: 3}
       propertyPath: m_Offset.y
       value: -0.029951096
@@ -12796,6 +12812,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shop (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7064566547112954412, guid: ea535e56185ec4c938d79d0976c6aa9f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6541c2774239949cf891440c8b607db1, type: 3}
+    - target: {fileID: 7064566547112954414, guid: ea535e56185ec4c938d79d0976c6aa9f, type: 3}
+      propertyPath: m_Name
+      value: 5coin
+      objectReference: {fileID: 0}
     - target: {fileID: 7064566547346705961, guid: ea535e56185ec4c938d79d0976c6aa9f, type: 3}
       propertyPath: m_Offset.y
       value: 4.007923
@@ -12811,6 +12835,14 @@ PrefabInstance:
     - target: {fileID: 7064566547346705961, guid: ea535e56185ec4c938d79d0976c6aa9f, type: 3}
       propertyPath: m_Size.x
       value: 37.820656
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064566547494436273, guid: ea535e56185ec4c938d79d0976c6aa9f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4b2f75072ed1e490587b7a9045cb8f14, type: 3}
+    - target: {fileID: 7064566547494436275, guid: ea535e56185ec4c938d79d0976c6aa9f, type: 3}
+      propertyPath: m_Name
+      value: 30coin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea535e56185ec4c938d79d0976c6aa9f, type: 3}
