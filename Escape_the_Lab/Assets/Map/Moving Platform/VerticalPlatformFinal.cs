@@ -13,16 +13,16 @@ public class VerticalPlatformFinal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bossDeath = false;
+        //var bossHealth = FindObjectOfType<Boss>().health;
+        //bossDeath = false;
+        bossDeath = FindObjectOfType<Boss>().bossDeath;
     }
 
     // Update is called once per frame
     void Update()
     {
-        var bossHealth = FindObjectOfType<Boss>().health;
-        if (bossHealth == 0) {
-            bossDeath = true;
-        }
+        //var bossHealth = FindObjectOfType<Boss>().health;
+        //bossDeath = FindObjectOfType<Boss>().bossDeath;
         if (bossDeath)
         {
             //Debug.Log("y = " + transform.position.y);
@@ -49,7 +49,12 @@ public class VerticalPlatformFinal : MonoBehaviour
                 Debug.Log("Moving Downnnnn");
                 transform.position = new Vector2(transform.position.x, transform.position.y - moveSpeed * Time.deltaTime);
             }
+            bossDeath = true;
         }
+        else {
+            bossDeath = FindObjectOfType<Boss>().bossDeath;
+        }
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

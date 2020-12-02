@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Timeline;
@@ -24,6 +25,7 @@ public class Boss : MonoBehaviour
     public GameObject grenadeObject;
     public float throwDistance = 300f;
     public float explosionDelay = 2f;
+    public Boolean bossDeath;
     Transform player, man, robot;
     Rigidbody2D myRigidBody;
     BoxCollider2D box;
@@ -279,6 +281,8 @@ public class Boss : MonoBehaviour
         grenade.throwDistance = throwDistance;
         grenade.explosionDelay = explosionDelay;
 
+        bossDeath = false;
+
     }
 
 
@@ -307,6 +311,7 @@ public class Boss : MonoBehaviour
         else if (health <= 0)
         {
             state = State.Death;
+            bossDeath = true;
         }
         if (stunCheck)
             state = State.Stunned;
