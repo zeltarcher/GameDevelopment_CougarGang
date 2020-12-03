@@ -192,7 +192,7 @@ public class Player : MonoBehaviour
         }
         Instantiate(gunProjectile, bulletPosition, quaternion.identity);
         yield return new WaitForSecondsRealtime(1f / rateOfFire);
-        FindObjectOfType<Inventory>().ammo--;
+        
         shoot = true;
     }
 
@@ -296,6 +296,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && shoot)
         {
+            FindObjectOfType<Inventory>().ammo--;
             StartCoroutine("fireGun");
             SFX_playerSrc.PlayOneShot(main_shoot_laser);
         }
