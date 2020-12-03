@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
     float timer;
     Vector2 bulletPosition;
     Projectile projectile;
+    Inventory inventory;
 
     AudioSource SFX_playerSrc;
     AudioClip main_jumpSound, main_dieSound, main_walkSound, main_hitSound, main_shoot_laser;
@@ -192,20 +193,7 @@ public class Player : MonoBehaviour
         }
         Instantiate(gunProjectile, bulletPosition, quaternion.identity);
         yield return new WaitForSecondsRealtime(1f / rateOfFire);
-        
         shoot = true;
-    }
-
-    private void reLoad()
-    {
-        if(hasGun == true && FindObjectOfType<Inventory>().ammo > 0)
-        {
-            shoot = true;
-        }
-        else if(FindObjectOfType<Inventory>().ammo < 1)
-        {
-            shoot = false;
-        }
     }
 
     private void shopEnter()
@@ -248,6 +236,7 @@ public class Player : MonoBehaviour
         controller = GetComponent<Controller2D>();
         animate = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        inventory = FindObjectOfType<Inventory>();
         gravity = -(2 * jumpHeight) / Mathf.Pow(jumpAcceleration, 2);
         jumpSpeed = Mathf.Abs(gravity) * jumpAcceleration;
 
@@ -258,7 +247,7 @@ public class Player : MonoBehaviour
         main_shoot_laser = Resources.Load<AudioClip>("Main_LaserShoot");
 
         SFX_playerSrc = GetComponent<AudioSource>();
-        shoot = false;
+        shoot = true;
         hasGun = false;
         projectile = gunProjectile.GetComponent<Projectile>();
         projectile.speed = projectileSpeed;
@@ -267,7 +256,6 @@ public class Player : MonoBehaviour
  
     void Update()
     {
-        reLoad();
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -294,9 +282,10 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) && velocity.y > 0)
             velocity.y = 1f;
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && shoot)
+        Debug.Log(shoot);
+        if (Input.GetKeyDown(KeyCode.Mouse1) && shoot && hasGun && inventory.ammo > 0)
         {
-            FindObjectOfType<Inventory>().ammo--;
+            inventory.ammo--;
             StartCoroutine("fireGun");
             SFX_playerSrc.PlayOneShot(main_shoot_laser);
         }
