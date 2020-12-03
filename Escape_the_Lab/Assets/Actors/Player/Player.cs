@@ -267,6 +267,7 @@ public class Player : MonoBehaviour
  
     void Update()
     {
+        reLoad();
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -303,7 +304,7 @@ public class Player : MonoBehaviour
         Vector3 newVelocity = calculateVelocity(ref velocity, direction);
         controller.move(newVelocity);
 
-        reLoad();
+        
         shopEnter();
 
         timer += Time.deltaTime;
