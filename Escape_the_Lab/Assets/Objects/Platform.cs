@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Platform : RayCastController
 {
-    public Vector2 move;
+    public Vector2 moveSpeed;
     public LayerMask passengerMask;
     public float travelDistance = 5f;
     Vector3 startingDistance;
@@ -104,40 +104,40 @@ public class Platform : RayCastController
         if (!isReturnToStart)
         {
             float currentDistance = Vector3.Distance(startingDistance, transform.position);
-            if (currentDistance > travelDistance && move.y == 0 && move.x != 0)
+            if (currentDistance > travelDistance && moveSpeed.y == 0 && moveSpeed.x != 0)
             {
-                move.x *= -1;
+                moveSpeed.x *= -1;
                 isReturnToStart = true;
             }
-            else if (currentDistance > travelDistance && move.y != 0 && move.x == 0)
+            else if (currentDistance > travelDistance && moveSpeed.y != 0 && moveSpeed.x == 0)
             {
-                move.y *= -1;
+                moveSpeed.y *= -1;
                 isReturnToStart = true;
             }
-            else if (currentDistance > travelDistance && move.y != 0 && move.x != 0)
+            else if (currentDistance > travelDistance && moveSpeed.y != 0 && moveSpeed.x != 0)
             {
-                move.x *= -1;
-                move.y *= -1;
+                moveSpeed.x *= -1;
+                moveSpeed.y *= -1;
                 isReturnToStart = true;
             }
         }
         else if (isReturnToStart)
         {
             float currentDistance = Vector3.Distance(startingDistance, transform.position);
-            if (currentDistance < 1 && move.y == 0 && move.x != 0)
+            if (currentDistance < 1 && moveSpeed.y == 0 && moveSpeed.x != 0)
             {
-                move.x *= -1;
+                moveSpeed.x *= -1;
                 isReturnToStart = false;
             }
-            else if (currentDistance < 1 && move.y != 0 && move.x == 0)
+            else if (currentDistance < 1 && moveSpeed.y != 0 && moveSpeed.x == 0)
             {
-                move.y *= -1;
+                moveSpeed.y *= -1;
                 isReturnToStart = false;
             }
-            else if (currentDistance < 1 && move.y != 0 && move.x != 0)
+            else if (currentDistance < 1 && moveSpeed.y != 0 && moveSpeed.x != 0)
             {
-                move.x *= -1;
-                move.y *= -1;
+                moveSpeed.x *= -1;
+                moveSpeed.y *= -1;
                 isReturnToStart = false;
             }
         }
@@ -154,7 +154,7 @@ public class Platform : RayCastController
     {
         updateRaycastOrigins();
         checkbounds();
-        Vector2 velocity = move * Time.deltaTime;
+        Vector2 velocity = moveSpeed * Time.deltaTime;
         movePassengers(velocity);
         transform.Translate(velocity);
     }
