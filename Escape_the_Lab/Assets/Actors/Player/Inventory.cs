@@ -43,7 +43,7 @@ public class Inventory : MonoBehaviour
         textBomb.text = bomb.ToString();
         textHP.text = hp.ToString();
         textSuper.text = superPotion.ToString();
-        textAmmo.text = ammo.ToString();
+        //textAmmo.text = ammo.ToString();
 
     }
 }

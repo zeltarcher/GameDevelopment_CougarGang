@@ -274,7 +274,7 @@ public class Player : MonoBehaviour
    
         if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below)
         {
-            playAnimation("Player jump start");
+            animate.SetTrigger("Player jump start");
             velocity.y = jumpSpeed;
 
             SFX_playerSrc.PlayOneShot(main_jumpSound);
@@ -282,7 +282,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) && velocity.y > 0)
             velocity.y = 1f;
 
-        Debug.Log(shoot);
         if (Input.GetKeyDown(KeyCode.Mouse1) && shoot && hasGun && inventory.ammo > 0)
         {
             inventory.ammo--;
