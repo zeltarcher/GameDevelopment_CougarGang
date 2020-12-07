@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
         hit = false;
         TakeDamage(10); 
     }
-    private void endHit() { hit = false; }
+    public void endHit() { hit = false; }
     private void enableShooting() { shoot = true; }
     private void disableShooting() { shoot = false; }
 

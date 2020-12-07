@@ -119,6 +119,7 @@ public class KeyPicker : MonoBehaviour
             {
                 if (FindObjectOfType<charChange>().p1 == true && FindObjectOfType<charChange>().p2 == false)
                 {
+                    FindObjectOfType<Player>().endHit();
                     FindObjectOfType<Inventory>().superPotion--;
                     FindObjectOfType<Inventory>().textSuper.text = FindObjectOfType<Inventory>().superPotion.ToString();
                     FindObjectOfType<charChange>().transformSuper();
