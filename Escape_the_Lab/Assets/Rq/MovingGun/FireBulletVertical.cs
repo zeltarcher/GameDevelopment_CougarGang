@@ -14,7 +14,7 @@ public class FireBulletVertical : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         //float xv = this.transform.position.x;
         targetPoint.x = this.transform.position.x;

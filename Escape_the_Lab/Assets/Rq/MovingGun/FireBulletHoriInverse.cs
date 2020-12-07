@@ -14,7 +14,7 @@ public class FireBulletHoriInverse : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
 
         targetPoint.x = this.transform.position.x - 2;

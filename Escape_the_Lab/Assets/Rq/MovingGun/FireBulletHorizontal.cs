@@ -17,7 +17,7 @@ public class FireBulletHorizontal : MonoBehaviour
         //rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         //float xv = this.transform.position.x;
         targetPoint.x = this.transform.position.x + 2;
