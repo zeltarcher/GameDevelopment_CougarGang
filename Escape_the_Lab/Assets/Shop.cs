@@ -13,6 +13,11 @@ public class Shop : MonoBehaviour
     public GameObject dontTag;
 
     public GameObject buyTag;
+    public GameObject MK;
+    public GameObject HPP;
+    public GameObject AB;
+    public GameObject BB;
+    public GameObject RT;
 
 
     public Collider2D oneone;
@@ -52,9 +57,13 @@ public class Shop : MonoBehaviour
             greetings.SetActive(false);
             buyTag.SetActive(true);
             bombTag.SetActive(true);
+            BB.SetActive(true);
             superTag.SetActive(false);
             hpTag.SetActive(false);
             ammoTag.SetActive(false);
+            MK.SetActive(false);
+            AB.SetActive(false);
+            RT.SetActive(false);
         }
         else if (oneone.IsTouching(superShop) && oneone.IsTouching(shopWay))
         {
@@ -72,10 +81,14 @@ public class Shop : MonoBehaviour
             }
             greetings.SetActive(false);
             buyTag.SetActive(true);
+            BB.SetActive(false);
             bombTag.SetActive(false);
             superTag.SetActive(true);
             hpTag.SetActive(false);
             ammoTag.SetActive(false);
+            MK.SetActive(false);
+            AB.SetActive(false);
+            RT.SetActive(true);
         }
         else if (oneone.IsTouching(HPShop) && oneone.IsTouching(shopWay))
         {
@@ -93,10 +106,14 @@ public class Shop : MonoBehaviour
             }
             greetings.SetActive(false);
             buyTag.SetActive(true);
+            BB.SetActive(false);
             bombTag.SetActive(false);
             superTag.SetActive(false);
             hpTag.SetActive(true);
             ammoTag.SetActive(false);
+            MK.SetActive(true);
+            AB.SetActive(false);
+            RT.SetActive(false);
         }
         else if (oneone.IsTouching(ammoShop) && oneone.IsTouching(shopWay))
         {
@@ -122,6 +139,10 @@ public class Shop : MonoBehaviour
             superTag.SetActive(false);
             hpTag.SetActive(false);
             ammoTag.SetActive(true);
+            BB.SetActive(false);
+            MK.SetActive(false);
+            AB.SetActive(true);
+            RT.SetActive(false);
         }
         else if (oneone.IsTouching(shopWay))
         {
@@ -136,6 +157,10 @@ public class Shop : MonoBehaviour
             hpTag.SetActive(false);
             ammoTag.SetActive(false);
             dontTag.SetActive(false);
+            BB.SetActive(false);
+            MK.SetActive(false);
+            AB.SetActive(false);
+            RT.SetActive(false);
         }
 
     }
@@ -158,6 +183,10 @@ public class Shop : MonoBehaviour
         hpTag = GameObject.Find("10coin");
         ammoTag = GameObject.Find("5coin");
         dontTag = GameObject.Find("you dont have");
+        MK = GameObject.Find("MK");
+        AB = GameObject.Find("AB");
+        BB = GameObject.Find("BB");
+        RT = GameObject.Find("RT");
 
         greetings.SetActive(true);
         buyTag.SetActive(false);
@@ -166,6 +195,10 @@ public class Shop : MonoBehaviour
         hpTag.SetActive(false);
         ammoTag.SetActive(false);
         dontTag.SetActive(false);
+        MK.SetActive(false);
+        AB.SetActive(false);
+        BB.SetActive(false);
+        RT.SetActive(false);
 
     }
     

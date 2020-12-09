@@ -39,7 +39,6 @@ public class DoorUnlock : MonoBehaviour
         if(khaBomb == true)
         {
             bombDoor();
-            khaBomb = false;
         }
 
         if (collides && Input.GetKeyDown(KeyCode.E))
