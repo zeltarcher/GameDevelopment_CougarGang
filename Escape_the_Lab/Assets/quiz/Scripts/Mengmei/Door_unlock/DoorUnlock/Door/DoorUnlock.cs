@@ -30,7 +30,7 @@ public class DoorUnlock : MonoBehaviour
         checkPasscode = FindObjectOfType<CheckPasscode>();
 
         _audiosrc = GetComponent<AudioSource>();
-        success = Resources.Load<AudioClip>("Win3");
+        success = Resources.Load<AudioClip>("Win4");
         failed = Resources.Load<AudioClip>("Answer_Wrong");
     }
 

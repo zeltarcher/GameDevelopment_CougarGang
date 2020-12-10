@@ -10,13 +10,14 @@ public class TriggerChangeBGMusic : MonoBehaviour
     void Start()
     {
         aSource = GameObject.Find("BGMusic").GetComponent<AudioSource>(); 
-        bgMusicLv2 = Resources.Load<AudioClip>("Fire_Burning");
+        bgMusicLv2 = Resources.Load<AudioClip>("Ingame_Music_Level_2");
     }
-
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        aSource.PlayOneShot(bgMusicLv2);
-        aSource.loop = true;
+        if (other.gameObject.CompareTag("Player"))
+        {
+            aSource.PlayOneShot(bgMusicLv2);
+            aSource.loop = true;
+        }
     }
 }
