@@ -22,11 +22,12 @@ public class SharkSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        fire_sfx = Resources.Load<AudioClip>("Shark_jump");
+        au_sou = GetComponent<AudioSource>();
+
         waveIndex = 0;
         currentTime = wave[waveIndex].delayTime;
 
-        au_sou = GetComponent<AudioSource>();
-        fire_sfx = Resources.Load<AudioClip>("Shark_jump");
     }
 
     // Update is called once per frame
