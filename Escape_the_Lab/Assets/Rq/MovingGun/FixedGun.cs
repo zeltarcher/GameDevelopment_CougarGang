@@ -9,8 +9,15 @@ public class FixedGun : MonoBehaviour
     public float speed1 = 1;
     int i = 0;
     float des;
+
+    AudioSource au_sou;
+    AudioClip fire_sfx;
+
     void Start()
     {
+        au_sou = GetComponent<AudioSource>();
+        fire_sfx = Resources.Load<AudioClip>("Shark_jump");
+        //au_sou.PlayOneShot(fire_sfx);
 
     }
 
@@ -35,6 +42,7 @@ public class FixedGun : MonoBehaviour
 
         if (des < 0.3f && i < gos1.Length)
         {
+            au_sou.PlayOneShot(fire_sfx);
             i++;
         }
 

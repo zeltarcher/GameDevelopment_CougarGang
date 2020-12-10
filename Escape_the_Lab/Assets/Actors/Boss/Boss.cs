@@ -47,6 +47,9 @@ public class Boss : MonoBehaviour
     Transform healthBar;
     float hb_max,local_scale_x;
 
+    AudioSource au_sou;
+    AudioClip boss_die, boss_shot, boss_hit, boss_throw, boss_knife;
+
     private enum State
     {
         Walking,
@@ -141,11 +144,20 @@ public class Boss : MonoBehaviour
                 animate.speed = 1;
                 playAnimation("boss idle melee attack");
                 myRigidBody.velocity = new Vector2(0, gravity);
+
+                if (!au_sou.isPlaying)
+                    au_sou.PlayOneShot(boss_knife);
+
                 break;
 
             case State.Throwing:
                 myRigidBody.velocity = new Vector2(0, gravity);
                 StartCoroutine("throwObject");
+
+                if (!au_sou.isPlaying)
+                    au_sou.PlayOneShot(boss_throw);
+
+
                 break;
 
             case State.Death:
@@ -155,6 +167,10 @@ public class Boss : MonoBehaviour
                 foreach (Collider c in GetComponents<Collider>())
                     c.enabled = false;
                 enabled = false;
+
+                au_sou.PlayOneShot(boss_die);
+
+
                 break;
 
             case State.Stunned:
@@ -168,6 +184,11 @@ public class Boss : MonoBehaviour
                 animate.speed = 1;
                 playAnimation("boss idle shooting");
                 myRigidBody.velocity = new Vector2(0, gravity);
+
+                if(!au_sou.isPlaying)
+                    au_sou.PlayOneShot(boss_shot);
+
+
                 break;
         }
     }
@@ -236,6 +257,8 @@ public class Boss : MonoBehaviour
         {
             healthBar.localScale = new Vector3(health/hb_max*local_scale_x, healthBar.localScale.y, healthBar.localScale.z);
             //Debug.LogError(health / hb_max);
+
+            au_sou.PlayOneShot(boss_hit);
         }
     }
     void poisonWater() { TakeDamage(10); }
@@ -272,6 +295,18 @@ public class Boss : MonoBehaviour
     }
     void Start()
     {
+
+        healthBar = gameObject.transform.Find("HealthBar");
+        hb_max = health;
+        local_scale_x = healthBar.transform.localScale.x;
+
+        au_sou = GetComponent<AudioSource>();
+        boss_die = Resources.Load<AudioClip>("Boss_die");
+        boss_shot = Resources.Load<AudioClip>("Boss_shot");
+        boss_hit = Resources.Load<AudioClip>("Boss_hurt");
+        boss_throw = Resources.Load<AudioClip>("Boss_throw");
+        boss_knife = Resources.Load<AudioClip>("Boss_knife");
+
         box = GetComponent<BoxCollider2D>();
         myRigidBody = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
@@ -293,10 +328,6 @@ public class Boss : MonoBehaviour
         grenade.explosionDelay = explosionDelay;
 
         bossDeath = false;
-
-        healthBar = gameObject.transform.Find("HealthBar");
-        hb_max = health;
-        local_scale_x = healthBar.transform.localScale.x;
     }
 
 

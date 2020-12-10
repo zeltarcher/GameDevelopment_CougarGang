@@ -9,9 +9,14 @@ public class FireBulletHoriInverse : MonoBehaviour
     public float des;
     public Vector3 targetPoint;
 
+    AudioSource au_sou;
+    AudioClip fire_sfx;
+
     void Start()
     {
-
+        au_sou = GetComponent<AudioSource>();
+        fire_sfx = Resources.Load<AudioClip>("Enemy_Turret_LaserShoot");
+        //au_sou.PlayOneShot(fire_sfx);
     }
 
     void FixedUpdate()
@@ -29,6 +34,5 @@ public class FireBulletHoriInverse : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
     }
 }

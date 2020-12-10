@@ -12,9 +12,15 @@ public class FireBulletHorizontal : MonoBehaviour
     public float des;
     public Vector3 targetPoint;
 
+    AudioSource au_sou;
+    AudioClip fire_sfx;
+
     void Start()
     {
         //rb = GetComponent<Rigidbody>();
+        au_sou = GetComponent<AudioSource>();
+        fire_sfx = Resources.Load<AudioClip>("Shark_jump");
+        //au_sou.PlayOneShot(fire_sfx);
     }
 
     void FixedUpdate()
@@ -31,6 +37,7 @@ public class FireBulletHorizontal : MonoBehaviour
         if (des < 0.1f){
             Destroy(this.gameObject);
         }
+
 
         //des = Vector3.Distance(this.transform.position, targetPoint.transform.position);
         //transform.position = Vector3.MoveTowards(this.transform.position, targetPoint.transform.position, Time.deltaTime * fireSpeed);

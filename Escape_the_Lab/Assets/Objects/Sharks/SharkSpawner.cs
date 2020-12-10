@@ -15,12 +15,18 @@ public class SharkSpawner : MonoBehaviour
     private GameObject risingWater;
     private ObjectTrigger objTrigger;
 
+    AudioSource au_sou;
+    AudioClip fire_sfx;
+
     //private ObjectTrigger 
     // Start is called before the first frame update
     void Start()
     {
         waveIndex = 0;
         currentTime = wave[waveIndex].delayTime;
+
+        au_sou = GetComponent<AudioSource>();
+        fire_sfx = Resources.Load<AudioClip>("Shark_jump");
     }
 
     // Update is called once per frame
@@ -76,7 +82,9 @@ public class SharkSpawner : MonoBehaviour
             xPos = Random.Range(risingWater.transform.position.x - risingWater.transform.localScale.x,
                 risingWater.transform.position.x + risingWater.transform.localScale.x);
             SpawnSharks(xPos);
-            wave[waveIndex].totalSpawn--;    
+            wave[waveIndex].totalSpawn--;
+
+            au_sou.PlayOneShot(fire_sfx);
         }
         else
         {
