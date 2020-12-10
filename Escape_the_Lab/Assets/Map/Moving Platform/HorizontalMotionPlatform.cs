@@ -40,10 +40,10 @@ public class HorizontalMotionPlatform : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("AHHHHHHHHHHHHHHHHHHH");
+        //Debug.Log("AHHHHHHHHHHHHHHHHHHH");
         if (collision.tag == "Platform")
         {
-            Debug.Log("Hit "+ collision.tag);
+// Debug.Log("Hit "+ collision.tag);
             // collision.transform.position = new Vector2(collision.transform.position.x + moveSpeed * Time.deltaTime *-1, collision.transform.position.y);
             moveSpeed *= -1;
         }

@@ -187,6 +187,7 @@ public class Boss : MonoBehaviour
 
     private void fireGun()
     {
+        projectile = gunProjectile.GetComponent<Projectile>();
         SpriteRenderer projectileSprite = gunProjectile.GetComponent<SpriteRenderer>();
         Bounds bounds = GetComponent<BoxCollider2D>().bounds;
         if (sprite.flipX)
@@ -206,6 +207,7 @@ public class Boss : MonoBehaviour
 
     private void throwGrenade()
     {
+        grenade = grenadeObject.GetComponent<Grenade>();
         Bounds bounds = GetComponent<BoxCollider2D>().bounds;
         if (sprite.flipX)
         {

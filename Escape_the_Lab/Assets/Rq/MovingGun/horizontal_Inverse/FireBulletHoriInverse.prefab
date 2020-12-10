@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8159299448909891976}
   - component: {fileID: 8159299448909891979}
   - component: {fileID: 3135787602399360113}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FireBulletHoriInverse
   m_TagString: Untagged
   m_Icon: {fileID: 0}

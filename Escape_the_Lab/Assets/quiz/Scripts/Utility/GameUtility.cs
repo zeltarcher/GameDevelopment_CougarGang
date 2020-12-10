@@ -7,7 +7,7 @@ public class GameUtility {
     public const float      ResolutionDelayTime     = 1;
     public const string     SavePrefKey             = "Game_Highscore_Value";
 
-    public const string     FileName                = "Q";
+    public const string     FileName                = "Resources/Q";
     public static string    FileDir                 
     {
         get
