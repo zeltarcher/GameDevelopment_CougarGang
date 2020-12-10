@@ -16,6 +16,7 @@ public class TriggerChangeBGMusic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        aSource.PlayOneShot(bgMusicLv2);
+        aSource.loop = true;
     }
 }
