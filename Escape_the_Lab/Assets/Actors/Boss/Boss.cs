@@ -45,6 +45,7 @@ public class Boss : MonoBehaviour
     Grenade grenade;
 
     Transform healthBar;
+    float hb_max;
 
     private enum State
     {
@@ -291,6 +292,7 @@ public class Boss : MonoBehaviour
         bossDeath = false;
 
         healthBar = gameObject.transform.Find("HealthBar");
+        hb_max = health;
     }
 
 
