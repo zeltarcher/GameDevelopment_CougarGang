@@ -110,7 +110,7 @@ public class KeyPicker : MonoBehaviour
         healing();
         if (Input.GetKeyDown(KeyCode.V))
         {
-            print("superPotion: " + superPotion);
+            //print("superPotion: " + superPotion);
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
@@ -279,7 +279,7 @@ public class KeyPicker : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            print(FindObjectOfType<Inventory>().bomb);   
+            //print(FindObjectOfType<Inventory>().bomb);   
             if (FindObjectOfType<Inventory>().bomb > 0 && FindObjectOfType<DoorUnlock>().khaBomb == false)
             {
                 item_audiosrc.PlayOneShot(ac_bomb_explore);
