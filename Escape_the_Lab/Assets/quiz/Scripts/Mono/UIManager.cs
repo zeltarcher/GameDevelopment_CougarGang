@@ -267,8 +267,8 @@ public class UIManager : MonoBehaviour {
                 + "3rd Passcode: " + "\n" + "?" + "\n\n"
                 + "4th Passcode: " + "\n" + "?";
         }*/
-        Debug.Log("WTF: " + uIElements.ScoreText.text); 
-        Debug.Log("SH*t: " + newPasscodeStringList[0]);
+        //Debug.Log("WTF: " + uIElements.ScoreText.text); 
+        //Debug.Log("SH*t: " + newPasscodeStringList[0]);
         
         uIElements.ScoreText.text = "1st Quiz Passcode: " + "\n" + newPasscodeStringList[0] + "\n\n"
             + "2nd Quiz Passcode: " + "\n" + newPasscodeStringList[1] + "\n\n"
@@ -310,7 +310,7 @@ public class UIManager : MonoBehaviour {
         for (int i = 0; i< 4; i++)
         {
             newPasscodeList[i] = 100;
-            Debug.Log("Check Check Check: " + newPasscodeList.Count());
+            //Debug.Log("Check Check Check: " + newPasscodeList.Count());
         }
         //foreach (int i in newPasscodeList) {
             //Debug.Log("Check Check Check: " + i);

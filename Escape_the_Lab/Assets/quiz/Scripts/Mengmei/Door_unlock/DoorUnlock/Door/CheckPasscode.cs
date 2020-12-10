@@ -134,7 +134,7 @@ public class CheckPasscode : MonoBehaviour
         }
         foreach (int i in inputArray)
         {
-            Debug.Log("Answers is: " + i);
+            //Debug.Log("Answers is: " + i);
         }
         return inputArray;
     }

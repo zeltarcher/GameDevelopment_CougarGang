@@ -345,6 +345,7 @@ public class GameManager : MonoBehaviour {
     void LoadData()
     {
         var path = Path.Combine(GameUtility.FileDir, GameUtility.FileName + events.level + ".xml");
+        Debug.Log(path);
         data = Data.Fetch(path);
     }
 
@@ -453,23 +454,27 @@ public class GameManager : MonoBehaviour {
     public List<int> GetRandomQuestionIndex()
     {
         //EraseRandomQuestionIndex();
-        var random = 0;
+        //var random = 0;
+        int random;
         Debug.Log("This is Holy Moly the while loop");
         //EraseRandomQuestionIndex();
         for (int i = 0; i < 4; i++)
         {
             
-            if (FinishedQuestions.Count < data.Questions.Length || FinishedQuestions.Count < 4)
+            if ((FinishedQuestions.Count + 1) <= 4)
             {
-                Debug.Log("This is aboveeeeeeeeeee the while loop");
+                //Debug.Log("This is aboveeeeeeeeeee the while loop");
                 do
                 {
-                    Debug.Log("This is innnnnnnnnn the while loop");
+                    Debug.Log("This is innnnnnnnnn the while loop, the size is " + FinishedQuestions.Count);
+
                     random = UnityEngine.Random.Range(0, data.Questions.Length);
-                } while (FinishedQuestions.Contains(random) || random == currentQuestion);
+                    Debug.Log("The random number is: " + random);
+                    Debug.Log("The data question length is: " + data.Questions.Length);
+                } while (FinishedQuestions.Contains(random));
                 FinishedQuestions.Add(random);
             }
-            Debug.Log("This is outtttttttttttttt the while loop");
+            //Debug.Log("This is outtttttttttttttt the while loop");
 
 
             //return random;

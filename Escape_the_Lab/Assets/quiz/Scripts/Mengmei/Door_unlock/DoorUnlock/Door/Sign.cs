@@ -43,7 +43,7 @@ public class Sign : MonoBehaviour
             //touchingName();
             dialogBox.SetActive(true);
             gaMa.UpdateCheckSignName(touchingName());
-            Debug.Log("Touch name after pressing E is: " + touchingName());
+            //Debug.Log("Touch name after pressing E is: " + touchingName());
             
             gaMa.Display();
         }
@@ -103,8 +103,8 @@ public class Sign : MonoBehaviour
         if (other.tag == "Player")
         {
             playerIsEntered = true;
-            Debug.Log("Name in is: " + other.tag);
-            Debug.Log("Player is entered is " + playerIsEntered);
+            //Debug.Log("Name in is: " + other.tag);
+            //Debug.Log("Player is entered is " + playerIsEntered);
         }
        
         //playerIsEntered = true;
