@@ -44,6 +44,8 @@ public class Boss : MonoBehaviour
     Projectile projectile;
     Grenade grenade;
 
+    Transform healthBar;
+
     private enum State
     {
         Walking,
@@ -226,6 +228,11 @@ public class Boss : MonoBehaviour
         //animate.SetTrigger("boss hit");
         //state = State.Hit;
         health -= damage;
+
+        if (health >= 0)
+        {
+            healthBar.localScale = new Vector3(health / hb_max, healthBar.localScale.y, healthBar.localScale.z);
+        }
     }
     void poisonWater() { TakeDamage(10); }
 
@@ -283,6 +290,7 @@ public class Boss : MonoBehaviour
 
         bossDeath = false;
 
+        healthBar = gameObject.transform.Find("HealthBar");
     }
 
 
