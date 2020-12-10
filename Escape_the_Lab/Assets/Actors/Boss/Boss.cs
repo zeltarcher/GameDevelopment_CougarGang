@@ -45,7 +45,7 @@ public class Boss : MonoBehaviour
     Grenade grenade;
 
     Transform healthBar;
-    float hb_max;
+    float hb_max,local_scale_x;
 
     private enum State
     {
@@ -232,7 +232,8 @@ public class Boss : MonoBehaviour
 
         if (health >= 0)
         {
-            healthBar.localScale = new Vector3(health / hb_max, healthBar.localScale.y, healthBar.localScale.z);
+            healthBar.localScale = new Vector3(health/hb_max*local_scale_x, healthBar.localScale.y, healthBar.localScale.z);
+            //Debug.LogError(health / hb_max);
         }
     }
     void poisonWater() { TakeDamage(10); }
@@ -293,6 +294,7 @@ public class Boss : MonoBehaviour
 
         healthBar = gameObject.transform.Find("HealthBar");
         hb_max = health;
+        local_scale_x = healthBar.transform.localScale.x;
     }
 
 
