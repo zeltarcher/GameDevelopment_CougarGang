@@ -131,7 +131,7 @@ public class Shop : MonoBehaviour
             }
             else
             {
-                print("dont have enough money");
+                //print("dont have enough money");
             }
             greetings.SetActive(false);
             buyTag.SetActive(true);
@@ -148,7 +148,7 @@ public class Shop : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.M))
             {
-                print("IN SHOP!!!!!");
+                //print("IN SHOP!!!!!");
             }
             greetings.SetActive(true);
             buyTag.SetActive(false);
