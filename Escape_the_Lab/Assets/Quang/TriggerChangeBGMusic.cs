@@ -14,10 +14,10 @@ public class TriggerChangeBGMusic : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.LogWarning("IINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
+        //Debug.LogWarning("IINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
         if (other.gameObject.tag == "Player")
         {
-            Debug.LogWarning("JACKPOT======================================");
+            //Debug.LogWarning("JACKPOT======================================");
             aSource.Stop();
             aSource.PlayOneShot(bgMusicLv2);
             aSource.loop = true;
