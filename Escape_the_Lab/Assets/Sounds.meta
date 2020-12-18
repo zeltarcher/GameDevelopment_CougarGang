@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 05aa7233648be1c46adbcd567ced1d0b
+=======
+guid: 29e85243812533a4b9c9b9753ef1e2c0
+>>>>>>> programmer-branch
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
